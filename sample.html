@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextora — We Build What's Next</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #07070d;
+            --bg2: #0d0d1a;
+            --blue: #4a9eff;
+            --blue-bright: #6db8ff;
+            --blue-glow: rgba(74, 158, 255, 0.18);
+            --blue-glow-strong: rgba(74, 158, 255, 0.35);
+            --white: #f0f4ff;
+            --white-dim: rgba(240, 244, 255, 0.55);
+            --white-faint: rgba(240, 244, 255, 0.12);
+            --purple: #7b5ea7;
+            --purple-faint: rgba(123, 94, 167, 0.12);
+            --border: rgba(74, 158, 255, 0.15);
+            --border-bright: rgba(74, 158, 255, 0.4);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: 'Syne', sans-serif;
+            line-height: 1.1;
+        }
+
+        /* ─── SCROLLBAR ─────────────────────────────── */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--blue);
+            border-radius: 2px;
+        }
+
+        /* ─── CURSOR ─────────────────────────────────── */
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: var(--blue);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s, width 0.25s, height 0.25s, background 0.25s;
+            mix-blend-mode: screen;
+        }
+
+        .cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid var(--blue);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.18s ease-out, width 0.3s, height 0.3s, opacity 0.3s;
+            opacity: 0.6;
+        }
+
+        body:hover .cursor,
+        body:hover .cursor-ring {
+            opacity: 1;
+        }
+
+        /* ─── NAV ────────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.4s, backdrop-filter 0.4s, padding 0.4s, border-bottom 0.4s;
+        }
+
+        nav.scrolled {
+            background: rgba(7, 7, 13, 0.82);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            padding: 14px 60px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+            position: relative;
+        }
+
+        /* SVG logo circles */
+        .nav-logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-logo-text {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white-dim);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--blue);
+            transform: scaleX(0);
+            transition: transform 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-cta {
+            background: var(--blue);
+            color: #07070d !important;
+            padding: 10px 22px;
+            border-radius: 100px;
+            font-weight: 600 !important;
+            font-size: 14px !important;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--blue-bright) !important;
+            box-shadow: 0 0 28px var(--blue-glow-strong) !important;
+            transform: translateY(-1px) !important;
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .nav-hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 1px;
+            transition: 0.3s;
+        }
+
+        /* ─── HERO ───────────────────────────────────── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 60px 80px;
+        }
+
+        .hero-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        canvas#mesh {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-glow-1 {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(74, 158, 255, 0.13) 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            animation: floatGlow 8s ease-in-out infinite;
+        }
+
+        .hero-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(123, 94, 167, 0.1) 0%, transparent 70%);
+            bottom: -100px;
+            right: -100px;
+            animation: floatGlow 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatGlow {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(40px, 30px);
+            }
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(74, 158, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 158, 255, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(74, 158, 255, 0.1);
+            border: 1px solid rgba(74, 158, 255, 0.25);
+            border-radius: 100px;
+            padding: 6px 16px 6px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--blue-bright);
+            margin-bottom: 28px;
+            width: fit-content;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--blue);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.7);
+            }
+        }
+
+        .hero-h1 {
+            font-size: clamp(48px, 6vw, 82px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.0;
+            margin-bottom: 24px;
+            color: var(--white);
+        }
+
+        .hero-h1 .accent {
+            background: linear-gradient(135deg, var(--blue) 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            color: var(--white-dim);
+            font-size: 18px;
+            font-weight: 300;
+            max-width: 420px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue);
+            color: #07070d;
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 14px 28px;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-bright);
+            box-shadow: 0 0 40px rgba(74, 158, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--white);
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 13px 28px;
+            border-radius: 100px;
+            border: 1px solid var(--border-bright);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--white-faint);
+            border-color: var(--blue);
+            box-shadow: 0 0 20px var(--blue-glow);
+        }
+
+        /* Hero right — abstract visual */
+        .hero-visual {
+            position: relative;
+            height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-ui-card {
+            position: absolute;
+            background: rgba(13, 13, 26, 0.7);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            backdrop-filter: blur(20px);
+            padding: 20px 24px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .ui-main {
+            width: 320px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 6s ease-in-out infinite;
+            z-index: 3;
+        }
+
+        .ui-mini-1 {
+            width: 180px;
+            top: 12%;
+            right: 0;
+            animation: float 7s ease-in-out infinite 1s;
+            z-index: 2;
+        }
+
+        .ui-mini-2 {
+            width: 160px;
+            bottom: 15%;
+            left: -10px;
+            animation: float 8s ease-in-out infinite 2s;
+            z-index: 2;
+        }
+
+        .ui-card-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+
+        .ui-metric {
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -1px;
+        }
+
+        .ui-metric-sub {
+            font-size: 12px;
+            color: var(--white-dim);
+            margin-top: 4px;
+        }
+
+        .ui-bar-track {
+            height: 4px;
+            background: var(--white-faint);
+            border-radius: 2px;
+            margin: 14px 0 8px;
+            overflow: hidden;
+        }
+
+        .ui-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--blue), #a78bfa);
+            animation: barGrow 2s ease-out forwards;
+        }
+
+        @keyframes barGrow {
+            from {
+                width: 0;
+            }
+        }
+
+        .ui-dots {
+            display: flex;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .ui-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .ui-sparkline {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 40px;
+            margin-top: 10px;
+        }
+
+        .ui-sparkline-bar {
+            flex: 1;
+            border-radius: 3px 3px 0 0;
+            background: linear-gradient(180deg, var(--blue), rgba(74, 158, 255, 0.3));
+            min-height: 6px;
+        }
+
+        /* Glowing orb */
+        .hero-orb {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(74, 158, 255, 0.25) 0%, rgba(123, 94, 167, 0.12) 50%, transparent 80%);
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: orbPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes orbPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 60px rgba(74, 158, 255, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 100px rgba(74, 158, 255, 0.35), 0 0 200px rgba(74, 158, 255, 0.1);
+            }
+        }
+
+        /* Logo circles SVG */
+        .hero-logo-circles {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        /* ─── SECTION COMMON ─────────────────────────── */
+        section {
+            padding: 100px 60px;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--blue);
+            margin-bottom: 16px;
+        }
+
+        .section-h2 {
+            font-size: clamp(36px, 4vw, 58px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .section-sub {
+            color: var(--white-dim);
+            font-size: 17px;
+            font-weight: 300;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .fade-in-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .fade-in-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .fade-in-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* ─── TRUSTED BY ─────────────────────────────── */
+        #trusted {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .marquee-label {
+            text-align: center;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--white-dim);
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        .marquee-track {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-track::before,
+        .marquee-track::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            z-index: 2;
+        }
+
+        .marquee-track::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--bg), transparent);
+        }
+
+        .marquee-track::after {
+            right: 0;
+            background: linear-gradient(-90deg, var(--bg), transparent);
+        }
+
+        .marquee-inner {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            animation: marquee 28s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-inner:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .logo-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 50px;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--white);
+        }
+
+        .logo-item:hover {
+            opacity: 0.9;
+        }
+
+        /* ─── SERVICES ───────────────────────────────── */
+        #services {
+            background: var(--bg2);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 64px;
+        }
+
+        .service-card {
+            background: rgba(13, 13, 26, 0.6);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px 30px;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(74, 158, 255, 0.1) 0%, transparent 65%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover {
+            border-color: var(--border-bright);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(74, 158, 255, 0.12), 0 0 0 1px rgba(74, 158, 255, 0.2);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(74, 158, 255, 0.1);
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 22px;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            background: rgba(74, 158, 255, 0.2);
+            box-shadow: 0 0 20px rgba(74, 158, 255, 0.3);
+        }
+
+        .service-h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .service-p {
+            color: var(--white-dim);
+            font-size: 14px;
+            line-height: 1.7;
+            font-weight: 300;
+            margin-bottom: 24px;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--blue);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: gap 0.2s;
+        }
+
+        .service-card:hover .service-link {
+            gap: 10px;
+        }
+
+        /* ─── WHY NEXTORA / STATS ────────────────────── */
+        #stats {
+            text-align: center;
+            padding: 100px 60px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-top: 70px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .stat-cell {
+            padding: 50px 30px;
+            background: rgba(13, 13, 26, 0.5);
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        .stat-cell:hover {
+            background: rgba(74, 158, 255, 0.06);
+        }
+
+        .stat-cell+.stat-cell {
+            border-left: 1px solid var(--border);
+        }
+
+        .stat-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 58px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, var(--white) 40%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--white-dim);
+            font-size: 14px;
+            margin-top: 12px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        /* ─── WORK / CASE STUDIES ────────────────────── */
+        #work {
+            background: var(--bg2);
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 64px;
+        }
+
+        .work-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border);
+            background: rgba(13, 13, 26, 0.7);
+            backdrop-filter: blur(10px);
+            transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+            cursor: pointer;
+        }
+
+        .work-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 80px rgba(74, 158, 255, 0.15);
+            border-color: rgba(74, 158, 255, 0.3);
+        }
+
+        .work-thumb {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-thumb-bg {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.5s;
+        }
+
+        .work-card:hover .work-thumb-bg {
+            transform: scale(1.06);
+        }
+
+        .work-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(13, 13, 26, 0.95) 100%);
+        }
+
+        .work-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(74, 158, 255, 0.15);
+            border: 1px solid rgba(74, 158, 255, 0.3);
+            border-radius: 100px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--blue);
+        }
+
+        .work-body {
+            padding: 24px;
+        }
+
+        .work-h3 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 10px;
+        }
+
+        .work-p {
+            color: var(--white-dim);
+            font-size: 14px;
+            line-height: 1.65;
+            font-weight: 300;
+        }
+
+        .work-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .work-meta-pill {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--white-dim);
+            border-radius: 4px;
+            padding: 3px 8px;
+            background: var(--white-faint);
+        }
+
+        /* ─── TESTIMONIALS ───────────────────────────── */
+        #testimonials {
+            padding: 100px 60px;
+        }
+
+        .testi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 64px;
+        }
+
+        .testi-card {
+            background: rgba(13, 13, 26, 0.6);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px;
+            position: relative;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .testi-card:hover {
+            border-color: var(--border-bright);
+            box-shadow: 0 0 40px var(--blue-glow);
+        }
+
+        .testi-quote {
+            font-size: 36px;
+            color: var(--blue);
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            line-height: 0.8;
+            margin-bottom: 16px;
+            opacity: 0.7;
+        }
+
+        .testi-text {
+            color: var(--white-dim);
+            font-size: 15px;
+            line-height: 1.75;
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 28px;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .testi-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .testi-name {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+
+        .testi-role {
+            font-size: 12px;
+            color: var(--white-dim);
+        }
+
+        .stars {
+            color: var(--blue);
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+
+        /* ─── CTA ────────────────────────────────────── */
+        #cta {
+            padding: 0 60px 100px;
+        }
+
+        .cta-box {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 24px;
+            padding: 100px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.12) 0%, rgba(123, 94, 167, 0.1) 50%, rgba(74, 158, 255, 0.08) 100%);
+            border: 1px solid rgba(74, 158, 255, 0.25);
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 20%;
+            right: 20%;
+            bottom: -50%;
+            background: radial-gradient(ellipse, rgba(74, 158, 255, 0.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cta-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(74, 158, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 158, 255, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+        }
+
+        .cta-label {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-h2 {
+            font-size: clamp(36px, 5vw, 68px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+        }
+
+        .cta-sub {
+            color: var(--white-dim);
+            font-size: 18px;
+            font-weight: 300;
+            margin-bottom: 44px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-btns {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ─── FOOTER ─────────────────────────────────── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 60px 40px;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand-text {
+            color: var(--white-dim);
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.7;
+            margin-top: 16px;
+            max-width: 260px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .social-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white-dim);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.25s;
+        }
+
+        .social-btn:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+            background: var(--blue-glow);
+        }
+
+        .footer-col-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: var(--white-dim);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 300;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: var(--white-dim);
+            font-weight: 300;
+        }
+
+        /* ─── RESPONSIVE ─────────────────────────────── */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid .stat-cell:nth-child(3) {
+                border-left: none;
+                border-top: 1px solid var(--border);
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 18px 24px;
+            }
+
+            nav.scrolled {
+                padding: 14px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-hamburger {
+                display: flex;
+            }
+
+            section {
+                padding: 70px 24px;
+            }
+
+            #hero {
+                padding: 110px 24px 70px;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+
+            .ui-main {
+                width: 260px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding: 50px 24px 30px;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            #cta {
+                padding: 0 24px 70px;
+            }
+
+            .cta-box {
+                padding: 60px 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Custom cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- ── NAV ────────────────────────────────────── -->
+    <nav id="navbar">
+        <a class="nav-logo" href="#">
+            <div class="nav-logo-icon">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Circles matching logo -->
+                    <circle cx="8" cy="28" r="5" stroke="#4a9eff" stroke-width="2.5" fill="none" />
+                    <circle cx="20" cy="28" r="5" stroke="#4a9eff" stroke-width="2.5" fill="none" />
+                    <circle cx="29" cy="21" r="4" stroke="#4a9eff" stroke-width="2.5" fill="none" />
+                    <circle cx="35" cy="12" r="3.5" stroke="#4a9eff" stroke-width="2.5" fill="none" />
+                </svg>
+            </div>
+            <span class="nav-logo-text">Nextora</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#stats">Why Us</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#testimonials">Clients</a></li>
+            <li><a href="#cta" class="nav-cta">Get Started →</a></li>
+        </ul>
+        <div class="nav-hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- ── HERO ───────────────────────────────────── -->
+    <section id="hero">
+        <div class="hero-canvas">
+            <canvas id="mesh"></canvas>
+            <div class="hero-glow-1"></div>
+            <div class="hero-glow-2"></div>
+            <div class="hero-grid"></div>
+        </div>
+
+        <div class="hero-inner">
+            <!-- Left: Copy -->
+            <div>
+                <div class="hero-badge fade-in">
+                    <span class="hero-badge-dot"></span>
+                    Now serving 12 countries globally
+                </div>
+                <h1 class="hero-h1 fade-in fade-in-delay-1">
+                    We Build<br>
+                    <span class="accent">What's Next</span>
+                </h1>
+                <p class="hero-sub fade-in fade-in-delay-2">
+                    Enterprise software, cloud infrastructure, AI-powered automation — engineered for organisations that
+                    refuse to stand still.
+                </p>
+                <div class="hero-btns fade-in fade-in-delay-3">
+                    <a href="#cta" class="btn-primary">Get Started →</a>
+                    <a href="#work" class="btn-secondary">View Our Work ↗</a>
+                </div>
+            </div>
+
+            <!-- Right: Abstract visual -->
+            <div class="hero-visual fade-in fade-in-delay-4">
+                <div class="hero-orb"></div>
+
+                <!-- SVG logo circles, large, floating -->
+                <svg class="hero-logo-circles" width="200" height="200" viewBox="0 0 200 200" fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style="position:absolute;top:50%;left:50%;transform:translate(-50%,-56%);">
+                    <circle cx="40" cy="140" r="28" stroke="#4a9eff" stroke-width="4" fill="none" opacity="0.5" />
+                    <circle cx="100" cy="140" r="28" stroke="#4a9eff" stroke-width="4" fill="none" opacity="0.5" />
+                    <circle cx="148" cy="105" r="22" stroke="#4a9eff" stroke-width="4" fill="none" opacity="0.6" />
+                    <circle cx="178" cy="54" r="18" stroke="#4a9eff" stroke-width="4" fill="none" opacity="0.7" />
+                </svg>
+
+                <!-- Floating UI cards -->
+                <div class="hero-ui-card ui-main">
+                    <div class="ui-card-label">Infrastructure Health</div>
+                    <div class="ui-metric">99.98%</div>
+                    <div class="ui-metric-sub">Uptime — Last 30 days</div>
+                    <div class="ui-bar-track">
+                        <div class="ui-bar-fill" style="width:99.98%"></div>
+                    </div>
+                    <div class="ui-sparkline">
+                        <div class="ui-sparkline-bar" style="height:55%"></div>
+                        <div class="ui-sparkline-bar" style="height:70%"></div>
+                        <div class="ui-sparkline-bar" style="height:60%"></div>
+                        <div class="ui-sparkline-bar" style="height:90%"></div>
+                        <div class="ui-sparkline-bar" style="height:75%"></div>
+                        <div class="ui-sparkline-bar" style="height:100%"></div>
+                        <div class="ui-sparkline-bar" style="height:80%"></div>
+                        <div class="ui-sparkline-bar" style="height:95%"></div>
+                    </div>
+                </div>
+
+                <div class="hero-ui-card ui-mini-1">
+                    <div class="ui-card-label">AI Tasks Processed</div>
+                    <div class="ui-metric" style="font-size:24px">2.4M</div>
+                    <div class="ui-bar-track">
+                        <div class="ui-bar-fill" style="width:84%;background:linear-gradient(90deg,#a78bfa,#4a9eff)">
+                        </div>
+                    </div>
+                    <div class="ui-metric-sub">↑ 34% this week</div>
+                </div>
+
+                <div class="hero-ui-card ui-mini-2">
+                    <div class="ui-card-label">Active Projects</div>
+                    <div class="ui-metric" style="font-size:24px">47</div>
+                    <div class="ui-dots">
+                        <div class="ui-dot" style="background:rgba(74,158,255,0.2);color:#4a9eff;">✓</div>
+                        <div class="ui-dot" style="background:rgba(167,139,250,0.2);color:#a78bfa;">⬡</div>
+                        <div class="ui-dot" style="background:rgba(74,158,255,0.1);color:#4a9eff;">+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // ─── CURSOR ──────────────────────────────────────
+        const cursor = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursor-ring');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            cursor.style.left = mx + 'px';
+            cursor.style.top = my + 'px';
+        });
+        function animateRing() {
+            rx += (mx - rx) * 0.12;
+            ry += (my - ry) * 0.12;
+            cursorRing.style.left = rx + 'px';
+            cursorRing.style.top = ry + 'px';
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+        document.querySelectorAll('a,button,.service-card,.work-card,.testi-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '20px'; cursor.style.height = '20px';
+                cursorRing.style.width = '54px'; cursorRing.style.height = '54px';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '12px'; cursor.style.height = '12px';
+                cursorRing.style.width = '36px'; cursorRing.style.height = '36px';
+            });
+        });
+
+        // ─── NAVBAR SCROLL ───────────────────────────────
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // ─── CIRCUIT BOARD HERO CANVAS ───────────────────
+        const canvas = document.getElementById('mesh');
+        const ctx = canvas.getContext('2d');
+
+        // Brand colours
+        const C_BLUE = 'rgba(74,158,255,';
+        const C_BLUE_BR = 'rgba(109,184,255,';
+        const C_PURPLE = 'rgba(123,94,167,';
+        const C_CYAN = 'rgba(80,210,255,';
+        const C_WHITE = 'rgba(240,244,255,';
+
+        let W, H;
+        const GRID = 40;         // grid cell size px
+        let cols, rows;
+
+        /* ── Data structures ── */
+        let nodes = [];          // junction dots
+        let traces = [];         // wire segments
+        let pulses = [];         // travelling light pulses
+        let chips = [];          // IC chip rectangles
+        let vias = [];           // PCB via rings
+
+        /* ── Utility ── */
+        const rnd = (a, b) => a + Math.random() * (b - a);
+        const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+        const snap = v => Math.round(v / GRID) * GRID;
+
+        /* ── Build circuit ── */
+        function buildCircuit() {
+            nodes = [];
+            traces = [];
+            pulses = [];
+            chips = [];
+            vias = [];
+
+            cols = Math.floor(W / GRID) + 2;
+            rows = Math.floor(H / GRID) + 2;
+
+            /* Node grid — sparse, ~30% fill */
+            const grid = {};
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    if (Math.random() < 0.30) {
+                        const x = c * GRID;
+                        const y = r * GRID;
+                        const key = `${c},${r}`;
+                        const type = Math.random();
+                        const nodeType = type < 0.55 ? 'junction'
+                            : type < 0.78 ? 'via'
+                                : 'pad';
+                        grid[key] = { x, y, c, r, type: nodeType };
+                        nodes.push(grid[key]);
+                        if (nodeType === 'via') vias.push(grid[key]);
+                    }
+                }
+            }
+
+            /* Traces: connect nearby nodes with L-shaped (orthogonal) routes */
+            const dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+            nodes.forEach(n => {
+                const maxConn = 1 + Math.floor(Math.random() * 3);
+                let conn = 0;
+                dirs.forEach(([dc, dr]) => {
+                    if (conn >= maxConn) return;
+                    // look ahead 1–5 cells
+                    const steps = 1 + Math.floor(Math.random() * 4);
+                    const tc = n.c + dc * steps;
+                    const tr = n.r + dr * steps;
+                    const key = `${tc},${tr}`;
+                    if (grid[key]) {
+                        const target = grid[key];
+                        // L-shape: go horizontal then vertical
+                        const corner = { x: target.x, y: n.y };
+                        const lColor = Math.random() < 0.15 ? 'purple' : 'blue';
+                        traces.push({ x1: n.x, y1: n.y, cx: corner.x, cy: corner.y, x2: target.x, y2: target.y, color: lColor, alpha: rnd(0.08, 0.18), width: Math.random() < 0.2 ? 1.5 : 1 });
+                        conn++;
+                    }
+                });
+            });
+
+            /* IC Chips — placed on grid, avoid crowding */
+            const chipCount = Math.floor((W * H) / 160000) + 6;
+            for (let i = 0; i < chipCount; i++) {
+                const cw = (2 + Math.floor(Math.random() * 4)) * GRID;
+                const ch = (1 + Math.floor(Math.random() * 2)) * GRID;
+                const cx = snap(rnd(GRID, W - cw - GRID));
+                const cy = snap(rnd(GRID * 2, H - ch - GRID));
+                chips.push({ x: cx, y: cy, w: cw, h: ch, pins: Math.floor(cw / GRID) * 2 });
+            }
+
+            /* Seed initial pulses */
+            for (let i = 0; i < 18; i++) spawnPulse();
+        }
+
+        function spawnPulse() {
+            if (traces.length === 0) return;
+            const trace = pick(traces);
+            // pulse travels from node1 → corner → node2
+            const speed = rnd(0.4, 1.4);
+            const color = Math.random() < 0.12 ? 'purple'
+                : Math.random() < 0.08 ? 'cyan'
+                    : 'blue';
+            pulses.push({
+                trace,
+                progress: 0,       // 0 → 1
+                speed: speed / 100,
+                size: rnd(2, 4),
+                color,
+                alpha: rnd(0.7, 1.0),
+                tail: [],
+                tailLen: Math.floor(rnd(6, 18)),
+            });
+        }
+
+        /* ── Draw helpers ── */
+        function tracePos(tr, t) {
+            // segment 1: node1 → corner (t = 0..0.5)
+            // segment 2: corner → node2 (t = 0.5..1)
+            const half = 0.5;
+            if (t <= half) {
+                const p = t / half;
+                return { x: tr.x1 + (tr.cx - tr.x1) * p, y: tr.y1 + (tr.cy - tr.y1) * p };
+            } else {
+                const p = (t - half) / half;
+                return { x: tr.cx + (tr.x2 - tr.cx) * p, y: tr.cy + (tr.y2 - tr.cy) * p };
+            }
+        }
+
+        function pulseColor(color, alpha) {
+            if (color === 'purple') return `${C_PURPLE}${alpha})`;
+            if (color === 'cyan') return `${C_CYAN}${alpha})`;
+            return `${C_BLUE}${alpha})`;
+        }
+
+        function glowColor(color, alpha) {
+            if (color === 'purple') return `${C_PURPLE}${alpha})`;
+            if (color === 'cyan') return `${C_CYAN}${alpha})`;
+            return `${C_BLUE_BR}${alpha})`;
+        }
+
+        /* ── Main draw ── */
+        let animT = 0;
+        function drawCircuit() {
+            ctx.clearRect(0, 0, W, H);
+            animT++;
+
+            /* subtle radial vignette */
+            const vg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.75);
+            vg.addColorStop(0, 'rgba(7,7,13,0)');
+            vg.addColorStop(0.6, 'rgba(7,7,13,0)');
+            vg.addColorStop(1, 'rgba(7,7,13,0.55)');
+            ctx.fillStyle = vg;
+            ctx.fillRect(0, 0, W, H);
+
+            /* ── Traces ── */
+            traces.forEach(tr => {
+                const pulse = Math.sin(animT * 0.008 + tr.x1 * 0.01) * 0.03;
+                const a = tr.alpha + pulse;
+                ctx.lineWidth = tr.width;
+                ctx.strokeStyle = tr.color === 'purple' ? `${C_PURPLE}${a})` : `${C_BLUE}${a})`;
+                ctx.lineCap = 'square';
+                ctx.beginPath();
+                ctx.moveTo(tr.x1, tr.y1);
+                ctx.lineTo(tr.cx, tr.cy);
+                ctx.lineTo(tr.x2, tr.y2);
+                ctx.stroke();
+            });
+
+            /* ── IC Chips ── */
+            chips.forEach(chip => {
+                // Body
+                ctx.strokeStyle = `${C_BLUE}0.14)`;
+                ctx.lineWidth = 1;
+                ctx.fillStyle = `rgba(10,10,22,0.7)`;
+                ctx.beginPath();
+                ctx.roundRect(chip.x, chip.y, chip.w, chip.h, 4);
+                ctx.fill();
+                ctx.stroke();
+
+                // Notch (top centre)
+                ctx.strokeStyle = `${C_BLUE}0.2)`;
+                ctx.beginPath();
+                ctx.arc(chip.x + chip.w / 2, chip.y, 5, Math.PI, 0, false);
+                ctx.stroke();
+
+                // Pin stubs — top and bottom edges
+                const pinSpacing = chip.w / (chip.pins / 2 + 1);
+                for (let p = 1; p <= chip.pins / 2; p++) {
+                    const px = chip.x + p * pinSpacing;
+                    // top pin
+                    ctx.strokeStyle = `${C_BLUE}0.25)`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(px, chip.y);
+                    ctx.lineTo(px, chip.y - 8);
+                    ctx.stroke();
+                    ctx.fillStyle = `${C_BLUE}0.35)`;
+                    ctx.fillRect(px - 2, chip.y - 12, 4, 4);
+                    // bottom pin
+                    ctx.beginPath();
+                    ctx.moveTo(px, chip.y + chip.h);
+                    ctx.lineTo(px, chip.y + chip.h + 8);
+                    ctx.stroke();
+                    ctx.fillRect(px - 2, chip.y + chip.h + 8, 4, 4);
+                }
+
+                // Label text
+                ctx.fillStyle = `${C_BLUE}0.2)`;
+                ctx.font = `bold ${Math.min(9, chip.w / 5)}px monospace`;
+                ctx.textAlign = 'center';
+                ctx.fillText('NXT', chip.x + chip.w / 2, chip.y + chip.h / 2 + 3);
+            });
+
+            /* ── Via rings ── */
+            vias.forEach(v => {
+                const pulse = 0.5 + 0.5 * Math.sin(animT * 0.025 + v.x * 0.05);
+                ctx.beginPath();
+                ctx.arc(v.x, v.y, 5, 0, Math.PI * 2);
+                ctx.strokeStyle = `${C_BLUE}${0.2 + 0.15 * pulse})`;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(v.x, v.y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = `${C_BLUE}${0.3 + 0.2 * pulse})`;
+                ctx.fill();
+                // outer glow ring
+                if (pulse > 0.85) {
+                    ctx.beginPath();
+                    ctx.arc(v.x, v.y, 8, 0, Math.PI * 2);
+                    ctx.strokeStyle = `${C_BLUE}0.07)`;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+            });
+
+            /* ── Junction nodes ── */
+            nodes.forEach(n => {
+                if (n.type !== 'junction') return;
+                const blink = 0.5 + 0.5 * Math.sin(animT * 0.02 + n.x * 0.04 + n.y * 0.03);
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = `${C_BLUE}${0.2 + 0.3 * blink})`;
+                ctx.fill();
+            });
+
+            /* ── Pad nodes ── */
+            nodes.forEach(n => {
+                if (n.type !== 'pad') return;
+                ctx.beginPath();
+                ctx.rect(n.x - 4, n.y - 4, 8, 8);
+                ctx.fillStyle = `${C_BLUE}0.12)`;
+                ctx.fill();
+                ctx.strokeStyle = `${C_BLUE}0.25)`;
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+            });
+
+            /* ── Pulses ── */
+            pulses.forEach((p, idx) => {
+                p.progress += p.speed;
+
+                const pos = tracePos(p.trace, p.progress);
+
+                // Store tail
+                p.tail.unshift({ ...pos });
+                if (p.tail.length > p.tailLen) p.tail.pop();
+
+                // Draw tail gradient
+                p.tail.forEach((pt, ti) => {
+                    const ratio = 1 - ti / p.tailLen;
+                    ctx.beginPath();
+                    ctx.arc(pt.x, pt.y, p.size * ratio * 0.6, 0, Math.PI * 2);
+                    ctx.fillStyle = pulseColor(p.color, p.alpha * ratio * 0.6);
+                    ctx.fill();
+                });
+
+                // Draw head glow
+                const grd = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, p.size * 5);
+                grd.addColorStop(0, glowColor(p.color, p.alpha * 0.9));
+                grd.addColorStop(0.4, glowColor(p.color, p.alpha * 0.3));
+                grd.addColorStop(1, glowColor(p.color, 0));
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, p.size * 5, 0, Math.PI * 2);
+                ctx.fillStyle = grd;
+                ctx.fill();
+
+                // Head dot
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = glowColor(p.color, 1);
+                ctx.fill();
+
+                // Respawn when done
+                if (p.progress >= 1) {
+                    pulses[idx] = null;
+                    spawnPulse();
+                }
+            });
+            pulses = pulses.filter(Boolean);
+
+            // Keep pulse count stable
+            while (pulses.length < 22) spawnPulse();
+
+            requestAnimationFrame(drawCircuit);
+        }
+
+        function resizeCircuit() {
+            W = canvas.width = canvas.offsetWidth;
+            H = canvas.height = canvas.offsetHeight;
+            buildCircuit();
+        }
+
+        window.addEventListener('resize', resizeCircuit);
+        resizeCircuit();
+        drawCircuit();
+
+        // ─── INTERSECTION OBSERVER ────────────────────────
+        const fadeEls = document.querySelectorAll('.fade-in');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        fadeEls.forEach(el => obs.observe(el));
+        // Trigger hero elements immediately
+        document.querySelectorAll('#hero .fade-in').forEach((el, i) => {
+            setTimeout(() => el.classList.add('visible'), 200 + i * 150);
+        });
+
+        // ─── COUNTER ANIMATION ────────────────────────────
+        const counters = document.querySelectorAll('.stat-num[data-target]');
+        const counterObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const el = e.target;
+                const target = +el.dataset.target;
+                const suffix = el.dataset.suffix || '';
+                let start = 0;
+                const duration = 1800;
+                const step = timestamp => {
+                    if (!start) start = timestamp;
+                    const progress = Math.min((timestamp - start) / duration, 1);
+                    const ease = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.floor(ease * target) + suffix;
+                    if (progress < 1) requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
+                counterObs.unobserve(el);
+            });
+        }, { threshold: 0.3 });
+        counters.forEach(c => counterObs.observe(c));
+
+        // ─── ROUNDRECT POLYFILL ──────────────────────────
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, radii) {
+                const r = typeof radii === 'number' ? radii : (radii && radii[0]) || 0;
+                this.moveTo(x + r, y);
+                this.lineTo(x + w - r, y);
+                this.arcTo(x + w, y, x + w, y + r, r);
+                this.lineTo(x + w, y + h - r);
+                this.arcTo(x + w, y + h, x + w - r, y + h, r);
+                this.lineTo(x + r, y + h);
+                this.arcTo(x, y + h, x, y + h - r, r);
+                this.lineTo(x, y + r);
+                this.arcTo(x, y, x + r, y, r);
+                this.closePath();
+                return this;
+            };
+        }
+    </script>
+</body>
+
+</html>
