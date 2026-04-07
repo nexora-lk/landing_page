@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 };
 
 const projects = [
-  { slug: "velocity-ledger", gradient: "linear-gradient(135deg, #00d4ff 0%, #7c5cff 100%)", tag: "FinTech · Platform", title: "Velocity Ledger", desc: "Real-time settlement engine processing 4M transactions daily." },
-  { slug: "orbit-intelligence", gradient: "linear-gradient(135deg, #7c5cff 0%, #ff5cf0 100%)", tag: "AI · SaaS", title: "Orbit Intelligence", desc: "Agentic research copilot deployed across 40+ enterprise teams." },
-  { slug: "pulse-cloud", gradient: "linear-gradient(135deg, #ff5cf0 0%, #00d4ff 100%)", tag: "Health · Infra", title: "Pulse Cloud", desc: "HIPAA-compliant data mesh serving 200+ hospital networks." },
+  { slug: "velocity-ledger", gradient: "linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%)", tag: "FinTech · Platform", title: "Velocity Ledger", desc: "Real-time settlement engine processing 4M transactions daily." },
+  { slug: "orbit-intelligence", gradient: "linear-gradient(135deg, var(--accent-2) 0%, var(--accent-3) 100%)", tag: "AI · SaaS", title: "Orbit Intelligence", desc: "Agentic research copilot deployed across 40+ enterprise teams." },
+  { slug: "pulse-cloud", gradient: "linear-gradient(135deg, var(--accent-3) 0%, var(--accent) 100%)", tag: "Health · Infra", title: "Pulse Cloud", desc: "HIPAA-compliant data mesh serving 200+ hospital networks." },
 ];
 
 export default function WorkPage() {
@@ -22,7 +22,7 @@ export default function WorkPage() {
       <Navbar />
       <main>
         <section style={{ paddingTop: "clamp(140px, 12vw, 180px)", paddingBottom: 80, position: "relative" }}>
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.10) 0%, transparent 55%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb),0.10) 0%, transparent 55%)", pointerEvents: "none" }} />
           <div className="container" style={{ position: "relative", zIndex: 1 }}>
             <span style={{ fontSize: 13, color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 600, marginBottom: 16, display: "block" }}>Featured work</span>
             <h1 style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(48px, 7vw, 96px)", fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 0.95, marginBottom: 24 }}>Selected builds.</h1>

@@ -7,9 +7,9 @@ import Container from "@mui/material/Container";
 import Link from "next/link";
 
 const projects: Record<string, { gradient: string; tag: string; title: string; desc: string; results: string[] }> = {
-  "velocity-ledger": { gradient: "linear-gradient(135deg, #00d4ff 0%, #7c5cff 100%)", tag: "FinTech · Platform", title: "Velocity Ledger", desc: "Real-time settlement engine processing 4M transactions daily.", results: ["4M+ daily transactions", "99.99% uptime SLA", "Deploy time reduced 20x", "SOC 2 Type II certified"] },
-  "orbit-intelligence": { gradient: "linear-gradient(135deg, #7c5cff 0%, #ff5cf0 100%)", tag: "AI · SaaS", title: "Orbit Intelligence", desc: "Agentic research copilot deployed across 40+ enterprise teams.", results: ["40+ enterprise deployments", "85% reduction in research time", "RAG over 10M documents", "Multi-agent orchestration"] },
-  "pulse-cloud": { gradient: "linear-gradient(135deg, #ff5cf0 0%, #00d4ff 100%)", tag: "Health · Infra", title: "Pulse Cloud", desc: "HIPAA-compliant data mesh serving 200+ hospital networks.", results: ["200+ hospital networks", "HIPAA & SOC 2 compliant", "Zero data breaches", "Sub-100ms query latency"] },
+  "velocity-ledger": { gradient: "linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%)", tag: "FinTech · Platform", title: "Velocity Ledger", desc: "Real-time settlement engine processing 4M transactions daily.", results: ["4M+ daily transactions", "99.99% uptime SLA", "Deploy time reduced 20x", "SOC 2 Type II certified"] },
+  "orbit-intelligence": { gradient: "linear-gradient(135deg, var(--accent-2) 0%, var(--accent-3) 100%)", tag: "AI · SaaS", title: "Orbit Intelligence", desc: "Agentic research copilot deployed across 40+ enterprise teams.", results: ["40+ enterprise deployments", "85% reduction in research time", "RAG over 10M documents", "Multi-agent orchestration"] },
+  "pulse-cloud": { gradient: "linear-gradient(135deg, var(--accent-3) 0%, var(--accent) 100%)", tag: "Health · Infra", title: "Pulse Cloud", desc: "HIPAA-compliant data mesh serving 200+ hospital networks.", results: ["200+ hospital networks", "HIPAA & SOC 2 compliant", "Zero data breaches", "Sub-100ms query latency"] },
 };
 
 export async function generateStaticParams() {
@@ -44,7 +44,7 @@ export default async function WorkCasePage({ params }: { params: Promise<{ slug:
         </section>
 
         <div style={{ height: "clamp(280px, 30vw, 480px)", background: project.gradient, position: "relative" }}>
-          <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "40px 40px", mixBlendMode: "overlay" }} />
+          <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(var(--text-rgb),0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--text-rgb),0.06) 1px, transparent 1px)", backgroundSize: "40px 40px", mixBlendMode: "overlay" }} />
         </div>
 
         <section style={{ padding: "clamp(60px, 8vw, 100px) 0" }}>

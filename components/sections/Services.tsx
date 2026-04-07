@@ -165,7 +165,7 @@ function ServiceCard({ num, icon, title, desc, href }: (typeof services)[0]) {
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(0,212,255,0.15), transparent 40%)",
+            "radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(var(--accent-rgb),0.15), transparent 40%)",
           opacity: 0,
           transition: "opacity 0.5s",
           pointerEvents: "none",
@@ -173,7 +173,7 @@ function ServiceCard({ num, icon, title, desc, href }: (typeof services)[0]) {
         "&:hover": {
           borderColor: "var(--border-hi)",
           transform: "translateY(-4px)",
-          boxShadow: "0 30px 80px rgba(0,212,255,0.1)",
+          boxShadow: "0 30px 80px rgba(var(--accent-rgb),0.1)",
           "&::before": { opacity: 1 },
         },
       }}
@@ -198,7 +198,7 @@ function ServiceCard({ num, icon, title, desc, href }: (typeof services)[0]) {
             width: 56,
             height: 56,
             borderRadius: "14px",
-            background: "linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,92,255,0.15))",
+            background: "linear-gradient(135deg, rgba(var(--accent-rgb),0.15), rgba(var(--accent-2-rgb),0.15))",
             border: "1px solid var(--border)",
             display: "grid",
             placeItems: "center",

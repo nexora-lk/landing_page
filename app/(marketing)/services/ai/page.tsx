@@ -17,7 +17,7 @@ export default function AIPage() {
       <Navbar />
       <main>
         <Box component="section" sx={{ pt: { xs: "140px", md: "180px" }, pb: "80px", position: "relative" }}>
-          <Box sx={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 70% 0%, rgba(124,92,255,0.15) 0%, transparent 55%)", pointerEvents: "none" }} />
+          <Box sx={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 70% 0%, rgba(var(--accent-2-rgb),0.15) 0%, transparent 55%)", pointerEvents: "none" }} />
           <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" }, position: "relative", zIndex: 1 }}>
             <Box component="span" sx={{ fontSize: 13, color: "var(--accent-2)", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 600, mb: "16px", display: "block" }}>◈ AI & Automation</Box>
             <Box component="h1" sx={{ fontFamily: "var(--font-syne)", fontSize: "clamp(48px, 7vw, 88px)", fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 0.95, mb: "28px", maxWidth: 800 }}>

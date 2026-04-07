@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { tokens } from "@/components/ui/ThemeRegistry";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,7 +25,7 @@ const pricingData: Record<string, Plan[]> = {
   Website: [
     {
       tier: "Starter",
-      tierColor: "#22c55e",
+      tierColor: tokens.tierGreen,
       label: "Best for small shops & startups",
       price: "LKR 35,000 – 60,000",
       features: [
@@ -39,7 +40,7 @@ const pricingData: Record<string, Plan[]> = {
     },
     {
       tier: "Business",
-      tierColor: "#3b82f6",
+      tierColor: tokens.tierBlue,
       label: "For growing businesses",
       price: "LKR 80,000 – 150,000",
       features: [
@@ -55,7 +56,7 @@ const pricingData: Record<string, Plan[]> = {
     },
     {
       tier: "E-Commerce",
-      tierColor: "#a855f7",
+      tierColor: tokens.tierPurple,
       label: "Full online store",
       price: "LKR 150,000 – 400,000",
       features: [
@@ -70,7 +71,7 @@ const pricingData: Record<string, Plan[]> = {
     },
     {
       tier: "Custom Web App",
-      tierColor: "#ef4444",
+      tierColor: tokens.tierRed,
       label: "SaaS / Dashboard",
       price: "LKR 300,000 – 1,500,000+",
       features: [
@@ -87,7 +88,7 @@ const pricingData: Record<string, Plan[]> = {
   "Mobile App": [
     {
       tier: "Basic App",
-      tierColor: "#22c55e",
+      tierColor: tokens.tierGreen,
       label: "Startup MVP",
       price: "LKR 60,000 – 120,000",
       features: [
@@ -101,7 +102,7 @@ const pricingData: Record<string, Plan[]> = {
     },
     {
       tier: "Standard",
-      tierColor: "#3b82f6",
+      tierColor: tokens.tierBlue,
       label: "Full-featured app",
       price: "LKR 150,000 – 350,000",
       features: [
@@ -115,7 +116,7 @@ const pricingData: Record<string, Plan[]> = {
     },
     {
       tier: "Advanced",
-      tierColor: "#ef4444",
+      tierColor: tokens.tierRed,
       label: "Uber / Booking / SaaS",
       price: "LKR 400,000 – 1,200,000+",
       features: [
@@ -131,7 +132,7 @@ const pricingData: Record<string, Plan[]> = {
   Software: [
     {
       tier: "Basic System",
-      tierColor: "#22c55e",
+      tierColor: tokens.tierGreen,
       label: "Small businesses",
       price: "LKR 80,000 – 200,000",
       features: ["POS system", "Small management system"],
@@ -139,7 +140,7 @@ const pricingData: Record<string, Plan[]> = {
     },
     {
       tier: "Business",
-      tierColor: "#3b82f6",
+      tierColor: tokens.tierBlue,
       label: "Growing companies",
       price: "LKR 200,000 – 600,000",
       features: ["Payroll system", "Inventory system", "CRM system"],
@@ -147,7 +148,7 @@ const pricingData: Record<string, Plan[]> = {
     },
     {
       tier: "Enterprise",
-      tierColor: "#ef4444",
+      tierColor: tokens.tierRed,
       label: "Large organizations",
       price: "LKR 600,000 – 2,000,000+",
       features: ["ERP systems", "Multi-branch systems", "Automation platforms"],
@@ -157,7 +158,7 @@ const pricingData: Record<string, Plan[]> = {
   "Extra Services": [
     {
       tier: "Hosting",
-      tierColor: "#00d4ff",
+      tierColor: tokens.accent,
       label: "Monthly service",
       price: "LKR 1,000 – 5,000 / month",
       features: ["Managed hosting", "SSL certificate", "Uptime monitoring"],
@@ -165,7 +166,7 @@ const pricingData: Record<string, Plan[]> = {
     },
     {
       tier: "Maintenance",
-      tierColor: "#7c5cff",
+      tierColor: tokens.accent2,
       label: "Monthly service",
       price: "LKR 5,000 – 20,000 / month",
       features: [
@@ -178,7 +179,7 @@ const pricingData: Record<string, Plan[]> = {
     },
     {
       tier: "UI/UX Design",
-      tierColor: "#ff5cf0",
+      tierColor: tokens.accent3,
       label: "Design only",
       price: "LKR 10,000 – 100,000",
       features: [
@@ -191,7 +192,7 @@ const pricingData: Record<string, Plan[]> = {
     },
     {
       tier: "SEO Services",
-      tierColor: "#22c55e",
+      tierColor: tokens.tierGreen,
       label: "Grow your traffic",
       price: "LKR 10,000 – 80,000",
       features: [
@@ -262,7 +263,7 @@ export default function Pricing() {
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.08) 0%, transparent 55%)",
+            "radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb),0.08) 0%, transparent 55%)",
           pointerEvents: "none",
         }}
       />
@@ -360,7 +361,7 @@ export default function Pricing() {
                 fontFamily: "inherit",
                 transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
                 background: activeCategory === cat ? "var(--text)" : "transparent",
-                color: activeCategory === cat ? "#000" : "var(--muted)",
+                color: activeCategory === cat ? "var(--bg)" : "var(--muted)",
                 "&:hover":
                   activeCategory !== cat ? { color: "var(--text)" } : {},
               }}
@@ -431,12 +432,12 @@ export default function Pricing() {
               fontWeight: 600,
               textDecoration: "none",
               background: "var(--text)",
-              color: "#000",
+              color: "var(--bg)",
               flexShrink: 0,
               transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
               "&:hover": {
                 background: "var(--accent)",
-                boxShadow: "0 10px 40px rgba(0,212,255,0.3)",
+                boxShadow: "0 10px 40px rgba(var(--accent-rgb),0.3)",
                 transform: "translateY(-2px)",
               },
             }}
@@ -467,10 +468,10 @@ function PriceCard({ tier, tierColor, label, price, features, highlighted }: Pla
       sx={{
         borderRadius: "24px",
         background: highlighted
-          ? "linear-gradient(135deg, rgba(0,212,255,0.07) 0%, rgba(124,92,255,0.07) 100%)"
+          ? "linear-gradient(135deg, rgba(var(--accent-rgb),0.07) 0%, rgba(var(--accent-2-rgb),0.07) 100%)"
           : "var(--surface)",
         border: highlighted
-          ? "1px solid rgba(0,212,255,0.35)"
+          ? "1px solid rgba(var(--accent-rgb),0.35)"
           : "1px solid var(--border)",
         p: { xs: "32px 24px", md: "40px" },
         position: "relative",
@@ -483,7 +484,7 @@ function PriceCard({ tier, tierColor, label, price, features, highlighted }: Pla
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(0,212,255,0.10), transparent 40%)",
+            "radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(var(--accent-rgb),0.10), transparent 40%)",
           opacity: 0,
           transition: "opacity 0.5s",
           pointerEvents: "none",
@@ -509,7 +510,7 @@ function PriceCard({ tier, tierColor, label, price, features, highlighted }: Pla
             background: "linear-gradient(135deg, var(--accent), var(--accent-2))",
             fontSize: 10,
             fontWeight: 700,
-            color: "#000",
+            color: "var(--bg)",
             letterSpacing: "0.08em",
             textTransform: "uppercase",
           }}
@@ -636,7 +637,7 @@ function PriceCard({ tier, tierColor, label, price, features, highlighted }: Pla
           transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
           "&:hover": {
             background: tierColor,
-            color: "#000",
+            color: "var(--bg)",
             boxShadow: `0 10px 40px ${tierColor}45`,
             transform: "translateY(-2px)",
           },

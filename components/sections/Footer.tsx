@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import { tokens } from "@/components/ui/ThemeRegistry";
 
 const footerLinks = {
   Company: [
@@ -38,7 +39,7 @@ export default function Footer() {
         pt: "80px",
         pb: "40px",
         borderTop: "1px solid var(--border)",
-        background: "rgba(0,0,0,0.4)",
+        background: `rgba(${tokens.bgRgb}, 0.4)`,
       }}
     >
       <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>

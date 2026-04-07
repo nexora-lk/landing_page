@@ -44,7 +44,7 @@ export default function CTA() {
             position: "relative",
             p: { xs: "60px 28px", md: "100px 60px" },
             borderRadius: "32px",
-            background: "linear-gradient(135deg, #0f0f17 0%, #1a0f2e 100%)",
+            background: "linear-gradient(135deg, var(--bg-2) 0%, var(--bg-deep) 100%)",
             border: "1px solid var(--border)",
             overflow: "hidden",
             textAlign: "center",
@@ -54,14 +54,14 @@ export default function CTA() {
               position: "absolute",
               inset: 0,
               background:
-                "radial-gradient(circle at 30% 0%, rgba(0,212,255,0.25), transparent 50%), radial-gradient(circle at 70% 100%, rgba(124,92,255,0.25), transparent 50%)",
+                "radial-gradient(circle at 30% 0%, rgba(var(--accent-rgb),0.25), transparent 50%), radial-gradient(circle at 70% 100%, rgba(var(--accent-2-rgb),0.25), transparent 50%)",
             },
             "&::after": {
               content: '""',
               position: "absolute",
               inset: 0,
               backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+                "linear-gradient(rgba(var(--text-rgb),0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--text-rgb),0.04) 1px, transparent 1px)",
               backgroundSize: "50px 50px",
               maskImage: "radial-gradient(ellipse at center, black, transparent 70%)",
               WebkitMaskImage: "radial-gradient(ellipse at center, black, transparent 70%)",
@@ -121,13 +121,13 @@ export default function CTA() {
                 fontWeight: 600,
                 textDecoration: "none",
                 background: "var(--text)",
-                color: "#000",
-                boxShadow: "0 10px 40px rgba(0,212,255,0.2)",
+                color: "var(--bg)",
+                boxShadow: "0 10px 40px rgba(var(--accent-rgb),0.2)",
                 border: "1px solid transparent",
                 transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
                 "&:hover": {
                   transform: "translateY(-2px)",
-                  boxShadow: "0 20px 60px rgba(0,212,255,0.4)",
+                  boxShadow: "0 20px 60px rgba(var(--accent-rgb),0.4)",
                   background: "var(--accent)",
                 },
               }}

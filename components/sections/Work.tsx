@@ -12,21 +12,21 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     slug: "velocity-ledger",
-    gradient: "linear-gradient(135deg, #00d4ff 0%, #7c5cff 100%)",
+    gradient: "linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%)",
     tag: "FinTech · Platform",
     title: "Velocity Ledger",
     desc: "Real-time settlement engine processing 4M transactions daily.",
   },
   {
     slug: "orbit-intelligence",
-    gradient: "linear-gradient(135deg, #7c5cff 0%, #ff5cf0 100%)",
+    gradient: "linear-gradient(135deg, var(--accent-2) 0%, var(--accent-3) 100%)",
     tag: "AI · SaaS",
     title: "Orbit Intelligence",
     desc: "Agentic research copilot deployed across 40+ enterprise teams.",
   },
   {
     slug: "pulse-cloud",
-    gradient: "linear-gradient(135deg, #ff5cf0 0%, #00d4ff 100%)",
+    gradient: "linear-gradient(135deg, var(--accent-3) 0%, var(--accent) 100%)",
     tag: "Health · Infra",
     title: "Pulse Cloud",
     desc: "HIPAA-compliant data mesh serving 200+ hospital networks.",
@@ -139,7 +139,7 @@ export default function Work() {
                     position: "absolute",
                     inset: 0,
                     backgroundImage:
-                      "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+                      "linear-gradient(rgba(var(--text-rgb),0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--text-rgb),0.08) 1px, transparent 1px)",
                     backgroundSize: "30px 30px",
                     mixBlendMode: "overlay",
                   },

@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { tokens } from "@/components/ui/ThemeRegistry";
 
 export const runtime = "edge";
 export const alt = "Nextora — We Build What's Next";
@@ -17,18 +18,18 @@ export default function OGImage() {
           alignItems: "flex-start",
           justifyContent: "flex-end",
           padding: "80px",
-          background: "linear-gradient(135deg, #0a0a0f 0%, #0f0f17 50%, #1a0f2e 100%)",
+          background: `linear-gradient(135deg, ${tokens.bg} 0%, ${tokens.bgPaper} 50%, ${tokens.bgDeep} 100%)`,
           fontFamily: "sans-serif",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 32 }}>
-          <div style={{ width: 40, height: 40, borderRadius: 10, background: "linear-gradient(135deg, #00d4ff, #7c5cff)" }} />
-          <span style={{ fontSize: 32, fontWeight: 700, color: "#fff", letterSpacing: "-0.02em" }}>Nextora</span>
+          <div style={{ width: 40, height: 40, borderRadius: 10, background: `linear-gradient(135deg, ${tokens.accent}, ${tokens.accent2})` }} />
+          <span style={{ fontSize: 32, fontWeight: 700, color: tokens.text, letterSpacing: "-0.02em" }}>Nextora</span>
         </div>
-        <div style={{ fontSize: 64, fontWeight: 700, color: "#fff", lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 24 }}>
+        <div style={{ fontSize: 64, fontWeight: 700, color: tokens.text, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 24 }}>
           We Build What&apos;s Next.
         </div>
-        <div style={{ fontSize: 24, color: "#8a8aa0", fontWeight: 300, maxWidth: 720 }}>
+        <div style={{ fontSize: 24, color: tokens.muted, fontWeight: 300, maxWidth: 720 }}>
           Engineering partner for cloud, AI, and custom software — built with relentless craft.
         </div>
       </div>

@@ -109,12 +109,12 @@ export default function Testimonials() {
               sx={{
                 p: "36px",
                 borderRadius: "20px",
-                background: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
+                background: "linear-gradient(180deg, rgba(var(--text-rgb),0.04), rgba(var(--text-rgb),0.01))",
                 border: "1px solid var(--border)",
                 backdropFilter: "blur(20px)",
                 position: "relative",
                 transition: "border-color 0.3s",
-                "&:hover": { borderColor: "rgba(0,212,255,0.3)" },
+                "&:hover": { borderColor: "rgba(var(--accent-rgb),0.3)" },
               }}
             >
               {/* Quote mark */}
@@ -139,7 +139,7 @@ export default function Testimonials() {
                 sx={{
                   fontSize: 16,
                   mb: "28px",
-                  color: "#d0d0e0",
+                  color: "rgba(var(--text-rgb),0.75)",
                   fontWeight: 300,
                   lineHeight: 1.65,
                   position: "relative",
@@ -159,7 +159,7 @@ export default function Testimonials() {
                     placeItems: "center",
                     fontWeight: 700,
                     fontSize: 16,
-                    color: "#000",
+                    color: "var(--bg)",
                     flexShrink: 0,
                   }}
                 >

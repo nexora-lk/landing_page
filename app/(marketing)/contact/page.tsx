@@ -29,7 +29,7 @@ export default function ContactPage() {
               position: "absolute",
               inset: 0,
               background:
-                "radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.10) 0%, transparent 55%)",
+                "radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb),0.10) 0%, transparent 55%)",
               pointerEvents: "none",
             }}
           />

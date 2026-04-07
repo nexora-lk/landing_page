@@ -23,7 +23,7 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
-        <Trusted />
+        {/*<Trusted />*/}
         <Services />
         <Stats />
         <Work />

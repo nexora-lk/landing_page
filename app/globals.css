@@ -1,16 +1,45 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════
+   Design Tokens (CSS Custom Properties)
+   ─────────────────────────────────────────────────────────
+   These MUST stay in sync with tokens in ThemeRegistry.tsx.
+   Components should reference var(--*) wherever possible;
+   canvas & OG-image code may import tokens from
+   ThemeRegistry.tsx directly.
+   ═══════════════════════════════════════════════════════════ */
+
 :root {
-  --bg: #0a0a0f;
-  --bg-2: #0f0f17;
-  --surface: rgba(255, 255, 255, 0.04);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hi: rgba(0, 212, 255, 0.4);
-  --text: #ffffff;
-  --muted: #8a8aa0;
-  --accent: #00d4ff;
-  --accent-2: #7c5cff;
-  --accent-3: #ff5cf0;
+  /* ── Core Palette ── */
+  --accent:       #00d4ff;
+  --accent-br:    #33dfff;
+  --accent-2:     #7c5cff;
+  --accent-3:     #ff5cf0;
+
+  /* ── RGB Channels (use with rgba()) ── */
+  --accent-rgb:    0, 212, 255;
+  --accent-br-rgb: 51, 223, 255;
+  --accent-2-rgb:  124, 92, 255;
+  --accent-3-rgb:  255, 92, 240;
+  --text-rgb:      255, 255, 255;
+  --bg-rgb:        10, 10, 15;
+
+  /* ── Backgrounds ── */
+  --bg:       #0a0a0f;
+  --bg-2:     #0f0f17;
+  --bg-deep:  #1a0f2e;
+
+  /* ── Text ── */
+  --text:      #ffffff;
+  --text-soft: #f0f4ff;
+  --muted:     #8a8aa0;
+
+  /* ── Surfaces & Borders ── */
+  --surface:    rgba(255, 255, 255, 0.04);
+  --border:     rgba(255, 255, 255, 0.08);
+  --border-hi:  rgba(0, 212, 255, 0.4);
+
+  /* ── Glow ── */
   --glow: 0 0 40px rgba(0, 212, 255, 0.35);
 }
 
@@ -34,7 +63,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: #000;
+  color: var(--bg);
 }
 
 /* Grain overlay */
@@ -96,3 +125,74 @@ body::before {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
+
+/* Hero circuit board animations */
+@keyframes floatGlow {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(40px, 30px); }
+}
+
+@keyframes orbPulse {
+  0%, 100% { box-shadow: 0 0 60px rgba(var(--accent-rgb), 0.2); }
+  50% { box-shadow: 0 0 100px rgba(var(--accent-rgb), 0.35), 0 0 200px rgba(var(--accent-rgb), 0.1); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* ── Premium Hero Animations ── */
+
+@keyframes shimmer-text {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float-badge-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(12px, -18px) rotate(2deg); }
+  50% { transform: translate(-8px, -28px) rotate(-1deg); }
+  75% { transform: translate(16px, -10px) rotate(1.5deg); }
+}
+
+@keyframes float-badge-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-16px, 14px) rotate(-2deg); }
+  50% { transform: translate(10px, 24px) rotate(1deg); }
+  75% { transform: translate(-12px, 8px) rotate(-1.5deg); }
+}
+
+@keyframes float-badge-3 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(20px, -14px); }
+  66% { transform: translate(-14px, 18px); }
+}
+
+@keyframes float-badge-4 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(-18px, -20px); }
+  66% { transform: translate(12px, 14px); }
+}
+
+@keyframes scroll-hint {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(10px); opacity: 1; }
+}
+
+@keyframes aurora-pulse {
+  0%, 100% { opacity: 0.12; transform: scale(1) rotate(0deg); }
+  33% { opacity: 0.18; transform: scale(1.05) rotate(2deg); }
+  66% { opacity: 0.1; transform: scale(0.97) rotate(-1deg); }
+}
+
+@keyframes line-expand {
+  from { width: 0; opacity: 0; }
+  to { width: 64px; opacity: 1; }
+}
+
+@keyframes stat-count-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+

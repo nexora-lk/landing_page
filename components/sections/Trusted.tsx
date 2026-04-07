@@ -11,7 +11,7 @@ export default function Trusted() {
         py: "80px",
         borderTop: "1px solid var(--border)",
         borderBottom: "1px solid var(--border)",
-        background: "rgba(255,255,255,0.015)",
+        background: "rgba(var(--text-rgb),0.015)",
       }}
     >
       <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>

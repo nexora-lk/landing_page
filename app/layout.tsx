@@ -65,6 +65,7 @@ export default function RootLayout({
       lang="en"
       className={`${syne.variable} ${inter.variable}`}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
     >
       <body>
         <ThemeRegistry>{children}</ThemeRegistry>

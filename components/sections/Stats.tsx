@@ -72,7 +72,7 @@ export default function Stats() {
       sx={{
         py: { xs: "80px", md: "120px" },
         position: "relative",
-        background: "linear-gradient(180deg, transparent, rgba(0,212,255,0.03), transparent)",
+        background: "linear-gradient(180deg, transparent, rgba(var(--accent-rgb),0.03), transparent)",
       }}
     >
       <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>
@@ -137,7 +137,7 @@ export default function Stats() {
                   fontWeight: 700,
                   letterSpacing: "-0.03em",
                   lineHeight: 1,
-                  background: "linear-gradient(135deg, #fff, var(--accent))",
+                  background: "linear-gradient(135deg, var(--text), var(--accent))",
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
                   color: "transparent",

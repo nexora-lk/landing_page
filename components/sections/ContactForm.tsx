@@ -33,7 +33,7 @@ export default function ContactForm() {
     px: "20px",
     py: "14px",
     borderRadius: "12px",
-    background: "rgba(255,255,255,0.04)",
+    background: "rgba(var(--text-rgb),0.04)",
     border: "1px solid var(--border)",
     color: "var(--text)",
     fontSize: 15,
@@ -51,7 +51,7 @@ export default function ContactForm() {
           p: "60px",
           borderRadius: "20px",
           background: "var(--surface)",
-          border: "1px solid rgba(0,212,255,0.3)",
+          border: "1px solid rgba(var(--accent-rgb),0.3)",
         }}
       >
         <Box sx={{ fontSize: 48, mb: "16px" }}>✓</Box>
@@ -117,7 +117,7 @@ export default function ContactForm() {
         />
       </Box>
       {status === "error" && (
-        <Box sx={{ color: "#ff5cf0", fontSize: 14 }}>Something went wrong. Please try again or email us directly.</Box>
+        <Box sx={{ color: "var(--accent-3)", fontSize: 14 }}>Something went wrong. Please try again or email us directly.</Box>
       )}
       <Box
         component="button"
@@ -130,7 +130,7 @@ export default function ContactForm() {
           fontSize: 15,
           fontWeight: 600,
           background: "var(--text)",
-          color: "#000",
+          color: "var(--bg)",
           border: "none",
           cursor: status === "loading" ? "wait" : "pointer",
           transition: "all 0.3s",

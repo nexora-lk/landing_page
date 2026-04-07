@@ -33,7 +33,7 @@ export default function PricingPage() {
               position: "absolute",
               inset: 0,
               background:
-                "radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.12) 0%, transparent 55%), radial-gradient(ellipse at 80% 80%, rgba(124,92,255,0.08) 0%, transparent 50%)",
+                "radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb),0.12) 0%, transparent 55%), radial-gradient(ellipse at 80% 80%, rgba(var(--accent-2-rgb),0.08) 0%, transparent 50%)",
               pointerEvents: "none",
             }}
           />
