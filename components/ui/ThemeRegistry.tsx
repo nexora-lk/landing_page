@@ -13,42 +13,42 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
    ═══════════════════════════════════════════════════════════ */
 
 export const tokens = {
-  /* ── Core Palette ── */
-  accent:     "#00d4ff",     // Primary cyan
-  accentBr:   "#33dfff",     // Brighter variant (hover states)
-  accent2:    "#7c5cff",     // Secondary purple
-  accent3:    "#ff5cf0",     // Tertiary pink
+  /* ── Core Palette (matched to Nextora circuit-board logo) ── */
+  accent:     "#42C6FF",     // Primary sky-cyan (logo primary)
+  accentBr:   "#6DD5FF",     // Brighter variant (hover states)
+  accent2:    "#1A73E8",     // Secondary electric blue
+  accent3:    "#00E5CC",     // Tertiary teal/cyan
 
   /* ── Backgrounds ── */
-  bg:         "#0a0a0f",     // App background
-  bgPaper:    "#0f0f17",     // Card / elevated surfaces
-  bgDeep:     "#1a0f2e",     // Deep purple tint (CTA, etc.)
+  bg:         "#060B14",     // Deep navy-black
+  bgPaper:    "#0A1120",     // Card / elevated surfaces
+  bgDeep:     "#0D1B30",     // Deep blue tint (CTA, etc.)
 
   /* ── Text ── */
   text:       "#ffffff",
-  textSoft:   "#f0f4ff",     // Slightly warm white
-  muted:      "#8a8aa0",     // Subdued labels
+  textSoft:   "#E8F0FE",     // Slightly cool white
+  muted:      "#7B8BA5",     // Subdued labels (blue-grey)
 
   /* ── Surfaces & Borders ── */
-  surface:    "rgba(255, 255, 255, 0.04)",
-  border:     "rgba(255, 255, 255, 0.08)",
-  borderHi:   "rgba(0, 212, 255, 0.4)",
+  surface:    "rgba(66, 198, 255, 0.04)",
+  border:     "rgba(66, 198, 255, 0.10)",
+  borderHi:   "rgba(66, 198, 255, 0.45)",
 
   /* ── Glow ── */
-  glow:       "0 0 40px rgba(0, 212, 255, 0.35)",
+  glow:       "0 0 40px rgba(66, 198, 255, 0.35)",
 
   /* ── RGB channel values (for rgba() compositing in JS) ── */
-  accentRgb:   "0, 212, 255",
-  accentBrRgb: "51, 223, 255",
-  accent2Rgb:  "124, 92, 255",
-  accent3Rgb:  "255, 92, 240",
+  accentRgb:   "66, 198, 255",
+  accentBrRgb: "109, 213, 255",
+  accent2Rgb:  "26, 115, 232",
+  accent3Rgb:  "0, 229, 204",
   textRgb:     "255, 255, 255",
-  bgRgb:       "10, 10, 15",
+  bgRgb:       "6, 11, 20",
 
   /* ── Pricing / Tier Colours ── */
   tierGreen:   "#22c55e",
-  tierBlue:    "#3b82f6",
-  tierPurple:  "#a855f7",
+  tierBlue:    "#42C6FF",
+  tierPurple:  "#1A73E8",
   tierRed:     "#ef4444",
 } as const;
 

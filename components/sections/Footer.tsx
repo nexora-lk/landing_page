@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { tokens } from "@/components/ui/ThemeRegistry";
@@ -54,36 +55,14 @@ export default function Footer() {
         >
           {/* Brand */}
           <Box>
-            <Link href="/" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 10 }}>
-              <Box
-                sx={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: "8px",
-                  background: "conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent))",
-                  boxShadow: "var(--glow)",
-                  position: "relative",
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    inset: "4px",
-                    borderRadius: "5px",
-                    background: "var(--bg)",
-                  },
-                }}
+            <Link href="/" style={{ display: "inline-flex", alignItems: "center" }}>
+              <Image
+                src="/logo.png"
+                alt="Nextora"
+                width={150}
+                height={42}
+                style={{ objectFit: "contain" }}
               />
-              <Box
-                component="span"
-                sx={{
-                  fontFamily: "var(--font-syne)",
-                  fontWeight: 700,
-                  fontSize: 24,
-                  letterSpacing: "-0.02em",
-                  color: "var(--text)",
-                }}
-              >
-                Nextora
-              </Box>
             </Link>
             <Box
               component="p"

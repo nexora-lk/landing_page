@@ -3,44 +3,45 @@
 /* ═══════════════════════════════════════════════════════════
    Design Tokens (CSS Custom Properties)
    ─────────────────────────────────────────────────────────
-   These MUST stay in sync with tokens in ThemeRegistry.tsx.
-   Components should reference var(--*) wherever possible;
-   canvas & OG-image code may import tokens from
-   ThemeRegistry.tsx directly.
+   Matched to Nextora circuit-board logo:
+   Primary: Sky-Cyan (#42C6FF) — the logo's dominant colour
+   Secondary: Electric Blue (#1A73E8) — deeper complement
+   Tertiary: Teal (#00E5CC) — vibrant accent
+   Background: Deep Navy (#060B14)
    ═══════════════════════════════════════════════════════════ */
 
 :root {
   /* ── Core Palette ── */
-  --accent:       #00d4ff;
-  --accent-br:    #33dfff;
-  --accent-2:     #7c5cff;
-  --accent-3:     #ff5cf0;
+  --accent:       #42C6FF;
+  --accent-br:    #6DD5FF;
+  --accent-2:     #1A73E8;
+  --accent-3:     #00E5CC;
 
   /* ── RGB Channels (use with rgba()) ── */
-  --accent-rgb:    0, 212, 255;
-  --accent-br-rgb: 51, 223, 255;
-  --accent-2-rgb:  124, 92, 255;
-  --accent-3-rgb:  255, 92, 240;
+  --accent-rgb:    66, 198, 255;
+  --accent-br-rgb: 109, 213, 255;
+  --accent-2-rgb:  26, 115, 232;
+  --accent-3-rgb:  0, 229, 204;
   --text-rgb:      255, 255, 255;
-  --bg-rgb:        10, 10, 15;
+  --bg-rgb:        6, 11, 20;
 
   /* ── Backgrounds ── */
-  --bg:       #0a0a0f;
-  --bg-2:     #0f0f17;
-  --bg-deep:  #1a0f2e;
+  --bg:       #060B14;
+  --bg-2:     #0A1120;
+  --bg-deep:  #0D1B30;
 
   /* ── Text ── */
   --text:      #ffffff;
-  --text-soft: #f0f4ff;
-  --muted:     #8a8aa0;
+  --text-soft: #E8F0FE;
+  --muted:     #7B8BA5;
 
   /* ── Surfaces & Borders ── */
-  --surface:    rgba(255, 255, 255, 0.04);
-  --border:     rgba(255, 255, 255, 0.08);
-  --border-hi:  rgba(0, 212, 255, 0.4);
+  --surface:    rgba(66, 198, 255, 0.04);
+  --border:     rgba(66, 198, 255, 0.10);
+  --border-hi:  rgba(66, 198, 255, 0.45);
 
   /* ── Glow ── */
-  --glow: 0 0 40px rgba(0, 212, 255, 0.35);
+  --glow: 0 0 40px rgba(66, 198, 255, 0.35);
 }
 
 * {
@@ -196,3 +197,44 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Circuit Node Pulse (logo-inspired) ── */
+@keyframes node-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(var(--accent-rgb), 0); }
+}
+
+@keyframes trace-flow {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* ── Circuit-board section divider ── */
+.circuit-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--accent-rgb), 0.3) 20%,
+    rgba(var(--accent-rgb), 0.6) 50%,
+    rgba(var(--accent-rgb), 0.3) 80%,
+    transparent 100%
+  );
+  position: relative;
+}
+
+.circuit-divider::before,
+.circuit-divider::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 12px var(--accent);
+  animation: node-pulse 2s ease-in-out infinite;
+}
+
+.circuit-divider::before { left: 20%; }
+.circuit-divider::after { right: 20%; animation-delay: 1s; }
