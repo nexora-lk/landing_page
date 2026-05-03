@@ -9,10 +9,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { target: 2, suffix: "+", label: "Projects Delivered" },
-  { target: 100, suffix: "%", label: "Client Retention" },
-  { target: 3, suffix: "", label: "Core Team Members" },
-  { target: 12, suffix: "", label: "Countries Served" },
+  { target: 3,   suffix: "",  label: "Live Projects" },
+  { target: 9,   suffix: "",  label: "Services We Offer" },
+  { target: 100, suffix: "%", label: "Founder-led Builds" },
+  { target: 24,  suffix: "/7", label: "Direct Slack Access" },
 ];
 
 export default function Stats() {
@@ -89,7 +89,7 @@ export default function Stats() {
             display: "block",
           }}
         >
-          Why Nextora
+          Where we&apos;re at
         </Box>
         <Box
           className="stats-reveal"
@@ -104,9 +104,9 @@ export default function Stats() {
             maxWidth: 720,
           }}
         >
-          Numbers that
+          Small team.
           <br />
-          speak quietly.
+          Honest numbers.
         </Box>
 
         <Box

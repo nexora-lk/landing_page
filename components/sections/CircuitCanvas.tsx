@@ -194,7 +194,9 @@ export default function CircuitCanvas() {
         data.chips.push({ x: cx, y: cy, w: cw, h: ch, pins: Math.floor(cw / GRID) * 2 });
       }
 
-      for (let i = 0; i < 18; i++) spawnPulse();
+      const small = typeof window !== "undefined" && window.innerWidth < 768;
+      const initial = small ? 8 : 18;
+      for (let i = 0; i < initial; i++) spawnPulse();
     },
     [spawnPulse]
   );
@@ -202,8 +204,16 @@ export default function CircuitCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
+
+    const reducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile =
+      typeof window !== "undefined" && window.innerWidth < 768;
+    let visible = true;
+    let inView = true;
 
     // roundRect polyfill
     if (!CanvasRenderingContext2D.prototype.roundRect) {
@@ -387,17 +397,65 @@ export default function CircuitCanvas() {
       });
       data.pulses = data.pulses.filter(Boolean);
 
-      while (data.pulses.length < 22) spawnPulse();
+      const target = isMobile ? 12 : 22;
+      while (data.pulses.length < target) spawnPulse();
 
+      if (visible && inView && !reducedMotion) {
+        animRef.current = requestAnimationFrame(draw);
+      }
+    }
+
+    function start() {
+      cancelAnimationFrame(animRef.current);
       animRef.current = requestAnimationFrame(draw);
     }
 
-    resize();
-    draw();
+    function stop() {
+      cancelAnimationFrame(animRef.current);
+    }
 
-    window.addEventListener("resize", resize);
+    resize();
+
+    if (reducedMotion) {
+      // Render a single static frame instead of looping.
+      draw();
+      stop();
+    } else {
+      start();
+    }
+
+    const onVisibility = () => {
+      visible = !document.hidden;
+      if (visible && inView && !reducedMotion) start();
+      else stop();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    let io: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== "undefined") {
+      io = new IntersectionObserver(
+        (entries) => {
+          inView = entries[0]?.isIntersecting ?? true;
+          if (visible && inView && !reducedMotion) start();
+          else stop();
+        },
+        { threshold: 0 }
+      );
+      io.observe(canvas);
+    }
+
+    let resizeRaf = 0;
+    const onResize = () => {
+      cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(resize);
+    };
+    window.addEventListener("resize", onResize);
+
     return () => {
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisibility);
+      io?.disconnect();
+      cancelAnimationFrame(resizeRaf);
       cancelAnimationFrame(animRef.current);
     };
   }, [buildCircuit, spawnPulse]);
@@ -405,12 +463,14 @@ export default function CircuitCanvas() {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden
       style={{
         position: "absolute",
         inset: 0,
         width: "100%",
         height: "100%",
         zIndex: 0,
+        pointerEvents: "none",
       }}
     />
   );

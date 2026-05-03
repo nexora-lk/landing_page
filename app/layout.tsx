@@ -2,19 +2,22 @@ import type { Metadata } from "next";
 import { Syne, Inter } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "@/components/ui/ThemeRegistry";
+import Cursor from "@/components/ui/Cursor";
 
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["700", "800"],
   display: "swap",
+  preload: true,
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "600"],
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -68,7 +71,10 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body>
-        <ThemeRegistry>{children}</ThemeRegistry>
+        <ThemeRegistry>
+          <Cursor />
+          {children}
+        </ThemeRegistry>
       </body>
     </html>
   );

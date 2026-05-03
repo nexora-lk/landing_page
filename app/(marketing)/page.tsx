@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
-import Trusted from "@/components/sections/Trusted";
 import Services from "@/components/sections/Services";
+import TechStack from "@/components/sections/TechStack";
 import Stats from "@/components/sections/Stats";
 import Work from "@/components/sections/Work";
+import WhyUs from "@/components/sections/WhyUs";
 import Testimonials from "@/components/sections/Testimonials";
+import FAQ from "@/components/sections/FAQ";
 import Pricing from "@/components/sections/Pricing";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
@@ -23,12 +25,14 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
-        {/*<Trusted />*/}
+        <TechStack />
         <Services />
-        <Stats />
         <Work />
+        <WhyUs />
         <Testimonials />
+        <Stats />
         <Pricing />
+        <FAQ />
         <CTA />
       </main>
       <Footer />

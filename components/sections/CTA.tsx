@@ -80,9 +80,9 @@ export default function CTA() {
                 mb: "24px",
               }}
             >
-              Ready to Build
+              Got an idea?
               <br />
-              the{" "}
+              Let&apos;s{" "}
               <Box
                 component="span"
                 sx={{
@@ -92,7 +92,7 @@ export default function CTA() {
                   color: "transparent",
                 }}
               >
-                Future?
+                build it.
               </Box>
             </Box>
             <Box
@@ -105,7 +105,7 @@ export default function CTA() {
                 fontWeight: 300,
               }}
             >
-              Let&apos;s turn your most ambitious roadmap into shipped software. Book a 30-minute strategy call with our founding team.
+              Whether it&apos;s a website, an app, an SEO push or your first AI-search strategy — book a free 30-min call with the founders. No agency middlemen.
             </Box>
             <Box
               component={Link}
@@ -132,7 +132,7 @@ export default function CTA() {
                 },
               }}
             >
-              Start a Project →
+              Book a Free Call →
             </Box>
           </Box>
         </Box>

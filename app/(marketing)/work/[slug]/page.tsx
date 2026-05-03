@@ -7,9 +7,42 @@ import Container from "@mui/material/Container";
 import Link from "next/link";
 
 const projects: Record<string, { gradient: string; tag: string; title: string; desc: string; results: string[] }> = {
-  "velocity-ledger": { gradient: "linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%)", tag: "FinTech · Platform", title: "Velocity Ledger", desc: "Real-time settlement engine processing 4M transactions daily.", results: ["4M+ daily transactions", "99.99% uptime SLA", "Deploy time reduced 20x", "SOC 2 Type II certified"] },
-  "orbit-intelligence": { gradient: "linear-gradient(135deg, var(--accent-2) 0%, var(--accent-3) 100%)", tag: "AI · SaaS", title: "Orbit Intelligence", desc: "Agentic research copilot deployed across 40+ enterprise teams.", results: ["40+ enterprise deployments", "85% reduction in research time", "RAG over 10M documents", "Multi-agent orchestration"] },
-  "pulse-cloud": { gradient: "linear-gradient(135deg, var(--accent-3) 0%, var(--accent) 100%)", tag: "Health · Infra", title: "Pulse Cloud", desc: "HIPAA-compliant data mesh serving 200+ hospital networks.", results: ["200+ hospital networks", "HIPAA & SOC 2 compliant", "Zero data breaches", "Sub-100ms query latency"] },
+  "prestige-glamour-payroll": {
+    gradient: "linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%)",
+    tag: "HR · Internal Tool",
+    title: "Prestige Glamour — Payroll",
+    desc: "Custom salary management software for the Prestige Glamour group of companies — handling employees, payslips and monthly payroll cycles in one place.",
+    results: [
+      "Multi-company payroll in one app",
+      "Automated payslip generation",
+      "Role-based access for HR & finance",
+      "Replaces manual spreadsheets",
+    ],
+  },
+  "prestige-glamour-website": {
+    gradient: "linear-gradient(135deg, var(--accent-2) 0%, var(--accent-3) 100%)",
+    tag: "Corporate · Website",
+    title: "Prestige Glamour — Website",
+    desc: "Group-wide corporate website redesign — modern brand presence covering every company under the Prestige Glamour umbrella.",
+    results: [
+      "Unified brand across companies",
+      "Built with Next.js + Tailwind",
+      "SEO-ready content structure",
+      "Fast, mobile-first design",
+    ],
+  },
+  "nextconstation": {
+    gradient: "linear-gradient(135deg, var(--accent-3) 0%, var(--accent) 100%)",
+    tag: "Web · Marketing Site",
+    title: "Nextconstation",
+    desc: "Marketing website built end-to-end — UI/UX design, development and deployment delivered as a complete package.",
+    results: [
+      "Design-to-deploy in weeks",
+      "Optimised Core Web Vitals",
+      "Deployed on Vercel + CI/CD",
+      "GEO-ready content structure",
+    ],
+  },
 };
 
 export async function generateStaticParams() {

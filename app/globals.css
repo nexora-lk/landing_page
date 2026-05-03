@@ -238,3 +238,37 @@ body::before {
 
 .circuit-divider::before { left: 20%; }
 .circuit-divider::after { right: 20%; animation-delay: 1s; }
+
+/* ═══════════════════════════════════════════════════════════
+   Custom Cursor
+   ─────────────────────────────────────────────────────────
+   Activated by <Cursor /> on fine-pointer devices only.
+   ═══════════════════════════════════════════════════════════ */
+
+@media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor body,
+  html.has-custom-cursor *,
+  html.has-custom-cursor *::before,
+  html.has-custom-cursor *::after {
+    cursor: none !important;
+  }
+}
+
+.nx-cursor-ring.cursor-hover {
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  margin-top: -28px;
+  border-color: rgba(var(--accent-rgb), 0.9);
+  background: rgba(var(--accent-rgb), 0.08);
+}
+
+.nx-cursor-ring.cursor-down {
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  margin-top: -12px;
+  border-color: rgba(var(--accent-br-rgb), 1);
+  background: rgba(var(--accent-rgb), 0.18);
+}

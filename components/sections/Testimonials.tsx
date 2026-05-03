@@ -8,27 +8,21 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const testimonials = [
+const steps = [
   {
-    quote:
-      "Nextora rebuilt our core platform in four months. Our deploys are 20x faster and our team finally trusts the stack again.",
-    initials: "AK",
-    name: "Anya Kowalski",
-    role: "CTO, Velocity Finance",
+    step: "01",
+    title: "Discover",
+    desc: "We jump on a free call, learn your goals, audit what you have today and map out exactly what you need — website, app, SEO, GEO or all of the above.",
   },
   {
-    quote:
-      "The only agency where the engineers are smarter than ours. They don't just deliver — they raise the bar for the whole org.",
-    initials: "MR",
-    name: "Marco Reyes",
-    role: "VP Engineering, Orbit AI",
+    step: "02",
+    title: "Design & Build",
+    desc: "Wireframes in Figma, then code in Next.js, React, Flask or Flutter. You get a live preview link from day one — no black boxes, no surprises.",
   },
   {
-    quote:
-      "From architecture to launch in 11 weeks. Nextora shipped what two previous vendors couldn't in a year. Unreal execution.",
-    initials: "SC",
-    name: "Sarah Chen",
-    role: "Founder, Pulse Health",
+    step: "03",
+    title: "Ship & Grow",
+    desc: "We deploy to Vercel or AWS, set up CI/CD, monitoring and analytics — then keep optimising for speed, SEO and AI search visibility.",
   },
 ];
 
@@ -75,7 +69,7 @@ export default function Testimonials() {
             display: "block",
           }}
         >
-          Testimonials
+          How we work
         </Box>
         <Box
           className="testi-reveal"
@@ -89,22 +83,22 @@ export default function Testimonials() {
             mb: "24px",
           }}
         >
-          Loved by the teams
+          From idea to live —
           <br />
-          we build alongside.
+          in three simple steps.
         </Box>
 
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(3, 1fr)" },
+            gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
             gap: "24px",
-            mt: "40px",
+            mt: "60px",
           }}
         >
-          {testimonials.map((t) => (
+          {steps.map((s) => (
             <Box
-              key={t.name}
+              key={s.step}
               className="testi-reveal"
               sx={{
                 p: "36px",
@@ -113,66 +107,51 @@ export default function Testimonials() {
                 border: "1px solid var(--border)",
                 backdropFilter: "blur(20px)",
                 position: "relative",
-                transition: "border-color 0.3s",
-                "&:hover": { borderColor: "rgba(var(--accent-rgb),0.3)" },
+                transition: "border-color 0.3s, transform 0.3s",
+                "&:hover": {
+                  borderColor: "rgba(var(--accent-rgb),0.3)",
+                  transform: "translateY(-4px)",
+                },
               }}
             >
-              {/* Quote mark */}
               <Box
                 sx={{
                   fontFamily: "var(--font-syne)",
-                  fontSize: 72,
-                  color: "var(--accent)",
-                  opacity: 0.3,
-                  lineHeight: 0.5,
-                  position: "absolute",
-                  top: 30,
-                  right: 30,
-                  pointerEvents: "none",
+                  fontSize: 64,
+                  fontWeight: 700,
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1,
+                  background: "linear-gradient(135deg, var(--accent), var(--accent-2))",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  mb: "16px",
                 }}
               >
-                &ldquo;
+                {s.step}
               </Box>
-
+              <Box
+                component="h3"
+                sx={{
+                  fontFamily: "var(--font-syne)",
+                  fontSize: 24,
+                  fontWeight: 600,
+                  mb: "12px",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {s.title}
+              </Box>
               <Box
                 component="p"
                 sx={{
-                  fontSize: 16,
-                  mb: "28px",
-                  color: "rgba(var(--text-rgb),0.75)",
+                  color: "var(--muted)",
+                  fontSize: 15,
+                  lineHeight: 1.7,
                   fontWeight: 300,
-                  lineHeight: 1.65,
-                  position: "relative",
                 }}
               >
-                {t.quote}
-              </Box>
-
-              <Box sx={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                <Box
-                  sx={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: "50%",
-                    background: "linear-gradient(135deg, var(--accent), var(--accent-2))",
-                    display: "grid",
-                    placeItems: "center",
-                    fontWeight: 700,
-                    fontSize: 16,
-                    color: "var(--bg)",
-                    flexShrink: 0,
-                  }}
-                >
-                  {t.initials}
-                </Box>
-                <Box>
-                  <Box component="p" sx={{ fontWeight: 600, fontSize: 14 }}>
-                    {t.name}
-                  </Box>
-                  <Box component="p" sx={{ color: "var(--muted)", fontSize: 13 }}>
-                    {t.role}
-                  </Box>
-                </Box>
+                {s.desc}
               </Box>
             </Box>
           ))}

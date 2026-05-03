@@ -6,36 +6,83 @@ import Container from "@mui/material/Container";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Globe,
+  Sparkles,
+  Search,
+  Server,
+  Smartphone,
+  Palette,
+  PenLine,
+  Rocket,
+  type LucideIcon,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
+type Service = {
+  num: string;
+  Icon: LucideIcon;
+  title: string;
+  desc: string;
+  href: string;
+};
+
+const services: Service[] = [
   {
     num: "/ 01",
-    icon: "☁",
-    title: "Cloud Infrastructure",
-    desc: "Multi-region Kubernetes, observability, and zero-downtime platforms designed for scale from day one.",
-    href: "/services/cloud",
+    Icon: Globe,
+    title: "Web Design & Development",
+    desc: "Business sites, SaaS dashboards, e-commerce and high-converting landing pages — built with Next.js, React, Tailwind and Flask.",
+    href: "/services",
   },
   {
     num: "/ 02",
-    icon: "◈",
-    title: "AI & Automation",
-    desc: "LLM pipelines, agentic workflows, and production-grade ML systems that ship real business outcomes.",
-    href: "/services/ai",
+    Icon: Sparkles,
+    title: "GEO — Generative Engine Optimization",
+    desc: "Get found in ChatGPT, Gemini and AI search. FAQ strategy, schema markup and AI-friendly content. Our specialty.",
+    href: "/services",
   },
   {
     num: "/ 03",
-    icon: "❖",
-    title: "Custom Software",
-    desc: "Bespoke platforms, internal tools, and full product builds engineered end-to-end by a senior team.",
+    Icon: Search,
+    title: "SEO & Performance",
+    desc: "Keyword strategy, on-page + technical SEO, Core Web Vitals tuning and Search Console / Analytics setup.",
     href: "/services",
   },
   {
     num: "/ 04",
-    icon: "⬢",
-    title: "Cybersecurity",
-    desc: "Threat modeling, pen testing, and SOC 2 readiness programs that harden your stack end-to-end.",
+    Icon: Server,
+    title: "Backend Development",
+    desc: "REST APIs in Flask or Node.js, JWT / OAuth auth, MongoDB & SQL design, and scalable architecture.",
+    href: "/services",
+  },
+  {
+    num: "/ 05",
+    Icon: Smartphone,
+    title: "Mobile App Development",
+    desc: "Cross-platform apps in Flutter or React Native — clean UI, smooth UX, fully wired to your backend.",
+    href: "/services",
+  },
+  {
+    num: "/ 06",
+    Icon: Palette,
+    title: "UI/UX & Branding",
+    desc: "Wireframes, prototypes, design systems and modern landing pages — designed in Figma, ready for handoff.",
+    href: "/services",
+  },
+  {
+    num: "/ 07",
+    Icon: PenLine,
+    title: "AI Content Strategy",
+    desc: "Blog content tuned for SEO + GEO, AI-assisted copywriting and conversion-focused content calendars.",
+    href: "/services",
+  },
+  {
+    num: "/ 08",
+    Icon: Rocket,
+    title: "Hosting & Deployment",
+    desc: "Domain setup, CI/CD pipelines, deploys to Vercel or AWS, plus ongoing monitoring and maintenance.",
     href: "/services",
   },
 ];
@@ -101,11 +148,11 @@ export default function Services() {
             maxWidth: 720,
           }}
         >
-          Infrastructure for the{" "}
+          Everything you need to{" "}
           <Box component="span" sx={{ color: "var(--accent)" }}>
-            next decade
+            launch & grow
           </Box>{" "}
-          of software.
+          online.
         </Box>
         <Box
           className="svc-reveal"
@@ -118,13 +165,13 @@ export default function Services() {
             fontWeight: 300,
           }}
         >
-          Four practices. One integrated team. Shipped at the speed of a startup with the rigor of an enterprise.
+          From your first website to AI-search visibility — a small team handling design, code, content and deployment under one roof.
         </Box>
 
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", lg: "repeat(4, 1fr)" },
             gap: "24px",
             mt: "40px",
           }}
@@ -138,7 +185,7 @@ export default function Services() {
   );
 }
 
-function ServiceCard({ num, icon, title, desc, href }: (typeof services)[0]) {
+function ServiceCard({ num, Icon, title, desc, href }: Service) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -195,20 +242,21 @@ function ServiceCard({ num, icon, title, desc, href }: (typeof services)[0]) {
         </Box>
         <Box
           sx={{
-            width: 56,
-            height: 56,
-            borderRadius: "14px",
-            background: "linear-gradient(135deg, rgba(var(--accent-rgb),0.15), rgba(var(--accent-2-rgb),0.15))",
+            width: 52,
+            height: 52,
+            borderRadius: "12px",
+            background: "linear-gradient(135deg, rgba(var(--accent-rgb),0.18), rgba(var(--accent-2-rgb),0.10))",
             border: "1px solid var(--border)",
             display: "grid",
             placeItems: "center",
-            fontSize: 24,
             mb: "24px",
             position: "relative",
             zIndex: 1,
+            color: "var(--accent)",
+            transition: "all 0.4s ease",
           }}
         >
-          {icon}
+          <Icon size={22} strokeWidth={1.75} />
         </Box>
         <Box
           component="h3"

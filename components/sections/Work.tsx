@@ -11,25 +11,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
-    slug: "velocity-ledger",
+    slug: "prestige-glamour-payroll",
     gradient: "linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%)",
-    tag: "FinTech · Platform",
-    title: "Velocity Ledger",
-    desc: "Real-time settlement engine processing 4M transactions daily.",
+    tag: "HR · Internal Tool",
+    title: "Prestige Glamour — Payroll",
+    desc: "Custom salary management software for the Prestige Glamour group of companies.",
   },
   {
-    slug: "orbit-intelligence",
+    slug: "prestige-glamour-website",
     gradient: "linear-gradient(135deg, var(--accent-2) 0%, var(--accent-3) 100%)",
-    tag: "AI · SaaS",
-    title: "Orbit Intelligence",
-    desc: "Agentic research copilot deployed across 40+ enterprise teams.",
+    tag: "Corporate · Website",
+    title: "Prestige Glamour — Website",
+    desc: "Group-wide corporate website redesign with modern brand presence and CMS.",
   },
   {
-    slug: "pulse-cloud",
+    slug: "nextconstation",
     gradient: "linear-gradient(135deg, var(--accent-3) 0%, var(--accent) 100%)",
-    tag: "Health · Infra",
-    title: "Pulse Cloud",
-    desc: "HIPAA-compliant data mesh serving 200+ hospital networks.",
+    tag: "Web · Marketing Site",
+    title: "Nextconstation",
+    desc: "Marketing website built end-to-end — design, development, deployment.",
   },
 ];
 
@@ -90,9 +90,9 @@ export default function Work() {
             mb: "24px",
           }}
         >
-          Selected builds from
+          Real projects.
           <br />
-          the last 12 months.
+          Real clients.
         </Box>
 
         <Box
