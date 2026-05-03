@@ -1,7 +1,16 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
-const brands = ["◆ STRIPE", "LINEAR•", "VERCEL", "NOTION", "FIGMA", "◎ OPENAI", "SHOPIFY", "RAMP"];
+const brands = [
+  "PRESTIGE GLAMOUR",
+  "NEXTCONSTATION",
+  "◆ FOUNDER-LED",
+  "SHIPPED IN WEEKS",
+  "FIXED-PRICE QUOTES",
+  "◎ AI-NATIVE BUILDS",
+  "GEO-READY",
+  "REMOTE FIRST",
+];
 
 export default function Trusted() {
   return (
@@ -25,7 +34,7 @@ export default function Trusted() {
             mb: "40px",
           }}
         >
-          Trusted by engineering teams at
+          Real clients · Honest promises · No agency fluff
         </Box>
       </Container>
 

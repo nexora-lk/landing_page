@@ -75,12 +75,12 @@ const pricingData: Record<string, Plan[]> = {
       label: "SaaS / Dashboard",
       price: "LKR 300,000 – 1,500,000+",
       features: [
-        "Full backend system (Node / Flask)",
-        "Authentication (JWT / OAuth)",
-        "API development",
-        "Admin panels",
-        "Real-time features",
-        "Cloud deployment",
+        "Custom backend built for your business logic",
+        "Secure user login system",
+        "Connects to other apps and tools you use",
+        "Admin dashboard to manage everything",
+        "Live updates without refreshing",
+        "Fully hosted online — no servers to manage",
       ],
       highlighted: false,
     },
@@ -305,10 +305,7 @@ export default function Pricing() {
           <Box
             component="span"
             sx={{
-              background: "linear-gradient(135deg, var(--accent), var(--accent-2))",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
+              color: "var(--accent)",
             }}
           >
             every stage
@@ -643,7 +640,7 @@ function PriceCard({ tier, tierColor, label, price, features, highlighted }: Pla
           },
         }}
       >
-        Get Started →
+        Choose this plan →
       </Box>
     </Box>
   );

@@ -47,14 +47,14 @@ const services: Service[] = [
     num: "/ 03",
     Icon: Search,
     title: "SEO & Performance",
-    desc: "Keyword strategy, on-page + technical SEO, Core Web Vitals tuning and Search Console / Analytics setup.",
+    desc: "Get found on Google. Loads fast on every device, ranks for the searches your customers actually make, with simple analytics you can read.",
     href: "/services",
   },
   {
     num: "/ 04",
     Icon: Server,
     title: "Backend Development",
-    desc: "REST APIs in Flask or Node.js, JWT / OAuth auth, MongoDB & SQL design, and scalable architecture.",
+    desc: "The engine behind your app — secure user logins, custom business logic, and a database built to scale as you grow.",
     href: "/services",
   },
   {
@@ -82,7 +82,7 @@ const services: Service[] = [
     num: "/ 08",
     Icon: Rocket,
     title: "Hosting & Deployment",
-    desc: "Domain setup, CI/CD pipelines, deploys to Vercel or AWS, plus ongoing monitoring and maintenance.",
+    desc: "We take it live. Domain, hosting, automatic updates and uptime monitoring — no manual work, no surprises.",
     href: "/services",
   },
 ];

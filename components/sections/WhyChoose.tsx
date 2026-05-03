@@ -5,53 +5,46 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  UserCog,
-  Sparkles,
-  Gauge,
-  HandCoins,
-  type LucideIcon,
-} from "lucide-react";
+import { Briefcase, Cpu, Headphones, type LucideIcon } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 type Pillar = {
   Icon: LucideIcon;
+  eyebrow: string;
   title: string;
   desc: string;
 };
 
 const pillars: Pillar[] = [
   {
-    Icon: UserCog,
-    title: "Founder-led builds",
-    desc: "You talk to the people writing your code — no junior hand-offs, no agency middlemen, no ghosting after kickoff.",
+    Icon: Briefcase,
+    eyebrow: "Services",
+    title: "End-to-end digital products",
+    desc: "We provide high-quality web development, mobile app development, AI solutions, and cloud services designed for startups and businesses. Our focus is building secure, fast, and scalable digital products that help companies grow and succeed in the digital world.",
   },
   {
-    Icon: Sparkles,
-    title: "GEO-native from day one",
-    desc: "We don't just build for Google — we build to be found in ChatGPT, Gemini and the AI search era ahead.",
+    Icon: Cpu,
+    eyebrow: "Latest Technology",
+    title: "Modern stack, AI-ready",
+    desc: "We use modern technologies, frameworks, and AI-powered tools to build innovative digital solutions. Our team stays updated with the latest industry trends to deliver powerful, future-ready applications that give your business a competitive advantage.",
   },
   {
-    Icon: Gauge,
-    title: "Built for speed",
-    desc: "Loads fast on every device — desktop, tablet, phone. Fast sites convert. Slow sites lose customers before the page even appears.",
-  },
-  {
-    Icon: HandCoins,
-    title: "Honest, fixed pricing",
-    desc: "Upfront quotes, no surprise invoices. We scope it, we ship it, you know exactly what you're paying for.",
+    Icon: Headphones,
+    eyebrow: "24×7 Support",
+    title: "Always-on, never offline",
+    desc: "Our dedicated support team is always ready to assist you. From technical maintenance to system monitoring, we ensure your digital platforms run smoothly with reliable support whenever your business needs it.",
   },
 ];
 
-export default function WhyUs() {
+export default function WhyChoose() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        ".why-reveal",
+        ".why-choose-reveal",
         { opacity: 0, y: 40 },
         {
           opacity: 1,
@@ -59,7 +52,7 @@ export default function WhyUs() {
           duration: 0.85,
           stagger: 0.12,
           ease: "power3.out",
-          scrollTrigger: { trigger: ".why-reveal", start: "top 85%" },
+          scrollTrigger: { trigger: ".why-choose-reveal", start: "top 85%" },
         }
       );
     }, sectionRef);
@@ -69,13 +62,13 @@ export default function WhyUs() {
   return (
     <Box
       component="section"
-      id="why-us"
+      id="why-choose"
       ref={sectionRef}
       sx={{ py: { xs: "80px", md: "120px" }, position: "relative" }}
     >
       <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>
         <Box
-          className="why-reveal"
+          className="why-choose-reveal"
           component="span"
           sx={{
             fontSize: 13,
@@ -87,10 +80,10 @@ export default function WhyUs() {
             display: "block",
           }}
         >
-          Why work with us
+          What sets us apart
         </Box>
         <Box
-          className="why-reveal"
+          className="why-choose-reveal"
           component="h2"
           sx={{
             fontFamily: "var(--font-syne)",
@@ -99,52 +92,42 @@ export default function WhyUs() {
             letterSpacing: "-0.03em",
             lineHeight: 1.05,
             mb: "24px",
-            maxWidth: 760,
+            maxWidth: 820,
           }}
         >
-          Small team. Senior craft.
-          <br />
-          Zero agency overhead.
+          Why choose Nextora Infotech?
         </Box>
         <Box
-          className="why-reveal"
+          className="why-choose-reveal"
           component="p"
           sx={{
             fontSize: 18,
             color: "var(--muted)",
-            maxWidth: 600,
+            maxWidth: 640,
             mb: "60px",
             fontWeight: 300,
           }}
         >
-          Built for founders who want sharp execution without the bloated
-          retainers and account-manager middlemen.
+          Engineering, design, and support — handled by a team that treats your
+          product like our own.
         </Box>
 
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", lg: "repeat(3, 1fr)" },
-            gridTemplateAreas: {
-              xs: `"a" "b" "c" "d"`,
-              sm: `"a a" "b c" "d ."`,
-              lg: `"a a a" "b c d"`,
-            },
+            gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
             gap: "24px",
           }}
         >
-          {pillars.map(({ Icon, title, desc }, i) => (
+          {pillars.map(({ Icon, eyebrow, title, desc }) => (
             <Box
-              key={title}
-              className="why-reveal"
+              key={eyebrow}
+              className="why-choose-reveal"
               sx={{
-                gridArea: ["a", "b", "c", "d"][i],
-                p: i === 0 ? { xs: "32px", lg: "48px" } : "32px",
+                p: "32px",
                 borderRadius: "20px",
-                background: i === 0
-                  ? "linear-gradient(135deg, rgba(var(--accent-rgb),0.10), rgba(var(--accent-2-rgb),0.04))"
-                  : "var(--surface)",
-                border: i === 0 ? "1px solid var(--border-hi)" : "1px solid var(--border)",
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
                 backdropFilter: "blur(20px)",
                 position: "relative",
                 overflow: "hidden",
@@ -161,7 +144,8 @@ export default function WhyUs() {
                   width: 48,
                   height: 48,
                   borderRadius: "12px",
-                  background: "linear-gradient(135deg, rgba(var(--accent-rgb),0.18), rgba(var(--accent-2-rgb),0.08))",
+                  background:
+                    "linear-gradient(135deg, rgba(var(--accent-rgb),0.18), rgba(var(--accent-2-rgb),0.08))",
                   border: "1px solid var(--border)",
                   display: "grid",
                   placeItems: "center",
@@ -172,12 +156,26 @@ export default function WhyUs() {
                 <Icon size={20} strokeWidth={1.75} />
               </Box>
               <Box
+                component="span"
+                sx={{
+                  fontSize: 12,
+                  color: "var(--accent)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.18em",
+                  fontWeight: 600,
+                  display: "block",
+                  mb: "8px",
+                }}
+              >
+                {eyebrow}
+              </Box>
+              <Box
                 component="h3"
                 sx={{
                   fontFamily: "var(--font-syne)",
-                  fontSize: i === 0 ? { xs: 22, lg: 28 } : 19,
+                  fontSize: 20,
                   fontWeight: 600,
-                  mb: "10px",
+                  mb: "12px",
                   letterSpacing: "-0.01em",
                 }}
               >
@@ -187,10 +185,9 @@ export default function WhyUs() {
                 component="p"
                 sx={{
                   color: "var(--muted)",
-                  fontSize: i === 0 ? { xs: 15, lg: 16 } : 14,
-                  lineHeight: 1.65,
+                  fontSize: 14,
+                  lineHeight: 1.7,
                   fontWeight: 300,
-                  maxWidth: i === 0 ? 720 : "none",
                 }}
               >
                 {desc}

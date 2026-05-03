@@ -22,7 +22,7 @@ export default function AIPage() {
             <Box component="span" sx={{ fontSize: 13, color: "var(--accent-2)", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 600, mb: "16px", display: "block" }}>◈ AI & Automation</Box>
             <Box component="h1" sx={{ fontFamily: "var(--font-syne)", fontSize: "clamp(48px, 7vw, 88px)", fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 0.95, mb: "28px", maxWidth: 800 }}>
               AI that ships{" "}
-              <Box component="span" sx={{ background: "linear-gradient(135deg, var(--accent-2), var(--accent-3))", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>real outcomes.</Box>
+              <Box component="span" sx={{ color: "var(--accent)" }}>real outcomes.</Box>
             </Box>
             <Box component="p" sx={{ fontSize: 20, color: "var(--muted)", maxWidth: 620, fontWeight: 300, lineHeight: 1.7 }}>
               We build production-grade AI systems — not demos. LLM pipelines, RAG architectures, agentic workflows, and MLOps that scale.

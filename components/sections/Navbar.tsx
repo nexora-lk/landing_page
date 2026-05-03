@@ -121,7 +121,7 @@ export default function Navbar() {
                             },
                         }}
                     >
-                        Get Started →
+                        Book a call
                     </Box>
 
                     {/* Mobile toggle */}
@@ -182,7 +182,7 @@ export default function Navbar() {
                                 fontWeight: 600,
                             }}
                         >
-                            Get Started →
+                            Book a call
                         </Link>
                     </Box>
                 )}

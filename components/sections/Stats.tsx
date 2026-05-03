@@ -8,11 +8,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stats = [
-  { target: 3,   suffix: "",  label: "Live Projects" },
-  { target: 9,   suffix: "",  label: "Services We Offer" },
+type Stat = { target: number; suffix: string; label: string; textValue?: string };
+
+const stats: Stat[] = [
+  { target: 3,   suffix: "",  label: "Client Projects Delivered" },
+  { target: 8,   suffix: "",  label: "Services Under One Roof" },
   { target: 100, suffix: "%", label: "Founder-led Builds" },
-  { target: 24,  suffix: "/7", label: "Direct Slack Access" },
+  { target: 0,   suffix: "",  label: "Direct WhatsApp Access", textValue: "WhatsApp" },
 ];
 
 export default function Stats() {
@@ -40,6 +42,10 @@ export default function Stats() {
       counterRefs.current.forEach((el, i) => {
         if (!el) return;
         const stat = stats[i];
+        if (stat.textValue) {
+          el.textContent = stat.textValue;
+          return;
+        }
         ScrollTrigger.create({
           trigger: el,
           start: "top 80%",
@@ -133,18 +139,17 @@ export default function Stats() {
                 ref={(el: HTMLDivElement | null) => { counterRefs.current[i] = el; }}
                 sx={{
                   fontFamily: "var(--font-syne)",
-                  fontSize: "clamp(48px, 5vw, 72px)",
+                  fontSize: stat.textValue
+                    ? "clamp(28px, 3vw, 44px)"
+                    : "clamp(48px, 5vw, 72px)",
                   fontWeight: 700,
                   letterSpacing: "-0.03em",
                   lineHeight: 1,
-                  background: "linear-gradient(135deg, var(--text), var(--accent))",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
+                  color: "var(--text)",
                   mb: "12px",
                 }}
               >
-                0{stat.suffix}
+                {stat.textValue ?? `0${stat.suffix}`}
               </Box>
               <Box
                 component="p"

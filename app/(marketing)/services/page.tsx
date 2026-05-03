@@ -6,15 +6,17 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Cloud infrastructure, AI automation, custom software, and cybersecurity — four practices, one integrated team.",
+  description: "Web, mobile, AI and cloud — everything a young business needs to launch online and grow, built by a founder-led team at startup speed.",
   alternates: { canonical: "/services" },
 };
 
 const services = [
-  { href: "/services/cloud", icon: "☁", num: "/ 01", title: "Cloud Infrastructure", desc: "Multi-region Kubernetes, observability, and zero-downtime platforms.", tags: ["Kubernetes", "Terraform", "AWS / GCP / Azure"] },
-  { href: "/services/ai", icon: "◈", num: "/ 02", title: "AI & Automation", desc: "LLM pipelines, agentic workflows, and production-grade ML systems.", tags: ["LLM Pipelines", "RAG", "Agents", "MLOps"] },
-  { href: "/services", icon: "❖", num: "/ 03", title: "Custom Software", desc: "Bespoke platforms, internal tools, and full product builds.", tags: ["Full-stack", "APIs", "Databases", "DevOps"] },
-  { href: "/services", icon: "⬢", num: "/ 04", title: "Cybersecurity", desc: "Threat modeling, pen testing, and SOC 2 readiness programs.", tags: ["Pen Testing", "SOC 2", "Zero Trust"] },
+  { href: "/services", icon: "◆", num: "/ 01", title: "Web Design & Development", desc: "Business sites, SaaS dashboards, e-commerce and high-converting landing pages — built with Next.js, React and Tailwind.", tags: ["Next.js", "React", "Tailwind", "Flask"] },
+  { href: "/services", icon: "▲", num: "/ 02", title: "Mobile App Development", desc: "Cross-platform apps in Flutter or React Native — clean UI, smooth UX, fully wired to your backend.", tags: ["Flutter", "React Native", "iOS", "Android"] },
+  { href: "/services/ai", icon: "◈", num: "/ 03", title: "AI Solutions & Automation", desc: "LLM-powered features, RAG pipelines and AI workflows that plug into the apps your team already uses.", tags: ["OpenAI", "RAG", "Automation", "GEO"] },
+  { href: "/services/cloud", icon: "☁", num: "/ 04", title: "Cloud, Hosting & DevOps", desc: "Domain setup, CI/CD, deploys to Vercel or AWS, plus monitoring and maintenance for the long haul.", tags: ["Vercel", "AWS", "Docker", "GitHub Actions"] },
+  { href: "/services", icon: "❖", num: "/ 05", title: "UI/UX & Branding", desc: "Wireframes, prototypes, design systems and modern landing pages — designed in Figma, ready for handoff.", tags: ["Figma", "Design Systems", "Prototyping"] },
+  { href: "/services", icon: "⬢", num: "/ 06", title: "SEO & GEO Content", desc: "On-page SEO, Core Web Vitals, plus AI-search visibility in ChatGPT, Gemini and Perplexity.", tags: ["SEO", "GEO", "Schema", "Analytics"] },
 ];
 
 export default function ServicesPage() {
@@ -27,10 +29,10 @@ export default function ServicesPage() {
           <div className="container" style={{ position: "relative", zIndex: 1 }}>
             <span style={{ fontSize: 13, color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 600, marginBottom: 16, display: "block" }}>What we do</span>
             <h1 style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(48px, 7vw, 96px)", fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 0.95, marginBottom: 24 }}>
-              Four practices.{" "}
-              <span style={{ background: "linear-gradient(135deg, var(--accent), var(--accent-2))", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>One team.</span>
+              Everything to launch.{" "}
+              <span style={{ color: "var(--accent)" }}>One small team.</span>
             </h1>
-            <p style={{ fontSize: 20, color: "var(--muted)", maxWidth: 600, fontWeight: 300 }}>Shipped at the speed of a startup with the rigor of an enterprise.</p>
+            <p style={{ fontSize: 20, color: "var(--muted)", maxWidth: 620, fontWeight: 300 }}>Web, mobile, AI and cloud — handled end-to-end by the founders. Startup pricing, senior-level craft, no agency middlemen.</p>
           </div>
         </section>
 

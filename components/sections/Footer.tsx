@@ -103,7 +103,7 @@ export default function Footer() {
             <Box sx={{ mt: "24px", display: "flex", flexDirection: "column", gap: "10px" }}>
               <Box
                 component="a"
-                href="mailto:hello@nextora.dev"
+                href="mailto:hello@nextora.lk"
                 sx={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -116,7 +116,7 @@ export default function Footer() {
                 }}
               >
                 <Mail size={15} strokeWidth={1.75} />
-                hello@nextora.dev
+                hello@nextora.lk
               </Box>
               <Box
                 sx={{

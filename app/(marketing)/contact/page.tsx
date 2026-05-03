@@ -64,10 +64,7 @@ export default function ContactPage() {
                 <Box
                   component="span"
                   sx={{
-                    background: "linear-gradient(135deg, var(--accent), var(--accent-2))",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
+                    color: "var(--accent)",
                   }}
                 >
                   Project

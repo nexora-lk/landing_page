@@ -88,34 +88,12 @@ export default function Hero() {
         <Box
           sx={{
             position: "absolute",
-            width: 800,
-            height: 800,
-            background: `radial-gradient(circle, ${rgba(tokens.accentRgb, 0.15)} 0%, transparent 65%)`,
-            top: "-25%",
-            left: "-15%",
-            animation: "aurora-pulse 8s ease-in-out infinite",
-          }}
-        />
-        <Box
-          sx={{
-            position: "absolute",
-            width: 600,
-            height: 600,
-            background: `radial-gradient(circle, ${rgba(tokens.accent2Rgb, 0.12)} 0%, transparent 65%)`,
-            top: "10%",
-            right: "-10%",
-            animation: "aurora-pulse 10s ease-in-out infinite 2s",
-          }}
-        />
-        <Box
-          sx={{
-            position: "absolute",
-            width: 500,
-            height: 500,
-            background: `radial-gradient(circle, ${rgba(tokens.accent3Rgb, 0.06)} 0%, transparent 65%)`,
-            bottom: "-10%",
-            left: "30%",
-            animation: "aurora-pulse 12s ease-in-out infinite 4s",
+            width: 900,
+            height: 900,
+            background: `radial-gradient(circle, ${rgba(tokens.accentRgb, 0.08)} 0%, transparent 60%)`,
+            top: "-30%",
+            left: "50%",
+            transform: "translateX(-50%)",
           }}
         />
 
@@ -182,12 +160,7 @@ export default function Hero() {
               sx={{
                 display: "block",
                 opacity: 0,
-                background: `linear-gradient(90deg, ${tokens.accent} 0%, ${tokens.accentBr} 35%, ${tokens.accent3} 70%, ${tokens.accent} 100%)`,
-                backgroundSize: "200% auto",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                animation: "shimmer-text 5s linear infinite",
+                color: tokens.accent,
               }}
             >
               what&apos;s next.
@@ -208,8 +181,8 @@ export default function Hero() {
               opacity: 0,
             }}
           >
-            A young IT studio crafting websites, mobile apps, SaaS platforms,
-            AI tools, cloud systems and clean design — built fast, shipped sharp.
+            We build your website — and make sure both Google and AI search
+            (ChatGPT, Gemini, Perplexity) actually find it.
           </Box>
 
           {/* CTAs */}
@@ -228,27 +201,25 @@ export default function Hero() {
               sx={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "10px",
-                background: tokens.text,
-                color: tokens.bg,
+                gap: "8px",
+                background: tokens.accent,
+                color: "#0A1120",
                 fontFamily: "var(--font-syne), 'Syne', sans-serif",
                 fontSize: 15,
-                fontWeight: 700,
-                px: "28px",
-                py: "14px",
-                borderRadius: "100px",
+                fontWeight: 600,
+                px: "24px",
+                py: "12px",
+                borderRadius: "980px",
                 textDecoration: "none",
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                boxShadow: `0 4px 24px ${rgba(tokens.accentRgb, 0.18)}`,
+                transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
                 opacity: 0,
                 "&:hover": {
-                  transform: "translateY(-2px)",
-                  boxShadow: `0 8px 32px ${rgba(tokens.accentRgb, 0.32)}`,
+                  background: tokens.accentBr,
                 },
               }}
             >
-              Get Started
-              <Box component="span" sx={{ fontSize: 16, lineHeight: 1 }}>→</Box>
+              Book a free 30-min call
+              <Box component="span" sx={{ fontSize: 15, lineHeight: 1 }}>→</Box>
             </Box>
 
             <Box
@@ -258,26 +229,24 @@ export default function Hero() {
               sx={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "10px",
+                gap: "6px",
                 background: "transparent",
-                color: tokens.textSoft,
+                color: tokens.accent,
                 fontFamily: "var(--font-syne), 'Syne', sans-serif",
                 fontSize: 15,
-                fontWeight: 600,
-                px: "28px",
-                py: "13px",
-                borderRadius: "100px",
-                border: `1px solid ${rgba(tokens.textRgb, 0.18)}`,
+                fontWeight: 500,
+                px: "12px",
+                py: "12px",
                 textDecoration: "none",
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                transition: "color 0.25s",
                 opacity: 0,
                 "&:hover": {
-                  borderColor: rgba(tokens.accentRgb, 0.45),
-                  background: rgba(tokens.accentRgb, 0.04),
+                  color: tokens.accentBr,
                 },
               }}
             >
-              View Our Work
+              See our work
+              <Box component="span" sx={{ fontSize: 15, lineHeight: 1 }}>→</Box>
             </Box>
           </Box>
         </Box>

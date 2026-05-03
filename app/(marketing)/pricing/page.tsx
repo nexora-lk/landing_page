@@ -71,11 +71,7 @@ export default function PricingPage() {
               <Box
                 component="span"
                 sx={{
-                  background:
-                    "linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 60%, var(--accent-3) 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
+                  color: "var(--accent)",
                 }}
               >
                 Real value.

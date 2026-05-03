@@ -5,53 +5,46 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  UserCog,
-  Sparkles,
-  Gauge,
-  HandCoins,
-  type LucideIcon,
-} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type Pillar = {
-  Icon: LucideIcon;
+type Step = {
+  num: string;
   title: string;
   desc: string;
 };
 
-const pillars: Pillar[] = [
+const steps: Step[] = [
   {
-    Icon: UserCog,
-    title: "Founder-led builds",
-    desc: "You talk to the people writing your code — no junior hand-offs, no agency middlemen, no ghosting after kickoff.",
+    num: "01",
+    title: "Requirement Analysis",
+    desc: "We understand your business goals, project requirements, and target audience to create a clear development strategy.",
   },
   {
-    Icon: Sparkles,
-    title: "GEO-native from day one",
-    desc: "We don't just build for Google — we build to be found in ChatGPT, Gemini and the AI search era ahead.",
+    num: "02",
+    title: "Design & Prototype",
+    desc: "We design modern UI/UX and create interactive prototypes to visualize the product before development begins.",
   },
   {
-    Icon: Gauge,
-    title: "Built for speed",
-    desc: "Loads fast on every device — desktop, tablet, phone. Fast sites convert. Slow sites lose customers before the page even appears.",
+    num: "03",
+    title: "Development & Testing",
+    desc: "Our developers build scalable and secure solutions while thoroughly testing performance and reliability.",
   },
   {
-    Icon: HandCoins,
-    title: "Honest, fixed pricing",
-    desc: "Upfront quotes, no surprise invoices. We scope it, we ship it, you know exactly what you're paying for.",
+    num: "04",
+    title: "Launch & Support",
+    desc: "We deploy the project smoothly and provide ongoing support, updates, and maintenance for long-term success.",
   },
 ];
 
-export default function WhyUs() {
+export default function Process() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        ".why-reveal",
+        ".process-reveal",
         { opacity: 0, y: 40 },
         {
           opacity: 1,
@@ -59,7 +52,7 @@ export default function WhyUs() {
           duration: 0.85,
           stagger: 0.12,
           ease: "power3.out",
-          scrollTrigger: { trigger: ".why-reveal", start: "top 85%" },
+          scrollTrigger: { trigger: ".process-reveal", start: "top 85%" },
         }
       );
     }, sectionRef);
@@ -69,13 +62,18 @@ export default function WhyUs() {
   return (
     <Box
       component="section"
-      id="why-us"
+      id="process"
       ref={sectionRef}
-      sx={{ py: { xs: "80px", md: "120px" }, position: "relative" }}
+      sx={{
+        py: { xs: "80px", md: "120px" },
+        position: "relative",
+        background:
+          "linear-gradient(180deg, transparent, rgba(var(--accent-rgb),0.03), transparent)",
+      }}
     >
       <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>
         <Box
-          className="why-reveal"
+          className="process-reveal"
           component="span"
           sx={{
             fontSize: 13,
@@ -87,10 +85,10 @@ export default function WhyUs() {
             display: "block",
           }}
         >
-          Why work with us
+          How we work
         </Box>
         <Box
-          className="why-reveal"
+          className="process-reveal"
           component="h2"
           sx={{
             fontFamily: "var(--font-syne)",
@@ -102,51 +100,46 @@ export default function WhyUs() {
             maxWidth: 760,
           }}
         >
-          Small team. Senior craft.
-          <br />
-          Zero agency overhead.
+          Our development process
         </Box>
         <Box
-          className="why-reveal"
+          className="process-reveal"
           component="p"
           sx={{
             fontSize: 18,
             color: "var(--muted)",
-            maxWidth: 600,
+            maxWidth: 640,
             mb: "60px",
             fontWeight: 300,
           }}
         >
-          Built for founders who want sharp execution without the bloated
-          retainers and account-manager middlemen.
+          A simple and transparent workflow to turn your ideas into powerful
+          digital products.
         </Box>
 
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", lg: "repeat(3, 1fr)" },
-            gridTemplateAreas: {
-              xs: `"a" "b" "c" "d"`,
-              sm: `"a a" "b c" "d ."`,
-              lg: `"a a a" "b c d"`,
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "1fr 1fr",
+              lg: "repeat(4, 1fr)",
             },
             gap: "24px",
+            position: "relative",
           }}
         >
-          {pillars.map(({ Icon, title, desc }, i) => (
+          {steps.map((step, i) => (
             <Box
-              key={title}
-              className="why-reveal"
+              key={step.num}
+              className="process-reveal"
               sx={{
-                gridArea: ["a", "b", "c", "d"][i],
-                p: i === 0 ? { xs: "32px", lg: "48px" } : "32px",
-                borderRadius: "20px",
-                background: i === 0
-                  ? "linear-gradient(135deg, rgba(var(--accent-rgb),0.10), rgba(var(--accent-2-rgb),0.04))"
-                  : "var(--surface)",
-                border: i === 0 ? "1px solid var(--border-hi)" : "1px solid var(--border)",
-                backdropFilter: "blur(20px)",
                 position: "relative",
+                p: "32px",
+                borderRadius: "20px",
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                backdropFilter: "blur(20px)",
                 overflow: "hidden",
                 transition: "all 0.4s cubic-bezier(0.4,0,0.2,1)",
                 "&:hover": {
@@ -154,46 +147,58 @@ export default function WhyUs() {
                   transform: "translateY(-4px)",
                   boxShadow: "0 20px 60px rgba(var(--accent-rgb),0.08)",
                 },
+                "&::after":
+                  i < steps.length - 1
+                    ? {
+                        content: '""',
+                        position: "absolute",
+                        top: "50%",
+                        right: "-14px",
+                        width: "28px",
+                        height: "1px",
+                        background:
+                          "linear-gradient(90deg, var(--border-hi), transparent)",
+                        display: { xs: "none", lg: "block" },
+                      }
+                    : undefined,
               }}
             >
               <Box
                 sx={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: "12px",
-                  background: "linear-gradient(135deg, rgba(var(--accent-rgb),0.18), rgba(var(--accent-2-rgb),0.08))",
-                  border: "1px solid var(--border)",
-                  display: "grid",
-                  placeItems: "center",
-                  mb: "20px",
+                  fontFamily: "var(--font-syne)",
+                  fontSize: 56,
+                  fontWeight: 700,
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1,
                   color: "var(--accent)",
+                  mb: "20px",
+                  opacity: 0.85,
                 }}
               >
-                <Icon size={20} strokeWidth={1.75} />
+                {step.num}
               </Box>
               <Box
                 component="h3"
                 sx={{
                   fontFamily: "var(--font-syne)",
-                  fontSize: i === 0 ? { xs: 22, lg: 28 } : 19,
+                  fontSize: 19,
                   fontWeight: 600,
                   mb: "10px",
                   letterSpacing: "-0.01em",
                 }}
               >
-                {title}
+                {step.title}
               </Box>
               <Box
                 component="p"
                 sx={{
                   color: "var(--muted)",
-                  fontSize: i === 0 ? { xs: 15, lg: 16 } : 14,
+                  fontSize: 14,
                   lineHeight: 1.65,
                   fontWeight: 300,
-                  maxWidth: i === 0 ? 720 : "none",
                 }}
               >
-                {desc}
+                {step.desc}
               </Box>
             </Box>
           ))}

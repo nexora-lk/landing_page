@@ -7,7 +7,7 @@ import Container from "@mui/material/Container";
 
 export const metadata: Metadata = {
   title: "Cloud Infrastructure",
-  description: "Multi-region Kubernetes, observability, and zero-downtime cloud platforms designed for scale from day one.",
+  description: "Hosting, deploys and DevOps for startups — Vercel, AWS, Docker and CI/CD pipelines that scale as you grow.",
   alternates: { canonical: "/services/cloud" },
 };
 
@@ -21,11 +21,11 @@ export default function CloudPage() {
           <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" }, position: "relative", zIndex: 1 }}>
             <Box component="span" sx={{ fontSize: 13, color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 600, mb: "16px", display: "block" }}>☁ Cloud Infrastructure</Box>
             <Box component="h1" sx={{ fontFamily: "var(--font-syne)", fontSize: "clamp(48px, 7vw, 88px)", fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 0.95, mb: "28px", maxWidth: 800 }}>
-              Platforms built for{" "}
-              <Box component="span" sx={{ background: "linear-gradient(135deg, var(--accent), var(--accent-2))", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>scale from day one.</Box>
+              Hosting and deploys{" "}
+              <Box component="span" sx={{ color: "var(--accent)" }}>that grow with you.</Box>
             </Box>
             <Box component="p" sx={{ fontSize: 20, color: "var(--muted)", maxWidth: 620, fontWeight: 300, lineHeight: 1.7 }}>
-              We design and operate multi-region infrastructure that handles whatever you throw at it — from zero to millions of requests.
+              Domains, CI/CD, deploys to Vercel or AWS, monitoring and ongoing maintenance — startup-sized infrastructure done right the first time.
             </Box>
           </Container>
         </Box>
@@ -33,7 +33,7 @@ export default function CloudPage() {
         <Box component="section" sx={{ pb: { xs: "80px", md: "120px" } }}>
           <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>
             <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(3, 1fr)" }, gap: "24px" }}>
-              {["Multi-region Kubernetes", "Zero-downtime deploys", "Full observability stack", "Terraform IaC", "Cost optimisation", "24/7 on-call support"].map((item) => (
+              {["Vercel & AWS deploys", "CI/CD with GitHub Actions", "Domain & DNS setup", "Docker containers", "Uptime monitoring", "Founder-direct support"].map((item) => (
                 <Box key={item} sx={{ p: "32px", borderRadius: "16px", background: "var(--surface)", border: "1px solid var(--border)", display: "flex", alignItems: "center", gap: "14px" }}>
                   <Box sx={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", flexShrink: 0, boxShadow: "0 0 10px var(--accent)" }} />
                   <Box component="span" sx={{ fontFamily: "var(--font-syne)", fontWeight: 600, fontSize: 16 }}>{item}</Box>

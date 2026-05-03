@@ -121,10 +121,7 @@ export default function Testimonials() {
                   fontWeight: 700,
                   letterSpacing: "-0.03em",
                   lineHeight: 1,
-                  background: "linear-gradient(135deg, var(--accent), var(--accent-2))",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
+                  color: "var(--accent)",
                   mb: "16px",
                 }}
               >
