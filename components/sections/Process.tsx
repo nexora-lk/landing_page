@@ -8,33 +8,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type Step = {
-  num: string;
-  title: string;
-  desc: string;
-};
+type Step = { num: string; title: string; desc: string };
 
 const steps: Step[] = [
-  {
-    num: "01",
-    title: "Requirement Analysis",
-    desc: "We understand your business goals, project requirements, and target audience to create a clear development strategy.",
-  },
-  {
-    num: "02",
-    title: "Design & Prototype",
-    desc: "We design modern UI/UX and create interactive prototypes to visualize the product before development begins.",
-  },
-  {
-    num: "03",
-    title: "Development & Testing",
-    desc: "Our developers build scalable and secure solutions while thoroughly testing performance and reliability.",
-  },
-  {
-    num: "04",
-    title: "Launch & Support",
-    desc: "We deploy the project smoothly and provide ongoing support, updates, and maintenance for long-term success.",
-  },
+  { num: "01", title: "Discover",           desc: "Free call to map your goals, scope and budget." },
+  { num: "02", title: "Design & Prototype", desc: "Wireframes and a clickable Figma you can react to." },
+  { num: "03", title: "Build & Test",       desc: "Live preview link from week one, weekly check-ins." },
+  { num: "04", title: "Launch & Support",   desc: "We ship it, monitor it, and stay on call as you grow." },
 ];
 
 export default function Process() {
@@ -45,15 +25,8 @@ export default function Process() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".process-reveal",
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.85,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".process-reveal", start: "top 85%" },
-        }
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: ".process-reveal", start: "top 85%" } }
       );
     }, sectionRef);
     return () => ctx.revert();
@@ -64,140 +37,39 @@ export default function Process() {
       component="section"
       id="process"
       ref={sectionRef}
-      sx={{
-        py: { xs: "80px", md: "120px" },
-        position: "relative",
-        background:
-          "linear-gradient(180deg, transparent, rgba(var(--accent-rgb),0.03), transparent)",
-      }}
+      sx={{ py: { xs: "96px", md: "128px" }, position: "relative", background: "var(--bg)" }}
     >
-      <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>
-        <Box
-          className="process-reveal"
-          component="span"
-          sx={{
-            fontSize: 13,
-            color: "var(--accent)",
-            textTransform: "uppercase",
-            letterSpacing: "0.2em",
-            fontWeight: 600,
-            mb: "16px",
-            display: "block",
-          }}
-        >
+      <Container maxWidth="lg" sx={{ px: { xs: "24px", md: "48px" } }}>
+        <Box className="process-reveal" component="span" sx={{ fontSize: 12, color: "var(--grey-1)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, mb: "16px", display: "block" }}>
           How we work
         </Box>
-        <Box
-          className="process-reveal"
-          component="h2"
-          sx={{
-            fontFamily: "var(--font-syne)",
-            fontSize: "clamp(36px, 5vw, 64px)",
-            fontWeight: 700,
-            letterSpacing: "-0.03em",
-            lineHeight: 1.05,
-            mb: "24px",
-            maxWidth: 760,
-          }}
-        >
-          Our development process
+        <Box className="process-reveal" component="h2" sx={{ fontSize: { xs: 36, md: 48 }, fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.1, mb: "16px", maxWidth: 760, color: "var(--ink)" }}>
+          From idea to live, in four simple steps.
         </Box>
-        <Box
-          className="process-reveal"
-          component="p"
-          sx={{
-            fontSize: 18,
-            color: "var(--muted)",
-            maxWidth: 640,
-            mb: "60px",
-            fontWeight: 300,
-          }}
-        >
-          A simple and transparent workflow to turn your ideas into powerful
-          digital products.
+        <Box className="process-reveal" component="p" sx={{ fontSize: 19, color: "var(--grey-1)", maxWidth: "65ch", mb: "64px", lineHeight: 1.6 }}>
+          A simple, transparent workflow that turns ideas into shipped products.
         </Box>
 
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "1fr",
-              sm: "1fr 1fr",
-              lg: "repeat(4, 1fr)",
-            },
-            gap: "24px",
-            position: "relative",
-          }}
-        >
-          {steps.map((step, i) => (
+        <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }, gap: { xs: "16px", md: "24px" } }}>
+          {steps.map((step) => (
             <Box
               key={step.num}
               className="process-reveal"
               sx={{
-                position: "relative",
                 p: "32px",
                 borderRadius: "20px",
                 background: "var(--surface)",
-                border: "1px solid var(--border)",
-                backdropFilter: "blur(20px)",
-                overflow: "hidden",
-                transition: "all 0.4s cubic-bezier(0.4,0,0.2,1)",
-                "&:hover": {
-                  borderColor: "var(--border-hi)",
-                  transform: "translateY(-4px)",
-                  boxShadow: "0 20px 60px rgba(var(--accent-rgb),0.08)",
-                },
-                "&::after":
-                  i < steps.length - 1
-                    ? {
-                        content: '""',
-                        position: "absolute",
-                        top: "50%",
-                        right: "-14px",
-                        width: "28px",
-                        height: "1px",
-                        background:
-                          "linear-gradient(90deg, var(--border-hi), transparent)",
-                        display: { xs: "none", lg: "block" },
-                      }
-                    : undefined,
+                transition: "all 240ms ease-out",
+                "&:hover": { transform: "translateY(-2px)", boxShadow: "0 8px 24px rgba(0,0,0,0.06)" },
               }}
             >
-              <Box
-                sx={{
-                  fontFamily: "var(--font-syne)",
-                  fontSize: 56,
-                  fontWeight: 700,
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1,
-                  color: "var(--accent)",
-                  mb: "20px",
-                  opacity: 0.85,
-                }}
-              >
+              <Box sx={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.1em", color: "var(--accent)", mb: "20px" }}>
                 {step.num}
               </Box>
-              <Box
-                component="h3"
-                sx={{
-                  fontFamily: "var(--font-syne)",
-                  fontSize: 19,
-                  fontWeight: 600,
-                  mb: "10px",
-                  letterSpacing: "-0.01em",
-                }}
-              >
+              <Box component="h3" sx={{ fontSize: 24, fontWeight: 600, mb: "12px", letterSpacing: "-0.01em", color: "var(--ink)", lineHeight: 1.25 }}>
                 {step.title}
               </Box>
-              <Box
-                component="p"
-                sx={{
-                  color: "var(--muted)",
-                  fontSize: 14,
-                  lineHeight: 1.65,
-                  fontWeight: 300,
-                }}
-              >
+              <Box component="p" sx={{ color: "var(--grey-1)", fontSize: 17, lineHeight: 1.6 }}>
                 {step.desc}
               </Box>
             </Box>

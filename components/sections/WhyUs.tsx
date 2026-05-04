@@ -5,21 +5,11 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  UserCog,
-  Sparkles,
-  Gauge,
-  HandCoins,
-  type LucideIcon,
-} from "lucide-react";
+import { UserCog, Gauge, HandCoins, type LucideIcon } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type Pillar = {
-  Icon: LucideIcon;
-  title: string;
-  desc: string;
-};
+type Pillar = { Icon: LucideIcon; title: string; desc: string };
 
 const pillars: Pillar[] = [
   {
@@ -28,19 +18,14 @@ const pillars: Pillar[] = [
     desc: "You talk to the people writing your code — no junior hand-offs, no agency middlemen, no ghosting after kickoff.",
   },
   {
-    Icon: Sparkles,
-    title: "GEO-native from day one",
-    desc: "We don't just build for Google — we build to be found in ChatGPT, Gemini and the AI search era ahead.",
-  },
-  {
     Icon: Gauge,
     title: "Built for speed",
-    desc: "Loads fast on every device — desktop, tablet, phone. Fast sites convert. Slow sites lose customers before the page even appears.",
+    desc: "Loads fast on every device. Fast sites convert. Slow sites lose customers before the page even appears.",
   },
   {
     Icon: HandCoins,
     title: "Honest, fixed pricing",
-    desc: "Upfront quotes, no surprise invoices. We scope it, we ship it, you know exactly what you're paying for.",
+    desc: "Upfront quotes, no surprise invoices. We scope it, ship it, and you know exactly what you're paying.",
   },
 ];
 
@@ -52,12 +37,12 @@ export default function WhyUs() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".why-reveal",
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 16 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
-          stagger: 0.12,
+          duration: 0.6,
+          stagger: 0.1,
           ease: "power3.out",
           scrollTrigger: { trigger: ".why-reveal", start: "top 85%" },
         }
@@ -71,128 +56,38 @@ export default function WhyUs() {
       component="section"
       id="why-us"
       ref={sectionRef}
-      sx={{ py: { xs: "80px", md: "120px" }, position: "relative" }}
+      sx={{ py: { xs: "96px", md: "128px" }, position: "relative", background: "var(--surface)" }}
     >
-      <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>
-        <Box
-          className="why-reveal"
-          component="span"
-          sx={{
-            fontSize: 13,
-            color: "var(--accent)",
-            textTransform: "uppercase",
-            letterSpacing: "0.2em",
-            fontWeight: 600,
-            mb: "16px",
-            display: "block",
-          }}
-        >
+      <Container maxWidth="lg" sx={{ px: { xs: "24px", md: "48px" } }}>
+        <Box className="why-reveal" component="span" sx={{ fontSize: 12, color: "var(--grey-1)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, mb: "16px", display: "block" }}>
           Why work with us
         </Box>
-        <Box
-          className="why-reveal"
-          component="h2"
-          sx={{
-            fontFamily: "var(--font-syne)",
-            fontSize: "clamp(36px, 5vw, 64px)",
-            fontWeight: 700,
-            letterSpacing: "-0.03em",
-            lineHeight: 1.05,
-            mb: "24px",
-            maxWidth: 760,
-          }}
-        >
-          Small team. Senior craft.
-          <br />
-          Zero agency overhead.
+        <Box className="why-reveal" component="h2" sx={{ fontSize: { xs: 36, md: 48 }, fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.1, mb: "16px", maxWidth: 760, color: "var(--ink)" }}>
+          Small team. Senior craft. Zero agency overhead.
         </Box>
-        <Box
-          className="why-reveal"
-          component="p"
-          sx={{
-            fontSize: 18,
-            color: "var(--muted)",
-            maxWidth: 600,
-            mb: "60px",
-            fontWeight: 300,
-          }}
-        >
-          Built for founders who want sharp execution without the bloated
-          retainers and account-manager middlemen.
+        <Box className="why-reveal" component="p" sx={{ fontSize: 19, color: "var(--grey-1)", maxWidth: "65ch", mb: "64px", lineHeight: 1.6 }}>
+          Built for founders who want sharp execution without bloated retainers and account-manager middlemen.
         </Box>
-
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", lg: "repeat(3, 1fr)" },
-            gridTemplateAreas: {
-              xs: `"a" "b" "c" "d"`,
-              sm: `"a a" "b c" "d ."`,
-              lg: `"a a a" "b c d"`,
-            },
-            gap: "24px",
-          }}
-        >
-          {pillars.map(({ Icon, title, desc }, i) => (
+        <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" }, gap: { xs: "16px", md: "24px" } }}>
+          {pillars.map(({ Icon, title, desc }) => (
             <Box
               key={title}
               className="why-reveal"
               sx={{
-                gridArea: ["a", "b", "c", "d"][i],
-                p: i === 0 ? { xs: "32px", lg: "48px" } : "32px",
+                p: "32px",
                 borderRadius: "20px",
-                background: i === 0
-                  ? "linear-gradient(135deg, rgba(var(--accent-rgb),0.10), rgba(var(--accent-2-rgb),0.04))"
-                  : "var(--surface)",
-                border: i === 0 ? "1px solid var(--border-hi)" : "1px solid var(--border)",
-                backdropFilter: "blur(20px)",
-                position: "relative",
-                overflow: "hidden",
-                transition: "all 0.4s cubic-bezier(0.4,0,0.2,1)",
-                "&:hover": {
-                  borderColor: "var(--border-hi)",
-                  transform: "translateY(-4px)",
-                  boxShadow: "0 20px 60px rgba(var(--accent-rgb),0.08)",
-                },
+                background: "var(--bg)",
+                transition: "all 240ms ease-out",
+                "&:hover": { transform: "translateY(-2px)", boxShadow: "0 8px 24px rgba(0,0,0,0.06)" },
               }}
             >
-              <Box
-                sx={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: "12px",
-                  background: "linear-gradient(135deg, rgba(var(--accent-rgb),0.18), rgba(var(--accent-2-rgb),0.08))",
-                  border: "1px solid var(--border)",
-                  display: "grid",
-                  placeItems: "center",
-                  mb: "20px",
-                  color: "var(--accent)",
-                }}
-              >
-                <Icon size={20} strokeWidth={1.75} />
+              <Box sx={{ color: "var(--accent)", mb: "24px" }}>
+                <Icon size={32} strokeWidth={1.5} />
               </Box>
-              <Box
-                component="h3"
-                sx={{
-                  fontFamily: "var(--font-syne)",
-                  fontSize: i === 0 ? { xs: 22, lg: 28 } : 19,
-                  fontWeight: 600,
-                  mb: "10px",
-                  letterSpacing: "-0.01em",
-                }}
-              >
+              <Box component="h3" sx={{ fontSize: 24, fontWeight: 600, mb: "16px", letterSpacing: "-0.01em", color: "var(--ink)", lineHeight: 1.25 }}>
                 {title}
               </Box>
-              <Box
-                component="p"
-                sx={{
-                  color: "var(--muted)",
-                  fontSize: i === 0 ? { xs: 15, lg: 16 } : 14,
-                  lineHeight: 1.65,
-                  fontWeight: 300,
-                  maxWidth: i === 0 ? 720 : "none",
-                }}
-              >
+              <Box component="p" sx={{ color: "var(--grey-1)", fontSize: 17, lineHeight: 1.6 }}>
                 {desc}
               </Box>
             </Box>

@@ -1,53 +1,79 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
+import PageHero from "@/components/sections/PageHero";
 import Link from "next/link";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Technical writing from the Nextora engineering team — cloud, AI, and software craft.",
+  description: "Notes from the Nextora team — web, AI search, performance and shipping.",
   alternates: { canonical: "/blog" },
 };
 
 const posts = [
-  { slug: "how-we-cut-deploys-20x", tag: "Engineering", title: "How We Reduced Deploy Times 20x at Velocity Finance", excerpt: "A deep dive into the CI/CD rewrite that turned a 40-minute pipeline into a 2-minute one.", date: "2026-03-10" },
-  { slug: "building-production-rag", tag: "AI", title: "Building Production RAG: What Nobody Tells You", excerpt: "Chunking strategies, embedding models, retrieval tricks, and the evals that matter.", date: "2026-02-22" },
-  { slug: "kubernetes-cost-optimisation", tag: "Cloud", title: "Kubernetes Cost Optimisation: A Practical Guide", excerpt: "How we cut a client's AWS bill by 60% without touching their product.", date: "2026-01-15" },
+  { slug: "how-we-cut-deploys-20x", tag: "Engineering", title: "How We Reduced Deploy Times 20×", excerpt: "A deep dive into the CI/CD rewrite that turned a 40-minute pipeline into a 2-minute one.", date: "2026-03-10" },
+  { slug: "building-production-rag", tag: "AI",          title: "Building Production RAG: What Nobody Tells You", excerpt: "Chunking strategies, embedding models, retrieval tricks, and the evals that matter.", date: "2026-02-22" },
+  { slug: "kubernetes-cost-optimisation", tag: "Cloud",  title: "Kubernetes Cost Optimisation: A Practical Guide", excerpt: "How we cut a client's AWS bill by 60% without touching their product.", date: "2026-01-15" },
 ];
 
 export default function BlogPage() {
   return (
     <>
       <Navbar />
-      <main>
-        <section style={{ paddingTop: "clamp(140px, 12vw, 180px)", paddingBottom: 80, position: "relative" }}>
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb),0.08) 0%, transparent 55%)", pointerEvents: "none" }} />
-          <div className="container" style={{ position: "relative", zIndex: 1 }}>
-            <span style={{ fontSize: 13, color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 600, marginBottom: 16, display: "block" }}>Blog</span>
-            <h1 style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(48px, 7vw, 96px)", fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 0.95, marginBottom: 24 }}>Technical writing.</h1>
-            <p style={{ fontSize: 20, color: "var(--muted)", maxWidth: 560, fontWeight: 300 }}>Deeply technical posts from the Nextora engineering team.</p>
-          </div>
-        </section>
+      <main id="main">
+        <PageHero
+          eyebrow="Blog"
+          title="Notes from the team."
+          subtitle="Short, honest writing about what we’re building and what we wish we knew sooner."
+        />
 
-        <section style={{ paddingBottom: "clamp(80px, 10vw, 120px)" }}>
-          <div className="container">
-            <div style={{ borderTop: "1px solid var(--border)" }}>
+        <Box component="section" sx={{ pb: { xs: "96px", md: "128px" }, background: "var(--bg)" }}>
+          <Container maxWidth="md" sx={{ px: { xs: "24px", md: "48px" } }}>
+            <Box sx={{ borderTop: "1px solid var(--grey-2)" }}>
               {posts.map((post) => (
-                <Link key={post.slug} href={`/blog/${post.slug}`} className="blog-row" style={{ padding: "40px 0", borderBottom: "1px solid var(--border)", textDecoration: "none", color: "inherit", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 20 }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-                      <span style={{ padding: "3px 10px", borderRadius: 100, background: "rgba(var(--accent-rgb),0.08)", border: "1px solid rgba(var(--accent-rgb),0.2)", fontSize: 12, color: "var(--accent)", fontWeight: 500 }}>{post.tag}</span>
-                      <time dateTime={post.date} style={{ color: "var(--muted)", fontSize: 13 }}>{new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</time>
-                    </div>
-                    <h2 className="blog-title" style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(20px, 2.5vw, 28px)", fontWeight: 700, letterSpacing: "-0.025em", marginBottom: 10, transition: "color 0.3s" }}>{post.title}</h2>
-                    <p style={{ color: "var(--muted)", fontSize: 16, maxWidth: 680 }}>{post.excerpt}</p>
-                  </div>
-                  <span style={{ fontSize: 24, color: "var(--muted)", flexShrink: 0 }}>→</span>
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="blog-row"
+                  style={{ textDecoration: "none", color: "inherit", display: "block", borderBottom: "1px solid var(--grey-2)" }}
+                >
+                <Box
+                  sx={{
+                    py: "32px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "24px",
+                  }}
+                >
+                  <Box sx={{ flex: 1 }}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: "12px", mb: "12px" }}>
+                      <Box component="span" sx={{ fontSize: 12, color: "var(--grey-1)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>
+                        {post.tag}
+                      </Box>
+                      <Box component="span" sx={{ color: "var(--grey-1)", fontSize: 13 }}>
+                        ·
+                      </Box>
+                      <Box component="time" dateTime={post.date} sx={{ color: "var(--grey-1)", fontSize: 13 }}>
+                        {new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+                      </Box>
+                    </Box>
+                    <Box className="blog-title" component="h2" sx={{ fontSize: { xs: 24, md: 28 }, fontWeight: 600, letterSpacing: "-0.01em", mb: "8px", color: "var(--ink)", transition: "color 240ms ease-out", lineHeight: 1.25 }}>
+                      {post.title}
+                    </Box>
+                    <Box component="p" sx={{ color: "var(--grey-1)", fontSize: 17, lineHeight: 1.6, maxWidth: "65ch" }}>
+                      {post.excerpt}
+                    </Box>
+                  </Box>
+                  <Box component="span" sx={{ fontSize: 22, color: "var(--accent)", flexShrink: 0, display: { xs: "none", sm: "inline" } }}>→</Box>
+                </Box>
                 </Link>
               ))}
-            </div>
-          </div>
-        </section>
+            </Box>
+          </Container>
+        </Box>
       </main>
       <Footer />
     </>

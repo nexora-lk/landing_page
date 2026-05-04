@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { tokens } from "@/components/ui/ThemeRegistry";
 import { Mail, MapPin } from "lucide-react";
 
 /* Brand icons (Lucide dropped these — small inline SVGs from simple-icons style) */
@@ -31,9 +30,10 @@ const SocialSvg = {
 
 const footerLinks = {
   Company: [
-    { label: "About", href: "/#why" },
+    { label: "About Us", href: "/about" },
     { label: "Work", href: "/work" },
     { label: "Pricing", href: "/pricing" },
+    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ],
   Services: [
@@ -64,13 +64,13 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        pt: "80px",
-        pb: "40px",
-        borderTop: "1px solid var(--border)",
-        background: `rgba(${tokens.bgRgb}, 0.4)`,
+        pt: "96px",
+        pb: { xs: "120px", md: "48px" },
+        borderTop: "1px solid var(--grey-2)",
+        background: "var(--surface)",
       }}
     >
-      <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>
+      <Container maxWidth="lg" sx={{ px: { xs: "24px", md: "48px", lg: "80px" } }}>
         {/* Grid */}
         <Box
           sx={{
@@ -82,21 +82,21 @@ export default function Footer() {
         >
           {/* Brand */}
           <Box>
-            <Link href="/" style={{ display: "inline-flex", alignItems: "center" }}>
+            <Link href="/" aria-label="Nextora — home" style={{ display: "inline-flex", alignItems: "center" }}>
               <Image
                 src="/logo.png"
-                alt="Nextora"
+                alt="Nextora Infotech"
                 width={140}
                 height={40}
-                style={{ objectFit: "contain" }}
+                style={{ objectFit: "contain", height: 32, width: "auto" }}
               />
             </Link>
             <Box
               component="p"
-              sx={{ color: "var(--muted)", fontSize: 14, mt: "20px", maxWidth: 340, lineHeight: 1.7 }}
+              sx={{ color: "var(--grey-1)", fontSize: 14, mt: "20px", maxWidth: 340, lineHeight: 1.7 }}
             >
-              A young IT studio crafting websites, mobile apps, AI tools and clean
-              design — built fast, shipped sharp.
+              The engineering partner for ambitious founders. Web, mobile and
+              AI products — shipped fast, built to scale.
             </Box>
 
             {/* Contact info */}
@@ -108,7 +108,7 @@ export default function Footer() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "10px",
-                  color: "var(--muted)",
+                  color: "var(--grey-1)",
                   fontSize: 14,
                   textDecoration: "none",
                   transition: "color 0.3s",
@@ -123,7 +123,7 @@ export default function Footer() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "10px",
-                  color: "var(--muted)",
+                  color: "var(--grey-1)",
                   fontSize: 14,
                 }}
               >
@@ -139,13 +139,12 @@ export default function Footer() {
               <Box
                 component="h4"
                 sx={{
-                  fontFamily: "var(--font-syne)",
-                  fontSize: 13,
+                  fontSize: 12,
                   fontWeight: 600,
                   mb: "20px",
-                  letterSpacing: "0.12em",
+                  letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "var(--text)",
+                  color: "var(--ink)",
                 }}
               >
                 {heading}
@@ -156,7 +155,7 @@ export default function Footer() {
                     <Link
                       href={link.href}
                       className="nav-link-hover"
-                      style={{ color: "var(--muted)", textDecoration: "none", fontSize: 14, transition: "color 0.3s" }}
+                      style={{ color: "var(--grey-1)", textDecoration: "none", fontSize: 14, transition: "color 0.3s" }}
                     >
                       {link.label}
                     </Link>
@@ -171,22 +170,22 @@ export default function Footer() {
         <Box
           sx={{
             pt: "32px",
-            borderTop: "1px solid var(--border)",
+            borderTop: "1px solid var(--grey-2)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             flexWrap: "wrap",
             gap: "20px",
-            color: "var(--muted)",
+            color: "var(--grey-1)",
             fontSize: 13,
           }}
         >
           <Box sx={{ display: "flex", gap: "20px", flexWrap: "wrap", alignItems: "center" }}>
             <Box>© {new Date().getFullYear()} Nextora. All rights reserved.</Box>
-            <Link href="#" style={{ color: "var(--muted)", textDecoration: "none" }} className="nav-link-hover">
+            <Link href="/privacy" style={{ color: "var(--grey-1)", textDecoration: "none" }} className="nav-link-hover">
               Privacy
             </Link>
-            <Link href="#" style={{ color: "var(--muted)", textDecoration: "none" }} className="nav-link-hover">
+            <Link href="/terms" style={{ color: "var(--grey-1)", textDecoration: "none" }} className="nav-link-hover">
               Terms
             </Link>
           </Box>
@@ -203,10 +202,10 @@ export default function Footer() {
                   width: 36,
                   height: 36,
                   borderRadius: "50%",
-                  border: "1px solid var(--border)",
+                  border: "1px solid var(--grey-2)",
                   display: "grid",
                   placeItems: "center",
-                  color: "var(--muted)",
+                  color: "var(--grey-1)",
                   textDecoration: "none",
                   transition: "all 0.3s",
                   "&:hover": {

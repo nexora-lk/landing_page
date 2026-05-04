@@ -1,56 +1,52 @@
 import type { Metadata } from "next";
-import { Syne, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "@/components/ui/ThemeRegistry";
-import Cursor from "@/components/ui/Cursor";
-
-const syne = Syne({
-  variable: "--font-syne",
-  subsets: ["latin"],
-  weight: ["700", "800"],
-  display: "swap",
-  preload: true,
-});
+import MobileStickyCTA from "@/components/ui/MobileStickyCTA";
+import BackToTop from "@/components/ui/BackToTop";
+import CookieBanner from "@/components/ui/CookieBanner";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["400", "500", "600"],
   display: "swap",
   preload: true,
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nextora.dev"),
+  metadataBase: new URL("https://nextora.lk"),
   title: {
-    default: "Nextora — We Build What's Next",
+    default: "Nextora Infotech — We Build What's Next",
     template: "%s | Nextora",
   },
   description:
-    "Nextora is the engineering partner for companies reinventing how they operate — cloud, AI, and custom software built with relentless craft.",
+    "Nextora Infotech is the engineering partner for ambitious founders — web, mobile and AI products, shipped fast and built to scale.",
   keywords: [
-    "cloud infrastructure",
-    "AI automation",
-    "custom software development",
-    "cybersecurity",
-    "engineering partner",
     "Nextora",
+    "Nextora Infotech",
+    "web development Sri Lanka",
+    "mobile app development",
+    "AI search optimization",
+    "GEO",
+    "founder-built websites",
   ],
-  authors: [{ name: "Nextora Labs" }],
-  creator: "Nextora Labs",
+  authors: [{ name: "Nextora Infotech" }],
+  creator: "Nextora Infotech",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nextora.dev",
-    siteName: "Nextora",
-    title: "Nextora — We Build What's Next",
+    url: "https://nextora.lk",
+    siteName: "Nextora Infotech",
+    title: "Nextora Infotech — Engineering for what’s next",
     description:
-      "Engineering partner for cloud, AI, and custom software — built with relentless craft.",
+      "The engineering partner ambitious founders trust to ship web, mobile and AI products — fast, fixed-price, built to scale.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nextora — We Build What's Next",
-    description: "Engineering partner for cloud, AI, and custom software.",
+    title: "Nextora Infotech — Engineering for what’s next",
+    description:
+      "The engineering partner ambitious founders trust to ship web, mobile and AI products.",
     creator: "@nextora",
   },
   robots: {
@@ -66,14 +62,35 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${inter.variable}`}
+      className={inter.variable}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >
       <body>
+        <a href="#main" className="skip-link">Skip to content</a>
+        <script
+          type="application/ld+json"
+          // Spec: structured data (Section 27.7). Organization mark-up so
+          // Google + AI search engines surface Nextora correctly.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Nextora Infotech",
+              url: "https://nextora.lk",
+              logo: "https://nextora.lk/logo.png",
+              email: "hello@nextora.lk",
+              description:
+                "Nextora Infotech is the engineering partner for ambitious founders — web, mobile and AI products, shipped fast and built to scale.",
+              sameAs: [],
+            }),
+          }}
+        />
         <ThemeRegistry>
-          <Cursor />
           {children}
+          <MobileStickyCTA />
+          <BackToTop />
+          <CookieBanner />
         </ThemeRegistry>
       </body>
     </html>

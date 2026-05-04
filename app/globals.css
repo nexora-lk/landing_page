@@ -1,274 +1,155 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════
-   Design Tokens (CSS Custom Properties)
-   ─────────────────────────────────────────────────────────
-   Matched to Nextora circuit-board logo:
-   Primary: Sky-Cyan (#42C6FF) — the logo's dominant colour
-   Secondary: Electric Blue (#1A73E8) — deeper complement
-   Tertiary: Teal (#00E5CC) — vibrant accent
-   Background: Deep Navy (#060B14)
+   Nextora Design Tokens — per Nextora_UI_Design_Spec.docx
+   Apple-style light system. 5 colors. Inter only. 8px scale.
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Core Palette ── */
-  --accent:       #42C6FF;
-  --accent-br:    #6DD5FF;
-  --accent-2:     #1A73E8;
-  --accent-3:     #00E5CC;
+  /* ── Type ── */
+  --font-syne: var(--font-inter);
 
-  /* ── RGB Channels (use with rgba()) ── */
-  --accent-rgb:    66, 198, 255;
-  --accent-br-rgb: 109, 213, 255;
-  --accent-2-rgb:  26, 115, 232;
-  --accent-3-rgb:  0, 229, 204;
-  --text-rgb:      255, 255, 255;
-  --bg-rgb:        6, 11, 20;
+  /* ── Color (5 + accent) ── */
+  --ink:        #1D1D1F;       /* text, headlines, dark surfaces (never #000) */
+  --grey-1:     #6E6E73;       /* secondary text, captions */
+  --grey-2:     #D2D2D7;       /* hairlines, input borders */
+  --surface:    #F5F5F7;       /* section backgrounds, card fills */
+  --bg:         #FFFFFF;       /* page background */
+  --accent:     #0071E3;       /* buttons, links, active only */
+  --accent-hi:  #0058B0;       /* hover */
+  --accent-lo:  #0050A0;       /* active */
 
-  /* ── Backgrounds ── */
-  --bg:       #060B14;
-  --bg-2:     #0A1120;
-  --bg-deep:  #0D1B30;
+  /* ── Legacy aliases (so existing components keep working) ── */
+  --text:        var(--ink);
+  --text-soft:   var(--ink);
+  --muted:       var(--grey-1);
+  --border:      var(--grey-2);
+  --border-hi:   #B5B5BA;
+  --accent-br:   var(--accent-hi);
+  --accent-2:    var(--accent);
+  --accent-3:    var(--accent);
 
-  /* ── Text ── */
-  --text:      #ffffff;
-  --text-soft: #E8F0FE;
-  --muted:     #7B8BA5;
+  /* RGB channels */
+  --accent-rgb:    0, 113, 227;
+  --accent-br-rgb: 0, 88, 176;
+  --accent-2-rgb:  0, 113, 227;
+  --accent-3-rgb:  0, 113, 227;
+  --text-rgb:      29, 29, 31;
+  --bg-rgb:        255, 255, 255;
+  --ink-rgb:       29, 29, 31;
+  --grey-1-rgb:    110, 110, 115;
 
-  /* ── Surfaces & Borders ── */
-  --surface:    rgba(66, 198, 255, 0.04);
-  --border:     rgba(66, 198, 255, 0.10);
-  --border-hi:  rgba(66, 198, 255, 0.45);
-
-  /* ── Glow ── */
-  --glow: 0 0 40px rgba(66, 198, 255, 0.35);
+  /* Glow (use sparingly — Apple avoids these) */
+  --glow: none;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
+  color: var(--ink);
+  font-family: var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 17px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* iOS form-zoom guard + long-word safety on narrow screens */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
-::selection {
-  background: var(--accent);
-  color: var(--bg);
+/* Prevent any long word (URL, code) from blowing out the layout on phones */
+p, h1, h2, h3, h4, li, span, a, dd, dt {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
-/* Grain overlay */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: 1000;
-  mix-blend-mode: overlay;
+/* Images never overflow their container */
+img, video, svg { max-width: 100%; height: auto; }
+
+::selection { background: var(--accent); color: #fff; }
+
+/* Spec: focus ring 2px accent, 4px offset. Never remove outline without replacing. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 /* Layout */
 .container {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 80px;
+}
+@media (max-width: 1024px) { .container { padding: 0 48px; } }
+@media (max-width: 620px)  { .container { padding: 0 24px; } }
+
+/* Link hover */
+.nav-link-hover:hover { color: var(--accent) !important; }
+.blog-row:hover h2 { color: var(--accent); }
+.work-card-link { transition: transform 240ms ease-out; }
+.work-card-link:hover { transform: translateY(-2px); }
+.work-card-link:hover .shot { box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.service-row-link { transition: transform 240ms ease-out; }
+.service-row-link:hover { transform: translateY(-2px); }
+.related-card:hover h3 { color: var(--accent); }
+
+/* Marquee (kept for any remaining marquee) */
+@keyframes marquee-scroll { to { transform: translateX(-50%); } }
+
+/* Hero — slow breathing glow */
+@keyframes hero-breathe {
+  0%, 100% { opacity: 0.75; transform: translate3d(-50%, 0, 0) scale(1); }
+  50%      { opacity: 1;    transform: translate3d(-50%, -1.5%, 0) scale(1.06); }
+}
+@keyframes hero-drift-1 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(2.5%, -2%, 0); }
+}
+@keyframes hero-drift-2 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(-2%, 2.5%, 0); }
+}
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
-@media (max-width: 620px) {
-  .container { padding: 0 20px; }
-}
-
-/* Link hover states */
-.nav-link-hover:hover { color: var(--text) !important; }
-.blog-row:hover .blog-title { color: var(--accent); }
-.work-card-link:hover { transform: translateY(-6px); border-color: var(--border-hi) !important; }
-.service-row-link:hover { border-color: var(--border-hi) !important; transform: translateX(4px); }
-
-/* Marquee animation */
-@keyframes marquee-scroll {
-  to { transform: translateX(-50%); }
-}
-
-/* Float animations */
-@keyframes mesh-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(60px, -40px) scale(1.1); }
-  66% { transform: translate(-40px, 60px) scale(0.95); }
-}
-
-@keyframes orb-orbit {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.05) rotate(180deg); }
-}
-
-@keyframes ring-spin {
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes card-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes badge-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-/* Hero circuit board animations */
-@keyframes floatGlow {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(40px, 30px); }
-}
-
-@keyframes orbPulse {
-  0%, 100% { box-shadow: 0 0 60px rgba(var(--accent-rgb), 0.2); }
-  50% { box-shadow: 0 0 100px rgba(var(--accent-rgb), 0.35), 0 0 200px rgba(var(--accent-rgb), 0.1); }
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.7); }
-}
-
-/* ── Premium Hero Animations ── */
-
-@keyframes shimmer-text {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-@keyframes float-badge-1 {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(12px, -18px) rotate(2deg); }
-  50% { transform: translate(-8px, -28px) rotate(-1deg); }
-  75% { transform: translate(16px, -10px) rotate(1.5deg); }
-}
-
-@keyframes float-badge-2 {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(-16px, 14px) rotate(-2deg); }
-  50% { transform: translate(10px, 24px) rotate(1deg); }
-  75% { transform: translate(-12px, 8px) rotate(-1.5deg); }
-}
-
-@keyframes float-badge-3 {
-  0%, 100% { transform: translate(0, 0); }
-  33% { transform: translate(20px, -14px); }
-  66% { transform: translate(-14px, 18px); }
-}
-
-@keyframes float-badge-4 {
-  0%, 100% { transform: translate(0, 0); }
-  33% { transform: translate(-18px, -20px); }
-  66% { transform: translate(12px, 14px); }
-}
-
-@keyframes scroll-hint {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(10px); opacity: 1; }
-}
-
-@keyframes aurora-pulse {
-  0%, 100% { opacity: 0.12; transform: scale(1) rotate(0deg); }
-  33% { opacity: 0.18; transform: scale(1.05) rotate(2deg); }
-  66% { opacity: 0.1; transform: scale(0.97) rotate(-1deg); }
-}
-
-@keyframes line-expand {
-  from { width: 0; opacity: 0; }
-  to { width: 64px; opacity: 1; }
-}
-
-@keyframes stat-count-in {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ── Circuit Node Pulse (logo-inspired) ── */
-@keyframes node-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(var(--accent-rgb), 0); }
-}
-
-@keyframes trace-flow {
-  0% { stroke-dashoffset: 24; }
-  100% { stroke-dashoffset: 0; }
-}
-
-/* ── Circuit-board section divider ── */
-.circuit-divider {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(var(--accent-rgb), 0.3) 20%,
-    rgba(var(--accent-rgb), 0.6) 50%,
-    rgba(var(--accent-rgb), 0.3) 80%,
-    transparent 100%
-  );
-  position: relative;
-}
-
-.circuit-divider::before,
-.circuit-divider::after {
-  content: "";
+/* Skip-to-content — hidden until focused (WCAG 2.4.1) */
+.skip-link {
   position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  left: 16px;
+  top: -100px;
+  z-index: 200;
   background: var(--accent);
-  top: 50%;
-  transform: translateY(-50%);
-  box-shadow: 0 0 12px var(--accent);
-  animation: node-pulse 2s ease-in-out infinite;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: top 240ms ease-out;
 }
+.skip-link:focus { top: 16px; }
 
-.circuit-divider::before { left: 20%; }
-.circuit-divider::after { right: 20%; animation-delay: 1s; }
-
-/* ═══════════════════════════════════════════════════════════
-   Custom Cursor
-   ─────────────────────────────────────────────────────────
-   Activated by <Cursor /> on fine-pointer devices only.
-   ═══════════════════════════════════════════════════════════ */
-
-@media (pointer: fine) {
-  html.has-custom-cursor,
-  html.has-custom-cursor body,
-  html.has-custom-cursor *,
-  html.has-custom-cursor *::before,
-  html.has-custom-cursor *::after {
-    cursor: none !important;
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-}
-
-.nx-cursor-ring.cursor-hover {
-  width: 56px;
-  height: 56px;
-  margin-left: -28px;
-  margin-top: -28px;
-  border-color: rgba(var(--accent-rgb), 0.9);
-  background: rgba(var(--accent-rgb), 0.08);
-}
-
-.nx-cursor-ring.cursor-down {
-  width: 24px;
-  height: 24px;
-  margin-left: -12px;
-  margin-top: -12px;
-  border-color: rgba(var(--accent-br-rgb), 1);
-  background: rgba(var(--accent-rgb), 0.18);
 }

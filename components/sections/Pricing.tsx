@@ -206,7 +206,7 @@ const pricingData: Record<string, Plan[]> = {
   ],
 };
 
-export default function Pricing() {
+export default function Pricing({ compact = false }: { compact?: boolean } = {}) {
   const [activeCategory, setActiveCategory] = useState("Website");
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -249,124 +249,113 @@ export default function Pricing() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const plans = pricingData[activeCategory];
+  const plans = compact
+    ? pricingData["Website"].slice(0, 3)
+    : pricingData[activeCategory];
 
   return (
     <Box
       component="section"
       ref={sectionRef}
-      sx={{ py: { xs: "80px", md: "120px" }, position: "relative" }}
+      sx={{ py: { xs: "96px", md: "128px" }, position: "relative", background: "var(--bg)" }}
     >
-      {/* Background gradient */}
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse at 50% 0%, rgba(var(--accent-rgb),0.08) 0%, transparent 55%)",
-          pointerEvents: "none",
-        }}
-      />
-
       <Container
-        maxWidth="xl"
-        sx={{ px: { xs: "20px", md: "32px" }, position: "relative", zIndex: 1 }}
+        maxWidth="lg"
+        sx={{ px: { xs: "24px", md: "48px", lg: "80px" }, position: "relative" }}
       >
         {/* Header */}
         <Box
           className="pricing-header-el"
           component="span"
           sx={{
-            fontSize: 13,
-            color: "var(--accent)",
+            fontSize: 12,
+            color: "var(--grey-1)",
             textTransform: "uppercase",
-            letterSpacing: "0.2em",
+            letterSpacing: "0.1em",
             fontWeight: 600,
             mb: "16px",
             display: "block",
           }}
         >
-          Transparent pricing
+          {compact ? "Pricing" : "Full pricing menu"}
         </Box>
         <Box
           className="pricing-header-el"
           component="h2"
           sx={{
-            fontFamily: "var(--font-syne)",
-            fontSize: "clamp(36px, 5vw, 64px)",
-            fontWeight: 700,
-            letterSpacing: "-0.03em",
-            lineHeight: 1.05,
+            fontSize: { xs: 36, md: 48 },
+            fontWeight: 600,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.1,
             mb: "16px",
-            maxWidth: 720,
+            maxWidth: 760,
+            color: "var(--ink)",
           }}
         >
           Investment plans for{" "}
-          <Box
-            component="span"
-            sx={{
-              color: "var(--accent)",
-            }}
-          >
-            every stage
-          </Box>
+          <Box component="span" sx={{ color: "var(--accent)" }}>every stage.</Box>
         </Box>
         <Box
           className="pricing-header-el"
           component="p"
           sx={{
-            fontSize: 18,
-            color: "var(--muted)",
-            maxWidth: 580,
+            fontSize: 19,
+            color: "var(--grey-1)",
+            maxWidth: "65ch",
             mb: "48px",
-            fontWeight: 300,
-            lineHeight: 1.7,
+            lineHeight: 1.6,
           }}
         >
           All prices in Sri Lankan Rupees (LKR). Final quotes depend on scope —
-          book a free consultation to get an exact estimate.
+          book a free call to get an exact estimate.
         </Box>
 
-        {/* Category tabs */}
-        <Box
-          className="pricing-header-el"
-          sx={{
-            display: "flex",
-            gap: "6px",
-            flexWrap: "wrap",
-            mb: "48px",
-            p: "6px",
-            borderRadius: "100px",
-            background: "var(--surface)",
-            border: "1px solid var(--border)",
-            width: "fit-content",
-          }}
-        >
-          {categories.map((cat) => (
-            <Box
-              key={cat}
-              component="button"
-              onClick={() => handleCategoryChange(cat)}
-              sx={{
-                px: { xs: "14px", md: "22px" },
-                py: "10px",
-                borderRadius: "100px",
-                border: "none",
-                cursor: "pointer",
-                fontSize: { xs: 12, md: 14 },
-                fontWeight: 500,
-                fontFamily: "inherit",
-                transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
-                background: activeCategory === cat ? "var(--text)" : "transparent",
-                color: activeCategory === cat ? "var(--bg)" : "var(--muted)",
-                "&:hover":
-                  activeCategory !== cat ? { color: "var(--text)" } : {},
-              }}
-            >
-              {cat}
-            </Box>
-          ))}
-        </Box>
+        {/* Category tabs (hidden in compact homepage mode) */}
+        {!compact && (
+          <Box
+            className="pricing-header-el"
+            sx={{
+              display: "flex",
+              gap: "4px",
+              flexWrap: { xs: "nowrap", md: "wrap" },
+              overflowX: { xs: "auto", md: "visible" },
+              WebkitOverflowScrolling: "touch",
+              mb: "48px",
+              p: "4px",
+              borderRadius: "999px",
+              background: "var(--surface)",
+              width: { xs: "100%", md: "fit-content" },
+              maxWidth: "100%",
+            }}
+          >
+            {categories.map((cat) => (
+              <Box
+                key={cat}
+                component="button"
+                onClick={() => handleCategoryChange(cat)}
+                sx={{
+                  px: { xs: "16px", md: "22px" },
+                  py: "10px",
+                  borderRadius: "999px",
+                  border: "none",
+                  cursor: "pointer",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  fontFamily: "inherit",
+                  minHeight: 40,
+                  flexShrink: 0,
+                  whiteSpace: "nowrap",
+                  transition: "background 240ms ease-out, color 240ms ease-out",
+                  background: activeCategory === cat ? "var(--ink)" : "transparent",
+                  color: activeCategory === cat ? "#fff" : "var(--grey-1)",
+                  "&:hover": activeCategory !== cat ? { color: "var(--ink)" } : {},
+                }}
+              >
+                {cat}
+              </Box>
+            ))}
+          </Box>
+        )}
 
         {/* Pricing cards */}
         <Box
@@ -395,8 +384,8 @@ export default function Pricing() {
         <Box
           sx={{
             mt: "64px",
-            pt: "40px",
-            borderTop: "1px solid var(--border)",
+            pt: "32px",
+            borderTop: "1px solid var(--grey-2)",
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: { md: "center" },
@@ -405,41 +394,35 @@ export default function Pricing() {
           }}
         >
           <Box>
-            <Box
-              component="p"
-              sx={{ color: "var(--muted)", fontSize: 15, mb: "4px" }}
-            >
+            <Box component="p" sx={{ color: "var(--ink)", fontSize: 16, mb: "4px" }}>
               All prices are starting estimates. Custom projects are quoted individually.
             </Box>
-            <Box component="p" sx={{ color: "var(--muted)", fontSize: 13 }}>
+            <Box component="p" sx={{ color: "var(--grey-1)", fontSize: 14 }}>
               Verified against Sri Lankan tech industry standards.
             </Box>
           </Box>
           <Box
             component={Link}
-            href="/contact"
+            href={compact ? "/pricing" : "/contact"}
             sx={{
               display: "inline-flex",
               alignItems: "center",
               gap: "8px",
               px: "28px",
               py: "14px",
-              borderRadius: "100px",
-              fontSize: 14,
-              fontWeight: 600,
+              borderRadius: "999px",
+              fontSize: 17,
+              fontWeight: 500,
               textDecoration: "none",
-              background: "var(--text)",
-              color: "var(--bg)",
+              background: "var(--accent)",
+              color: "#fff",
               flexShrink: 0,
-              transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
-              "&:hover": {
-                background: "var(--accent)",
-                boxShadow: "0 10px 40px rgba(var(--accent-rgb),0.3)",
-                transform: "translateY(-2px)",
-              },
+              minHeight: 44,
+              transition: "background 240ms ease-out",
+              "&:hover": { background: "var(--accent-hi)" },
             }}
           >
-            Get a Free Quote →
+            {compact ? "See full pricing menu →" : "Get a free quote →"}
           </Box>
         </Box>
       </Container>
@@ -460,55 +443,36 @@ function PriceCard({ tier, tierColor, label, price, features, highlighted }: Pla
   return (
     <Box
       ref={cardRef}
-      onMouseMove={handleMouseMove}
       className="price-card"
       sx={{
         borderRadius: "24px",
-        background: highlighted
-          ? "linear-gradient(135deg, rgba(var(--accent-rgb),0.07) 0%, rgba(var(--accent-2-rgb),0.07) 100%)"
-          : "var(--surface)",
-        border: highlighted
-          ? "1px solid rgba(var(--accent-rgb),0.35)"
-          : "1px solid var(--border)",
-        p: { xs: "32px 24px", md: "40px" },
+        background: highlighted ? "var(--ink)" : "var(--surface)",
+        color: highlighted ? "#fff" : "var(--ink)",
+        p: { xs: "32px", md: "40px" },
         position: "relative",
-        overflow: "hidden",
         display: "flex",
         flexDirection: "column",
-        transition: "all 0.5s cubic-bezier(0.4,0,0.2,1)",
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(var(--accent-rgb),0.10), transparent 40%)",
-          opacity: 0,
-          transition: "opacity 0.5s",
-          pointerEvents: "none",
-        },
+        transition: "all 240ms ease-out",
         "&:hover": {
-          borderColor: "var(--border-hi)",
-          transform: "translateY(-6px)",
-          boxShadow: `0 30px 80px ${tierColor}25`,
-          "&::before": { opacity: 1 },
+          transform: "translateY(-2px)",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
         },
       }}
     >
-      {/* Popular badge */}
       {highlighted && (
         <Box
           sx={{
             position: "absolute",
             top: 20,
             right: 20,
-            px: "12px",
-            py: "5px",
-            borderRadius: "100px",
-            background: "linear-gradient(135deg, var(--accent), var(--accent-2))",
-            fontSize: 10,
-            fontWeight: 700,
-            color: "var(--bg)",
-            letterSpacing: "0.08em",
+            px: "10px",
+            py: "4px",
+            borderRadius: "999px",
+            background: "var(--accent)",
+            fontSize: 11,
+            fontWeight: 600,
+            color: "#fff",
+            letterSpacing: "0.06em",
             textTransform: "uppercase",
           }}
         >
@@ -516,71 +480,52 @@ function PriceCard({ tier, tierColor, label, price, features, highlighted }: Pla
         </Box>
       )}
 
-      {/* Tier badge */}
       <Box
-        sx={{ display: "flex", alignItems: "center", gap: "10px", mb: "16px" }}
+        component="span"
+        sx={{
+          fontSize: 12,
+          fontWeight: 600,
+          color: highlighted ? "rgba(255,255,255,0.7)" : "var(--grey-1)",
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+          mb: "8px",
+        }}
       >
-        <Box
-          sx={{
-            width: 10,
-            height: 10,
-            borderRadius: "50%",
-            background: tierColor,
-            boxShadow: `0 0 14px ${tierColor}90`,
-            flexShrink: 0,
-          }}
-        />
-        <Box
-          component="span"
-          sx={{
-            fontSize: 12,
-            fontWeight: 700,
-            color: tierColor,
-            textTransform: "uppercase",
-            letterSpacing: "0.12em",
-          }}
-        >
-          {tier}
-        </Box>
+        {tier}
       </Box>
 
-      {/* Label */}
       <Box
         component="p"
-        sx={{ fontSize: 14, color: "var(--muted)", mb: "20px", lineHeight: 1.5 }}
+        sx={{
+          fontSize: 14,
+          color: highlighted ? "rgba(255,255,255,0.7)" : "var(--grey-1)",
+          mb: "20px",
+          lineHeight: 1.5,
+        }}
       >
         {label}
       </Box>
 
-      {/* Price */}
       <Box
         sx={{
-          fontFamily: "var(--font-syne)",
-          fontSize: "clamp(16px, 2vw, 22px)",
-          fontWeight: 700,
-          color: "var(--text)",
-          mb: "28px",
+          fontSize: { xs: 20, md: 24 },
+          fontWeight: 600,
+          color: highlighted ? "#fff" : "var(--ink)",
+          mb: "24px",
           lineHeight: 1.3,
-          letterSpacing: "-0.02em",
-          pb: "28px",
-          borderBottom: "1px solid var(--border)",
+          letterSpacing: "-0.01em",
+          pb: "24px",
+          borderBottom: highlighted ? "1px solid rgba(255,255,255,0.18)" : "1px solid var(--grey-2)",
+          // Long ranges like "LKR 300,000 – 1,500,000+" need to wrap, not overflow
+          overflowWrap: "anywhere",
         }}
       >
         {price}
       </Box>
 
-      {/* Features */}
       <Box
         component="ul"
-        sx={{
-          listStyle: "none",
-          p: 0,
-          m: 0,
-          display: "flex",
-          flexDirection: "column",
-          gap: "12px",
-          flex: 1,
-        }}
+        sx={{ listStyle: "none", p: 0, m: 0, display: "flex", flexDirection: "column", gap: "12px", flex: 1 }}
       >
         {features.map((feat) => (
           <Box
@@ -590,21 +535,12 @@ function PriceCard({ tier, tierColor, label, price, features, highlighted }: Pla
               display: "flex",
               alignItems: "flex-start",
               gap: "10px",
-              fontSize: 14,
-              color: "var(--muted)",
+              fontSize: 15,
+              color: highlighted ? "rgba(255,255,255,0.85)" : "var(--ink)",
               lineHeight: 1.5,
             }}
           >
-            <Box
-              component="span"
-              sx={{
-                color: tierColor,
-                flexShrink: 0,
-                lineHeight: 1.5,
-                fontSize: 13,
-                fontWeight: 700,
-              }}
-            >
+            <Box component="span" sx={{ color: "var(--accent)", flexShrink: 0, lineHeight: 1.5, fontSize: 14, fontWeight: 600 }}>
               ✓
             </Box>
             {feat}
@@ -612,7 +548,6 @@ function PriceCard({ tier, tierColor, label, price, features, highlighted }: Pla
         ))}
       </Box>
 
-      {/* CTA */}
       <Box
         component={Link}
         href="/contact"
@@ -623,25 +558,23 @@ function PriceCard({ tier, tierColor, label, price, features, highlighted }: Pla
           justifyContent: "center",
           gap: "8px",
           px: "20px",
-          py: "13px",
-          borderRadius: "100px",
-          border: `1px solid ${tierColor}50`,
-          background: `${tierColor}12`,
-          color: tierColor,
-          fontSize: 14,
-          fontWeight: 600,
+          py: "12px",
+          borderRadius: "999px",
+          background: highlighted ? "var(--accent)" : "var(--ink)",
+          color: "#fff",
+          fontSize: 16,
+          fontWeight: 500,
           textDecoration: "none",
-          transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
-          "&:hover": {
-            background: tierColor,
-            color: "var(--bg)",
-            boxShadow: `0 10px 40px ${tierColor}45`,
-            transform: "translateY(-2px)",
-          },
+          minHeight: 44,
+          transition: "background 240ms ease-out",
+          "&:hover": { background: highlighted ? "var(--accent-hi)" : "#0F0F11" },
         }}
       >
         Choose this plan →
       </Box>
+
+      {/* Suppress unused tierColor lint */}
+      <Box sx={{ display: "none" }}>{tierColor}</Box>
     </Box>
   );
 }

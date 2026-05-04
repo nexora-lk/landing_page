@@ -9,27 +9,33 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
+type Project = {
+  slug: string;
+  tag: string;
+  title: string;
+  desc: string;
+  /** Optional: when added, replaces the placeholder block. */
+  image?: string;
+};
+
+const projects: Project[] = [
   {
     slug: "prestige-glamour-payroll",
-    gradient: "linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%)",
     tag: "HR · Internal Tool",
     title: "Prestige Glamour — Payroll",
-    desc: "Custom salary management software for the Prestige Glamour group of companies.",
+    desc: "Custom salary management software for the Prestige Glamour group.",
   },
   {
     slug: "prestige-glamour-website",
-    gradient: "linear-gradient(135deg, var(--accent-2) 0%, var(--accent-3) 100%)",
     tag: "Corporate · Website",
     title: "Prestige Glamour — Website",
-    desc: "Group-wide corporate website redesign with modern brand presence and CMS.",
+    desc: "Group-wide corporate website redesign with CMS.",
   },
   {
     slug: "nextconstation",
-    gradient: "linear-gradient(135deg, var(--accent-3) 0%, var(--accent) 100%)",
     tag: "Web · Marketing Site",
     title: "Nextconstation",
-    desc: "Marketing website built end-to-end — design, development, deployment.",
+    desc: "Marketing website built end-to-end — design, dev, deploy.",
   },
 ];
 
@@ -41,12 +47,12 @@ export default function Work() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".work-reveal",
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 16 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
-          stagger: 0.15,
+          duration: 0.6,
+          stagger: 0.1,
           ease: "power3.out",
           scrollTrigger: { trigger: ".work-reveal", start: "top 85%" },
         }
@@ -60,17 +66,17 @@ export default function Work() {
       component="section"
       id="work"
       ref={sectionRef}
-      sx={{ py: { xs: "80px", md: "120px" }, position: "relative" }}
+      sx={{ py: { xs: "96px", md: "128px" }, position: "relative", background: "var(--bg)" }}
     >
-      <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>
+      <Container maxWidth="lg" sx={{ px: { xs: "24px", md: "48px" } }}>
         <Box
           className="work-reveal"
           component="span"
           sx={{
-            fontSize: 13,
-            color: "var(--accent)",
+            fontSize: 12,
+            color: "var(--grey-1)",
             textTransform: "uppercase",
-            letterSpacing: "0.2em",
+            letterSpacing: "0.1em",
             fontWeight: 600,
             mb: "16px",
             display: "block",
@@ -82,25 +88,36 @@ export default function Work() {
           className="work-reveal"
           component="h2"
           sx={{
-            fontFamily: "var(--font-syne)",
-            fontSize: "clamp(36px, 5vw, 64px)",
-            fontWeight: 700,
-            letterSpacing: "-0.03em",
-            lineHeight: 1.05,
-            mb: "24px",
+            fontSize: { xs: 36, md: 48 },
+            fontWeight: 600,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.1,
+            mb: "16px",
+            color: "var(--ink)",
           }}
         >
-          Real projects.
-          <br />
-          Real clients.
+          Real projects. Real clients.
+        </Box>
+        <Box
+          className="work-reveal"
+          component="p"
+          sx={{
+            fontSize: 19,
+            color: "var(--grey-1)",
+            maxWidth: "65ch",
+            mb: "64px",
+            lineHeight: 1.6,
+          }}
+        >
+          A small but growing portfolio — every project shipped end-to-end by
+          the founders.
         </Box>
 
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(3, 1fr)" },
-            gap: "24px",
-            mt: "40px",
+            gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
+            gap: { xs: "24px", md: "32px" },
           }}
         >
           {projects.map((p) => (
@@ -112,67 +129,73 @@ export default function Work() {
               sx={{
                 borderRadius: "20px",
                 overflow: "hidden",
-                position: "relative",
-                background: "var(--surface)",
-                border: "1px solid var(--border)",
-                aspectRatio: "4/5",
+                background: "transparent",
                 textDecoration: "none",
                 color: "inherit",
                 display: "block",
-                backdropFilter: "blur(20px)",
-                transition: "all 0.5s",
-                "&:hover": {
-                  transform: "translateY(-6px)",
-                  borderColor: "var(--border-hi)",
+                transition: "transform 240ms ease-out",
+                "&:hover": { transform: "translateY(-2px)" },
+                "&:hover .work-shot": {
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
                 },
               }}
             >
-              {/* Color block image */}
+              {/* Spec: 16:10 hero shot in soft #F5F5F7 container, 24px radius, 24px padding */}
+              <Box
+                className="work-shot"
+                sx={{
+                  background: "var(--surface)",
+                  borderRadius: "24px",
+                  p: "24px",
+                  mb: "20px",
+                  transition: "box-shadow 240ms ease-out",
+                }}
+              >
+                <Box
+                  sx={{
+                    aspectRatio: "16 / 10",
+                    borderRadius: "12px",
+                    overflow: "hidden",
+                    background: p.image
+                      ? `center/cover no-repeat url(${p.image})`
+                      : "linear-gradient(135deg, rgba(0,113,227,0.12) 0%, rgba(0,113,227,0.04) 100%)",
+                    display: "grid",
+                    placeItems: "center",
+                    color: "var(--grey-1)",
+                    fontSize: 13,
+                    fontWeight: 500,
+                  }}
+                >
+                  {!p.image && "Screenshot coming soon"}
+                </Box>
+              </Box>
               <Box
                 sx={{
-                  height: "60%",
-                  position: "relative",
-                  overflow: "hidden",
-                  background: p.gradient,
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    inset: 0,
-                    backgroundImage:
-                      "linear-gradient(rgba(var(--text-rgb),0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--text-rgb),0.08) 1px, transparent 1px)",
-                    backgroundSize: "30px 30px",
-                    mixBlendMode: "overlay",
-                  },
+                  fontSize: 12,
+                  color: "var(--grey-1)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  fontWeight: 600,
+                  mb: "8px",
                 }}
-              />
-              <Box sx={{ p: "28px" }}>
-                <Box
-                  sx={{
-                    fontSize: 12,
-                    color: "var(--accent)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.15em",
-                    fontWeight: 600,
-                    mb: "10px",
-                  }}
-                >
-                  {p.tag}
-                </Box>
-                <Box
-                  component="h3"
-                  sx={{
-                    fontFamily: "var(--font-syne)",
-                    fontSize: 22,
-                    fontWeight: 600,
-                    mb: "8px",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  {p.title}
-                </Box>
-                <Box component="p" sx={{ color: "var(--muted)", fontSize: 14 }}>
-                  {p.desc}
-                </Box>
+              >
+                {p.tag}
+              </Box>
+              <Box
+                component="h3"
+                sx={{
+                  fontSize: 24,
+                  fontWeight: 600,
+                  mb: "8px",
+                  letterSpacing: "-0.01em",
+                  color: "var(--ink)",
+                  lineHeight: 1.25,
+                }}
+              >
+                {p.title}
+              </Box>
+              <Box component="p" sx={{ color: "var(--grey-1)", fontSize: 17, lineHeight: 1.6 }}>
+                {p.desc}
               </Box>
             </Box>
           ))}

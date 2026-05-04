@@ -1,23 +1,20 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
+import TrustedStrip from "@/components/sections/TrustedStrip";
 import Services from "@/components/sections/Services";
-import TechStack from "@/components/sections/TechStack";
-import Stats from "@/components/sections/Stats";
 import Work from "@/components/sections/Work";
 import WhyUs from "@/components/sections/WhyUs";
-import WhyChoose from "@/components/sections/WhyChoose";
 import Process from "@/components/sections/Process";
-import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
 import Pricing from "@/components/sections/Pricing";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "Nextora Infotech — We Build What's Next",
+  title: "Nextora Infotech — Engineering for what’s next",
   description:
-    "Nextora Infotech is a young IT startup building websites, mobile apps, AI tools and cloud systems for founders and growing businesses — fast, fixed-price, founder-led.",
+    "Nextora Infotech is the engineering partner ambitious founders trust to ship web, mobile and AI products — fast, fixed-price, built to scale.",
   alternates: { canonical: "/" },
 };
 
@@ -25,17 +22,14 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <Hero />
-        <TechStack />
+        {/* <TrustedStrip /> */}
         <Services />
         <Work />
         <WhyUs />
-        <WhyChoose />
         <Process />
-        <Testimonials />
-        <Stats />
-        <Pricing />
+        <Pricing compact />
         <FAQ />
         <CTA />
       </main>

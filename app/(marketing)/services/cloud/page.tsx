@@ -2,41 +2,55 @@ import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import CTA from "@/components/sections/CTA";
+import PageHero from "@/components/sections/PageHero";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
 export const metadata: Metadata = {
-  title: "Cloud Infrastructure",
-  description: "Hosting, deploys and DevOps for startups — Vercel, AWS, Docker and CI/CD pipelines that scale as you grow.",
+  title: "Cloud & Performance",
+  description: "Hosting, deploys and DevOps for startups — Vercel, AWS, Docker and CI/CD that scale.",
   alternates: { canonical: "/services/cloud" },
 };
+
+const items = [
+  "Vercel & AWS deploys",
+  "CI/CD with GitHub Actions",
+  "Domain & DNS setup",
+  "Docker containers",
+  "Uptime monitoring",
+  "Founder-direct support",
+];
 
 export default function CloudPage() {
   return (
     <>
       <Navbar />
-      <main>
-        <Box component="section" sx={{ pt: { xs: "140px", md: "180px" }, pb: "80px", position: "relative" }}>
-          <Box sx={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 30% 0%, rgba(var(--accent-rgb),0.15) 0%, transparent 55%)", pointerEvents: "none" }} />
-          <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" }, position: "relative", zIndex: 1 }}>
-            <Box component="span" sx={{ fontSize: 13, color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 600, mb: "16px", display: "block" }}>☁ Cloud Infrastructure</Box>
-            <Box component="h1" sx={{ fontFamily: "var(--font-syne)", fontSize: "clamp(48px, 7vw, 88px)", fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 0.95, mb: "28px", maxWidth: 800 }}>
-              Hosting and deploys{" "}
-              <Box component="span" sx={{ color: "var(--accent)" }}>that grow with you.</Box>
-            </Box>
-            <Box component="p" sx={{ fontSize: 20, color: "var(--muted)", maxWidth: 620, fontWeight: 300, lineHeight: 1.7 }}>
-              Domains, CI/CD, deploys to Vercel or AWS, monitoring and ongoing maintenance — startup-sized infrastructure done right the first time.
-            </Box>
-          </Container>
-        </Box>
+      <main id="main">
+        <PageHero
+          eyebrow="Cloud & Performance"
+          titleParts={{ plain: "Hosting and deploys", accent: "that grow with you." }}
+          subtitle="Domain, hosting, automatic updates and uptime monitoring — startup-sized infrastructure done right the first time."
+        />
 
-        <Box component="section" sx={{ pb: { xs: "80px", md: "120px" } }}>
-          <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>
-            <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(3, 1fr)" }, gap: "24px" }}>
-              {["Vercel & AWS deploys", "CI/CD with GitHub Actions", "Domain & DNS setup", "Docker containers", "Uptime monitoring", "Founder-direct support"].map((item) => (
-                <Box key={item} sx={{ p: "32px", borderRadius: "16px", background: "var(--surface)", border: "1px solid var(--border)", display: "flex", alignItems: "center", gap: "14px" }}>
-                  <Box sx={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", flexShrink: 0, boxShadow: "0 0 10px var(--accent)" }} />
-                  <Box component="span" sx={{ fontFamily: "var(--font-syne)", fontWeight: 600, fontSize: 16 }}>{item}</Box>
+        <Box component="section" sx={{ pb: { xs: "96px", md: "128px" }, background: "var(--bg)" }}>
+          <Container maxWidth="lg" sx={{ px: { xs: "24px", md: "48px", lg: "80px" } }}>
+            <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(3, 1fr)" }, gap: "16px" }}>
+              {items.map((item) => (
+                <Box
+                  key={item}
+                  sx={{
+                    p: "24px",
+                    borderRadius: "16px",
+                    background: "var(--surface)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "14px",
+                  }}
+                >
+                  <Box sx={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", flexShrink: 0 }} />
+                  <Box component="span" sx={{ fontWeight: 500, fontSize: 16, color: "var(--ink)" }}>
+                    {item}
+                  </Box>
                 </Box>
               ))}
             </Box>

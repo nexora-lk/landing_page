@@ -17,12 +17,11 @@ export default function CTA() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         boxRef.current,
-        { opacity: 0, y: 40, scale: 0.97 },
+        { opacity: 0, y: 16 },
         {
           opacity: 1,
           y: 0,
-          scale: 1,
-          duration: 1,
+          duration: 0.6,
           ease: "power3.out",
           scrollTrigger: { trigger: boxRef.current, start: "top 85%" },
         }
@@ -32,105 +31,65 @@ export default function CTA() {
   }, []);
 
   return (
-    <Box
-      component="section"
-      id="cta"
-      sx={{ py: "80px", position: "relative" }}
-    >
-      <Container maxWidth="xl" sx={{ px: { xs: "20px", md: "32px" } }}>
+    <Box component="section" id="cta" sx={{ py: { xs: "96px", md: "128px" }, background: "var(--bg)" }}>
+      <Container maxWidth="lg" sx={{ px: { xs: "24px", md: "48px" } }}>
         <Box
           ref={boxRef}
           sx={{
-            position: "relative",
-            p: { xs: "60px 28px", md: "100px 60px" },
+            p: { xs: "64px 32px", md: "96px 64px" },
             borderRadius: "32px",
-            background: "linear-gradient(135deg, var(--bg-2) 0%, var(--bg-deep) 100%)",
-            border: "1px solid var(--border)",
-            overflow: "hidden",
+            background: "var(--surface)",
             textAlign: "center",
             opacity: 0,
-            "&::before": {
-              content: '""',
-              position: "absolute",
-              inset: 0,
-              background:
-                "radial-gradient(circle at 30% 0%, rgba(var(--accent-rgb),0.25), transparent 50%), radial-gradient(circle at 70% 100%, rgba(var(--accent-2-rgb),0.25), transparent 50%)",
-            },
-            "&::after": {
-              content: '""',
-              position: "absolute",
-              inset: 0,
-              backgroundImage:
-                "linear-gradient(rgba(var(--text-rgb),0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--text-rgb),0.04) 1px, transparent 1px)",
-              backgroundSize: "50px 50px",
-              maskImage: "radial-gradient(ellipse at center, black, transparent 70%)",
-              WebkitMaskImage: "radial-gradient(ellipse at center, black, transparent 70%)",
-            },
           }}
         >
-          <Box sx={{ position: "relative", zIndex: 1 }}>
-            <Box
-              component="h2"
-              sx={{
-                fontFamily: "var(--font-syne)",
-                fontSize: "clamp(40px, 6vw, 80px)",
-                fontWeight: 700,
-                letterSpacing: "-0.035em",
-                lineHeight: 1,
-                mb: "24px",
-              }}
-            >
-              Got an idea?
-              <br />
-              Let&apos;s{" "}
-              <Box
-                component="span"
-                sx={{
-                  color: "var(--accent)",
-                }}
-              >
-                build it.
-              </Box>
-            </Box>
-            <Box
-              component="p"
-              sx={{
-                fontSize: 19,
-                color: "var(--muted)",
-                maxWidth: 560,
-                margin: "0 auto 40px",
-                fontWeight: 300,
-              }}
-            >
-              Whether it&apos;s a website, an app, an SEO push or your first AI-search strategy — book a free 30-min call with the founders. No agency middlemen.
-            </Box>
-            <Box
-              component={Link}
-              href="/contact"
-              sx={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "10px",
-                px: "30px",
-                py: "16px",
-                borderRadius: "100px",
-                fontSize: 15,
-                fontWeight: 600,
-                textDecoration: "none",
-                background: "var(--text)",
-                color: "var(--bg)",
-                boxShadow: "0 10px 40px rgba(var(--accent-rgb),0.2)",
-                border: "1px solid transparent",
-                transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
-                "&:hover": {
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 20px 60px rgba(var(--accent-rgb),0.4)",
-                  background: "var(--accent)",
-                },
-              }}
-            >
-              Book a Free Call →
-            </Box>
+          <Box
+            component="h2"
+            sx={{
+              fontSize: { xs: 36, md: 56 },
+              fontWeight: 600,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              mb: "16px",
+              color: "var(--ink)",
+            }}
+          >
+            Got an idea? Let’s build it.
+          </Box>
+          <Box
+            component="p"
+            sx={{
+              fontSize: 19,
+              color: "var(--grey-1)",
+              maxWidth: "60ch",
+              margin: "0 auto 48px",
+              lineHeight: 1.6,
+            }}
+          >
+            Book a free 30-min call with the founders — no pitch decks, no
+            agency middlemen.
+          </Box>
+          <Box
+            component={Link}
+            href="/contact"
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              px: "28px",
+              py: "14px",
+              borderRadius: "999px",
+              fontSize: 17,
+              fontWeight: 500,
+              textDecoration: "none",
+              background: "var(--accent)",
+              color: "#fff",
+              minHeight: 44,
+              transition: "background 240ms ease-out",
+              "&:hover": { background: "var(--accent-hi)" },
+            }}
+          >
+            Book a free call →
           </Box>
         </Box>
       </Container>

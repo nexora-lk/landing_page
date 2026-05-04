@@ -1,8 +1,7 @@
 import { ImageResponse } from "next/og";
-import { tokens } from "@/components/ui/ThemeRegistry";
 
 export const runtime = "edge";
-export const alt = "Nextora — We Build What's Next";
+export const alt = "Nextora Infotech — Engineering for what’s next";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -17,20 +16,66 @@ export default function OGImage() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "flex-end",
-          padding: "80px",
-          background: `linear-gradient(135deg, ${tokens.bg} 0%, ${tokens.bgPaper} 50%, ${tokens.bgDeep} 100%)`,
+          padding: 80,
+          background:
+            "linear-gradient(180deg, #F4F8FF 0%, #FFFFFF 70%, #FFFFFF 100%)",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 32 }}>
-          <div style={{ width: 40, height: 40, borderRadius: 10, background: `linear-gradient(135deg, ${tokens.accent}, ${tokens.accent2})` }} />
-          <span style={{ fontSize: 32, fontWeight: 700, color: tokens.text, letterSpacing: "-0.02em" }}>Nextora</span>
+        {/* Soft accent glow */}
+        <div
+          style={{
+            position: "absolute",
+            top: -200,
+            left: 200,
+            width: 800,
+            height: 800,
+            borderRadius: 9999,
+            background:
+              "radial-gradient(closest-side, rgba(0,113,227,0.30), transparent 70%)",
+            filter: "blur(40px)",
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 14,
+            marginBottom: 32,
+            position: "relative",
+          }}
+        >
+          <div style={{ width: 10, height: 10, borderRadius: 9999, background: "#0071E3" }} />
+          <span style={{ fontSize: 28, fontWeight: 600, color: "#1D1D1F", letterSpacing: "-0.01em" }}>
+            Nextora Infotech
+          </span>
         </div>
-        <div style={{ fontSize: 64, fontWeight: 700, color: tokens.text, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 24 }}>
-          We Build What&apos;s Next.
+        <div
+          style={{
+            fontSize: 72,
+            fontWeight: 600,
+            color: "#1D1D1F",
+            lineHeight: 1.05,
+            letterSpacing: "-0.04em",
+            marginBottom: 24,
+            position: "relative",
+            maxWidth: 1000,
+          }}
+        >
+          Engineering for{" "}
+          <span style={{ color: "#0071E3" }}>what’s next.</span>
         </div>
-        <div style={{ fontSize: 24, color: tokens.muted, fontWeight: 300, maxWidth: 720 }}>
-          Engineering partner for cloud, AI, and custom software — built with relentless craft.
+        <div
+          style={{
+            fontSize: 24,
+            color: "#6E6E73",
+            fontWeight: 400,
+            maxWidth: 800,
+            position: "relative",
+          }}
+        >
+          The engineering partner ambitious founders trust to ship web, mobile
+          and AI products — fast, fixed-price, built to scale.
         </div>
       </div>
     ),

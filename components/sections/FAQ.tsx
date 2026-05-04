@@ -64,21 +64,35 @@ export default function FAQ() {
       component="section"
       id="faq"
       ref={sectionRef}
-      sx={{ py: { xs: "80px", md: "120px" }, position: "relative" }}
+      sx={{ py: { xs: "96px", md: "128px" }, position: "relative" }}
     >
-      <Container maxWidth="md" sx={{ px: { xs: "20px", md: "32px" } }}>
+      {/* FAQPage JSON-LD — helps Google + AI search surface answers directly */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          }),
+        }}
+      />
+      <Container maxWidth="md" sx={{ px: { xs: "24px", md: "48px" } }}>
         <Box
           className="faq-reveal"
           component="span"
           sx={{
-            fontSize: 13,
-            color: "var(--accent)",
+            fontSize: 12,
+            color: "var(--grey-1)",
             textTransform: "uppercase",
-            letterSpacing: "0.2em",
+            letterSpacing: "0.1em",
             fontWeight: 600,
             mb: "16px",
             display: "block",
-            textAlign: "center",
           }}
         >
           Questions
@@ -87,38 +101,25 @@ export default function FAQ() {
           className="faq-reveal"
           component="h2"
           sx={{
-            fontFamily: "var(--font-syne)",
-            fontSize: "clamp(36px, 5vw, 64px)",
-            fontWeight: 700,
-            letterSpacing: "-0.03em",
-            lineHeight: 1.05,
-            mb: "60px",
-            textAlign: "center",
+            fontSize: { xs: 36, md: 48 },
+            fontWeight: 600,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.1,
+            mb: "64px",
+            color: "var(--ink)",
           }}
         >
-          Everything else,
-          <br />
-          answered.
+          Everything else, answered.
         </Box>
 
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <Box sx={{ borderTop: "1px solid var(--grey-2)" }}>
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
               <Box
                 key={f.q}
                 className="faq-reveal"
-                sx={{
-                  border: "1px solid var(--border)",
-                  borderRadius: "16px",
-                  background: isOpen
-                    ? "linear-gradient(180deg, rgba(var(--accent-rgb),0.04), rgba(var(--text-rgb),0.02))"
-                    : "var(--surface)",
-                  backdropFilter: "blur(10px)",
-                  transition: "all 0.35s cubic-bezier(0.4,0,0.2,1)",
-                  borderColor: isOpen ? "rgba(var(--accent-rgb),0.35)" : "var(--border)",
-                  overflow: "hidden",
-                }}
+                sx={{ borderBottom: "1px solid var(--grey-2)" }}
               >
                 <Box
                   component="button"
@@ -129,18 +130,18 @@ export default function FAQ() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: "20px",
-                    px: { xs: "20px", md: "28px" },
-                    py: { xs: "20px", md: "24px" },
+                    gap: "24px",
+                    px: 0,
+                    py: "24px",
                     background: "none",
                     border: "none",
-                    color: "inherit",
+                    color: "var(--ink)",
                     cursor: "pointer",
                     textAlign: "left",
-                    fontFamily: "var(--font-syne)",
-                    fontSize: { xs: 16, md: 18 },
-                    fontWeight: 600,
+                    fontSize: { xs: 17, md: 19 },
+                    fontWeight: 500,
                     letterSpacing: "-0.01em",
+                    minHeight: 44,
                   }}
                 >
                   <Box component="span">{f.q}</Box>
@@ -149,36 +150,32 @@ export default function FAQ() {
                       flexShrink: 0,
                       width: 32,
                       height: 32,
-                      borderRadius: "50%",
-                      border: "1px solid var(--border)",
                       display: "grid",
                       placeItems: "center",
-                      color: isOpen ? "var(--accent)" : "var(--muted)",
+                      color: isOpen ? "var(--accent)" : "var(--ink)",
                       transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
-                      transition: "all 0.35s cubic-bezier(0.4,0,0.2,1)",
-                      borderColor: isOpen ? "var(--border-hi)" : "var(--border)",
+                      transition: "transform 200ms ease-out, color 200ms ease-out",
                     }}
                   >
-                    <Plus size={16} strokeWidth={2} />
+                    <Plus size={20} strokeWidth={1.5} />
                   </Box>
                 </Box>
                 <Box
                   sx={{
                     display: "grid",
                     gridTemplateRows: isOpen ? "1fr" : "0fr",
-                    transition: "grid-template-rows 0.4s cubic-bezier(0.4,0,0.2,1)",
+                    transition: "grid-template-rows 200ms ease-out",
                   }}
                 >
                   <Box sx={{ overflow: "hidden" }}>
                     <Box
                       sx={{
-                        px: { xs: "20px", md: "28px" },
-                        pb: { xs: "22px", md: "26px" },
-                        color: "var(--muted)",
-                        fontSize: 15,
-                        lineHeight: 1.75,
-                        fontWeight: 300,
-                        maxWidth: 620,
+                        pb: "24px",
+                        pr: "56px",
+                        color: "var(--grey-1)",
+                        fontSize: 17,
+                        lineHeight: 1.6,
+                        maxWidth: "65ch",
                       }}
                     >
                       {f.a}

@@ -28,41 +28,52 @@ export default function ContactForm() {
     }
   };
 
+  // Per spec: input height 48 min, 1px #D2D2D7 border, 12px radius, 16px h padding,
+  // 16px font min, focus = accent border + 4px soft ring rgba(0,113,227,0.15).
   const inputSx = {
     width: "100%",
-    px: "20px",
-    py: "14px",
+    minHeight: 48,
+    px: "16px",
+    py: "12px",
     borderRadius: "12px",
-    background: "rgba(var(--text-rgb),0.04)",
-    border: "1px solid var(--border)",
-    color: "var(--text)",
-    fontSize: 15,
-    fontFamily: "var(--font-inter)",
+    background: "#FFFFFF",
+    border: "1px solid var(--grey-2)",
+    color: "var(--ink)",
+    fontSize: 16,
+    fontFamily: "var(--font-inter), Inter, sans-serif",
     outline: "none",
-    transition: "border-color 0.3s",
-    "&:focus": { borderColor: "var(--accent)" },
+    transition: "border-color 200ms ease-out, box-shadow 200ms ease-out",
+    "&::placeholder": { color: "var(--grey-1)" },
+    "&:focus": {
+      borderColor: "var(--accent)",
+      boxShadow: "0 0 0 4px rgba(0,113,227,0.15)",
+    },
   };
+
+  const labelSx = {
+    display: "block",
+    fontSize: 14,
+    color: "var(--ink)",
+    mb: "8px",
+    fontWeight: 500,
+  } as const;
 
   if (status === "success") {
     return (
       <Box
         sx={{
           textAlign: "center",
-          p: "60px",
+          p: "64px 32px",
           borderRadius: "20px",
           background: "var(--surface)",
-          border: "1px solid rgba(var(--accent-rgb),0.3)",
         }}
       >
-        <Box sx={{ fontSize: 48, mb: "16px" }}>✓</Box>
-        <Box
-          component="h2"
-          sx={{ fontFamily: "var(--font-syne)", fontSize: 28, fontWeight: 700, mb: "12px" }}
-        >
+        <Box sx={{ fontSize: 48, mb: "16px", color: "var(--accent)" }}>✓</Box>
+        <Box component="h2" sx={{ fontSize: 28, fontWeight: 600, mb: "12px", color: "var(--ink)", letterSpacing: "-0.01em" }}>
           Message sent
         </Box>
-        <Box component="p" sx={{ color: "var(--muted)", fontSize: 16 }}>
-          We&apos;ll be in touch within one business day.
+        <Box component="p" sx={{ color: "var(--grey-1)", fontSize: 17 }}>
+          We’ll be in touch within one business day.
         </Box>
       </Box>
     );
@@ -76,70 +87,64 @@ export default function ContactForm() {
         p: { xs: "32px 24px", md: "48px" },
         borderRadius: "20px",
         background: "var(--surface)",
-        border: "1px solid var(--border)",
         display: "flex",
         flexDirection: "column",
         gap: "24px",
       }}
     >
-      <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" }, gap: "20px" }}>
+      <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" }, gap: "24px" }}>
         <Box>
-          <Box component="label" htmlFor="name" sx={{ display: "block", fontSize: 13, color: "var(--muted)", mb: "8px", fontWeight: 500 }}>
-            Name *
-          </Box>
+          <Box component="label" htmlFor="name" sx={labelSx}>Name</Box>
           <Box component="input" id="name" name="name" required placeholder="Your name" sx={inputSx} />
         </Box>
         <Box>
-          <Box component="label" htmlFor="email" sx={{ display: "block", fontSize: 13, color: "var(--muted)", mb: "8px", fontWeight: 500 }}>
-            Email *
-          </Box>
+          <Box component="label" htmlFor="email" sx={labelSx}>Email</Box>
           <Box component="input" id="email" name="email" type="email" required placeholder="you@company.com" sx={inputSx} />
         </Box>
       </Box>
       <Box>
-        <Box component="label" htmlFor="company" sx={{ display: "block", fontSize: 13, color: "var(--muted)", mb: "8px", fontWeight: 500 }}>
-          Company
-        </Box>
+        <Box component="label" htmlFor="company" sx={labelSx}>Company (optional)</Box>
         <Box component="input" id="company" name="company" placeholder="Acme Corp" sx={inputSx} />
       </Box>
       <Box>
-        <Box component="label" htmlFor="message" sx={{ display: "block", fontSize: 13, color: "var(--muted)", mb: "8px", fontWeight: 500 }}>
-          What are you building? *
-        </Box>
+        <Box component="label" htmlFor="message" sx={labelSx}>What are you building?</Box>
         <Box
           component="textarea"
           id="message"
           name="message"
           required
           rows={5}
-          placeholder="Tell us about your project, stack, and timeline..."
-          sx={{ ...inputSx, resize: "vertical", minHeight: 120 }}
+          placeholder="Tell us about your project, goals and timeline…"
+          sx={{ ...inputSx, resize: "vertical", minHeight: 140, py: "16px" }}
         />
       </Box>
       {status === "error" && (
-        <Box sx={{ color: "var(--accent-3)", fontSize: 14 }}>Something went wrong. Please try again or email us directly.</Box>
+        <Box sx={{ color: "#A32D2D", fontSize: 14 }}>
+          Something went wrong. Please try again or email hello@nextora.lk directly.
+        </Box>
       )}
       <Box
         component="button"
         type="submit"
         disabled={status === "loading"}
         sx={{
-          px: "30px",
-          py: "16px",
-          borderRadius: "100px",
-          fontSize: 15,
-          fontWeight: 600,
-          background: "var(--text)",
-          color: "var(--bg)",
+          px: "28px",
+          py: "14px",
+          borderRadius: "999px",
+          fontSize: 17,
+          fontWeight: 500,
+          background: "var(--accent)",
+          color: "#fff",
           border: "none",
           cursor: status === "loading" ? "wait" : "pointer",
-          transition: "all 0.3s",
+          minHeight: 48,
           alignSelf: "flex-start",
-          "&:hover": { background: "var(--accent)", transform: "translateY(-2px)" },
+          transition: "background 240ms ease-out",
+          "&:hover": { background: "var(--accent-hi)" },
           "&:disabled": { opacity: 0.7 },
         }}
       >
-        {status === "loading" ? "Sending…" : "Send Message →"}
+        {status === "loading" ? "Sending…" : "Send message →"}
       </Box>
     </Box>
   );

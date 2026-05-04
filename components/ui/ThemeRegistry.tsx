@@ -13,43 +13,42 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
    ═══════════════════════════════════════════════════════════ */
 
 export const tokens = {
-  /* ── Core Palette (matched to Nextora circuit-board logo) ── */
-  accent:     "#42C6FF",     // Primary sky-cyan (logo primary)
-  accentBr:   "#6DD5FF",     // Brighter variant (hover states)
-  accent2:    "#1A73E8",     // Secondary electric blue
-  accent3:    "#00E5CC",     // Tertiary teal/cyan
+  /* ── Apple-style light system per Nextora_UI_Design_Spec ── */
+  accent:     "#0071E3",
+  accentBr:   "#0058B0",     // hover (darker, not lighter — Apple way)
+  accent2:    "#0071E3",
+  accent3:    "#0071E3",
 
   /* ── Backgrounds ── */
-  bg:         "#060B14",     // Deep navy-black
-  bgPaper:    "#0A1120",     // Card / elevated surfaces
-  bgDeep:     "#0D1B30",     // Deep blue tint (CTA, etc.)
+  bg:         "#FFFFFF",
+  bgPaper:    "#F5F5F7",
+  bgDeep:     "#F5F5F7",
 
   /* ── Text ── */
-  text:       "#ffffff",
-  textSoft:   "#E8F0FE",     // Slightly cool white
-  muted:      "#7B8BA5",     // Subdued labels (blue-grey)
+  text:       "#1D1D1F",
+  textSoft:   "#1D1D1F",
+  muted:      "#6E6E73",
 
   /* ── Surfaces & Borders ── */
-  surface:    "rgba(66, 198, 255, 0.04)",
-  border:     "rgba(66, 198, 255, 0.10)",
-  borderHi:   "rgba(66, 198, 255, 0.45)",
+  surface:    "#F5F5F7",
+  border:     "#D2D2D7",
+  borderHi:   "#B5B5BA",
 
-  /* ── Glow ── */
-  glow:       "0 0 40px rgba(66, 198, 255, 0.35)",
+  glow:       "none",
 
-  /* ── RGB channel values (for rgba() compositing in JS) ── */
-  accentRgb:   "66, 198, 255",
-  accentBrRgb: "109, 213, 255",
-  accent2Rgb:  "26, 115, 232",
-  accent3Rgb:  "0, 229, 204",
-  textRgb:     "255, 255, 255",
-  bgRgb:       "6, 11, 20",
+  /* ── RGB channels ── */
+  accentRgb:   "0, 113, 227",
+  accentBrRgb: "0, 88, 176",
+  accent2Rgb:  "0, 113, 227",
+  accent3Rgb:  "0, 113, 227",
+  textRgb:     "29, 29, 31",
+  bgRgb:       "255, 255, 255",
 
-  /* ── Pricing / Tier Colours ── */
-  tierGreen:   "#22c55e",
-  tierBlue:    "#42C6FF",
-  tierPurple:  "#1A73E8",
-  tierRed:     "#ef4444",
+  /* ── Tier accents (kept muted, all derived from one accent) ── */
+  tierGreen:   "#0071E3",
+  tierBlue:    "#0071E3",
+  tierPurple:  "#0071E3",
+  tierRed:     "#0071E3",
 } as const;
 
 /** Shorthand: produce `rgba(r,g,b, alpha)` from an RGB token string */
@@ -58,16 +57,17 @@ export const rgba = (rgb: string, a: number) => `rgba(${rgb}, ${a})`;
 /* ── MUI Theme (mirrors CSS vars + tokens) ── */
 const theme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
     primary:    { main: tokens.accent },
-    secondary:  { main: tokens.accent2 },
+    secondary:  { main: tokens.accent },
     background: { default: tokens.bg, paper: tokens.bgPaper },
+    text:       { primary: tokens.text, secondary: tokens.muted },
   },
   typography: {
-    fontFamily: "var(--font-inter), Inter, sans-serif",
-    h1: { fontFamily: "var(--font-syne), Syne, sans-serif" },
-    h2: { fontFamily: "var(--font-syne), Syne, sans-serif" },
-    h3: { fontFamily: "var(--font-syne), Syne, sans-serif" },
+    fontFamily: "var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+    h1: { fontFamily: "var(--font-inter), Inter, sans-serif", fontWeight: 600, letterSpacing: "-0.02em" },
+    h2: { fontFamily: "var(--font-inter), Inter, sans-serif", fontWeight: 600, letterSpacing: "-0.02em" },
+    h3: { fontFamily: "var(--font-inter), Inter, sans-serif", fontWeight: 600, letterSpacing: "-0.01em" },
   },
   components: {
     MuiCssBaseline: {
